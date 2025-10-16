@@ -1,0 +1,31 @@
+{
+    "activeFile": "testMap.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "test.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "testMap.tmx": {
+            "scale": 0.30578125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 640.9810935104753,
+                "y": 479.1006642820644
+            }
+        }
+    },
+    "last.externalTilesetPath": "C:/Users/Mat/maze-game/assets/World",
+    "last.imagePath": "C:/Users/Mat/maze-game/assets/World",
+    "openFiles": [
+        "testMap.tmx"
+    ],
+    "project": "untitled.tiled-project",
+    "recentFiles": [
+        "testMap.tmx",
+        "test.tsx"
+    ]
+}
