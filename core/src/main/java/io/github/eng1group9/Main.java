@@ -33,7 +33,7 @@ public class Main extends ApplicationAdapter {
     private FitViewport viewport;
 
     // Config
-    private float playerSpeed = 50;
+    private float playerSpeed = 100;
 
 
     @Override
@@ -46,9 +46,9 @@ public class Main extends ApplicationAdapter {
     public void setupWorld() {
         testMap = new TmxMapLoader().load("World/testMap.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(testMap);
-        camera.setToOrtho(false, 960, 960);
+        camera.setToOrtho(false, 480, 320);
         camera.update();
-        viewport = new FitViewport(960, 960, camera);
+        viewport = new FitViewport(480, 320, camera);
     }
 
 
@@ -56,8 +56,8 @@ public class Main extends ApplicationAdapter {
         playerSpriteSheet = new Texture("Characters/playerAnimations.png");
         playerFrames = TextureRegion.split(playerSpriteSheet, 32, 32);
         player = new Sprite(playerFrames[0][1]);
-        player.setOrigin(50, 50);
-        player.setSize(32, 32);
+        player.translate(16, 532);
+        player.setSize(64, 64);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class Main extends ApplicationAdapter {
     public void miscInputs() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.F11)) {
             if (isFullscreen) {
-                Gdx.graphics.setWindowedMode(960, 960);
+                Gdx.graphics.setWindowedMode(960, 640);
                 isFullscreen = false;
             }
             else {
