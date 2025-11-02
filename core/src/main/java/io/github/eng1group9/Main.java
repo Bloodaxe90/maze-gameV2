@@ -1,18 +1,12 @@
 package io.github.eng1group9;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -46,8 +40,7 @@ public class Main extends ApplicationAdapter {
     private float deanSpeed = 10;
     final Vector2 DEANSTARTPOS = new Vector2(16, 532);
 
-
-
+    private Chest chest;
 
 
 
@@ -57,6 +50,7 @@ public class Main extends ApplicationAdapter {
         setupWorld();
         player = new Player(PLAYERSTARTPOS);
         dean = new Dean(DEANSTARTPOS);
+        chest = new Chest();
     }
 
     public void setupWorld() {
@@ -96,6 +90,19 @@ public class Main extends ApplicationAdapter {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             isPaused = !isPaused;
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            tryInteract();
+        }
+    }
+
+    private void tryInteract() {
+        if (!chest.opened) {
+            if (chest.isColliding(player)) {
+                player.setHasKey(true);
+                chest.open();
+            }
         }
     }
 
@@ -179,6 +186,7 @@ public class Main extends ApplicationAdapter {
         batch.begin();
         player.draw(batch);
         dean.draw(batch);
+        chest.draw(batch);
 
         // Overlay text - must be before batch.end.
         BitmapFont font = new BitmapFont();

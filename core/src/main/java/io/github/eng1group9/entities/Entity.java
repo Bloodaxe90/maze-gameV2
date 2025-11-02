@@ -153,4 +153,11 @@ public class Entity {
         scale = newScale;
     }
 
+    public Rectangle getBounds() {
+        return hitbox;
+    }
+
+    public boolean overlaps(Entity other) {
+        return this.getBounds().overlaps(other.getBounds());
+    }
 }
