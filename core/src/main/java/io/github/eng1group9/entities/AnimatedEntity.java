@@ -14,12 +14,12 @@ import com.badlogic.gdx.math.Vector2;
  * An Entity which is animated.
  * Animations are stored in an ArrayList created automatially from a given spriteSheet.
  * Each animation should be on a seperate row in the spriteSheet.
- * 
+ *
  * @param spriteSheetTexture The texture contaning the frames laid out in a grid, which are then used to create the aniamtions.
  * @param frameNumbers An array of integers which state how many frames are in each animation, values should match the number of sprites on each row of the spriteSheet.
  * @param tileWidth How wide each tile in the SpriteSheet is in pixels.
  * @param tileHeight How high each tile in the SpriteSheet is in pixels.
- * 
+ *
  * @author Mat.
  */
 public class AnimatedEntity extends Entity{
@@ -49,7 +49,7 @@ public class AnimatedEntity extends Entity{
     /**
      * Use this to change the animation being played.
      * Will have no effect if the animation is already playing.
-     * 
+     *
      * @param index The index of the desired animation in the list.
      */
     public void playAnimation(int index) {
@@ -62,7 +62,7 @@ public class AnimatedEntity extends Entity{
         return animations.get(currentAnimation).getKeyFrame(animationPlayTime, true);
     }
 
-    
+
     @Override
     public void draw(SpriteBatch batch) {
         float delta = Gdx.graphics.getDeltaTime();
@@ -71,5 +71,5 @@ public class AnimatedEntity extends Entity{
         batch.draw(currentFrame, getX(), getY(), getWidth(), getHeight());
     }
 
-    
+
 }
