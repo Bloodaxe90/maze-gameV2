@@ -22,10 +22,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import io.github.eng1group9.entities.*;
+
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
     private SpriteBatch batch;
-    
+
     private boolean isFullscreen = false;
     private boolean isPaused = false;
 
@@ -34,18 +36,27 @@ public class Main extends ApplicationAdapter {
     private OrthographicCamera camera = new OrthographicCamera();
 
     private FitViewport viewport;
-    private long elapsedTime = 0;
+    private float elapsedTime = 0;
 
     private Player player;
     private float playerSpeed = 100;
     final Vector2 PLAYERSTARTPOS = new Vector2(16, 532);
- 
+
+    private Dean dean;
+    private float deanSpeed = 10;
+    final Vector2 DEANSTARTPOS = new Vector2(16, 532);
+
+
+
+
+
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         setupWorld();
         player = new Player(PLAYERSTARTPOS);
+        dean = new Dean(DEANSTARTPOS);
     }
 
     public void setupWorld() {
@@ -149,7 +160,7 @@ public class Main extends ApplicationAdapter {
     public void logic() {
         // Process game logic here
         float delta = Gdx.graphics.getDeltaTime();
-        if (!isPaused) elapsedTime += delta;
+        if (!isPaused) elapsedTime += (delta * 1000);
     }
 
     public String getClock() {
@@ -167,6 +178,7 @@ public class Main extends ApplicationAdapter {
 
         batch.begin();
         player.draw(batch);
+        dean.draw(batch);
 
         // Overlay text - must be before batch.end.
         BitmapFont font = new BitmapFont();

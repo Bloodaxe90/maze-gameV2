@@ -1,4 +1,4 @@
-package io.github.eng1group9;
+package io.github.eng1group9.entities;
 
 
 import org.w3c.dom.Text;
@@ -11,18 +11,18 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
 * An Entity is the parent class for any game object with a position and collision.
-* 
+*
 * @param texture The texture the entity will use.
 * @param startPosition Where the entity will begin in game as Vector2.
 * @param width The width of the entity.
 * @param height The height of the entity.
-* 
-* 
+*
+*
 * @author Mat.
-* 
+*
 */
 public class Entity {
-    
+
     private Texture missingTexture = new Texture("missingTexture.png");
     private Sprite sprite = new Sprite(missingTexture);
     private Rectangle hitbox = new Rectangle();
@@ -103,7 +103,7 @@ public class Entity {
     * Toggle wether other entities can detect collision with this entity.
     */
     public void toggleCollision() {
-        
+
         canCollide = !canCollide;
     }
 
@@ -111,7 +111,7 @@ public class Entity {
     * @return wether this entity has collision enabled.
     */
     public boolean hasCollision() {
-        
+
         return canCollide;
     }
 
@@ -133,7 +133,7 @@ public class Entity {
     public void setTexture(Texture newTexture) {
         sprite.setTexture(newTexture);
     }
-    
+
     /**
      * @return the width of this sprite (before scaling).
      */
@@ -152,5 +152,5 @@ public class Entity {
     public void setScale(float newScale) {
         scale = newScale;
     }
-    
+
 }

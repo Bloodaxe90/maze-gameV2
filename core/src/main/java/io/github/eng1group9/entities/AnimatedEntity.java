@@ -1,4 +1,4 @@
-package io.github.eng1group9;
+package io.github.eng1group9.entities;
 
 import java.util.ArrayList;
 import java.util.List;

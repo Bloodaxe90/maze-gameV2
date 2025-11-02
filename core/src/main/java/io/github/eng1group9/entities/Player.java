@@ -1,4 +1,4 @@
-package io.github.eng1group9;
+package io.github.eng1group9.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -10,11 +10,11 @@ import com.badlogic.gdx.math.Vector2;
 public class Player extends AnimatedEntity {
 
     private float speed;
-    
+
     public Player(Vector2 startPos) {
         super(new Texture("Characters/playerAnimations.png"), new int[] {4, 4,4,4} , 32, 32);
         setPosition(startPos);
         setScale(2);
     }
-    
+
 }
