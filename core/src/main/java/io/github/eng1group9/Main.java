@@ -155,9 +155,8 @@ public class Main extends ApplicationAdapter {
 
         camera.update();
         mapRenderer.setView(camera);
-        mapRenderer.render();
-
-        
+        int[] belowPlayer = {0, 1, 2};
+        mapRenderer.render(belowPlayer);
 
         batch.begin();
         player.draw(batch);
@@ -176,6 +175,9 @@ public class Main extends ApplicationAdapter {
         font.draw(batch, getClock(), 10, 640 - 10);
 
         batch.end();
+
+        int[] abovePlayer = {3, 4, 5, 6, 7};
+        mapRenderer.render(abovePlayer);
     }
 
     @Override
