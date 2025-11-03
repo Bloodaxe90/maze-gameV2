@@ -168,6 +168,7 @@ public class Main extends ApplicationAdapter {
                 batch.draw(missingTexture, rectangle.x, rectangle.y , rectangle.width, rectangle.height);
             }
             batch.draw(missingTexture, player.getHitbox().x + 16, player.getHitbox().y+ 16, player.getHitbox().width, player.getHitbox().height);
+            batch.draw(missingTexture, dean.getHitbox().x + 16, dean.getHitbox().y+ 16, dean.getHitbox().width, dean.getHitbox().height);
         }
 
         // Overlay text - must be before batch.end.

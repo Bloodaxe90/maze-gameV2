@@ -115,11 +115,11 @@
             "scaleInEditor": 1
         },
         "testMap.tmx": {
-            "scale": 5.5,
+            "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 216.1818181818182,
-                "y": 149.54545454545456
+                "x": 263.5,
+                "y": 171
             }
         }
     },
