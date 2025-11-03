@@ -12,11 +12,12 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * Handles everything connected to the player.
- * @author Mat.
+ * @author Mat and Max.
  */
 public class Player extends AnimatedEntity {
 
     private float speed = 100;
+    private boolean hasKey = false;
 
     public Player(Vector2 startPos) {
         super(new Texture("Characters/playerAnimations.png"), new int[] {4, 4,4,4} , 32, 32);
@@ -92,4 +93,11 @@ public class Player extends AnimatedEntity {
         return true;
     }
 
+    public boolean hasKey() {
+        return hasKey;
+    }
+
+    public void setHasKey(Boolean bool) {
+        hasKey = bool;
+    }
 }

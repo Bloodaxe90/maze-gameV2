@@ -1,9 +1,7 @@
 package io.github.eng1group9;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -13,17 +11,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -51,11 +44,14 @@ public class Main extends ApplicationAdapter {
     private List<Rectangle> worldCollision;
 
     private Player player;
-    final Vector2 PLAYERSTARTPOS = new Vector2(18, 516);
+    final Vector2 PLAYERSTARTPOS = new Vector2(16, 532);
 
     private Dean dean;
     final Vector2 DEANSTARTPOS = new Vector2(16, 532);
- 
+
+    private Chest chest;
+
+
 
     @Override
     public void create() {
@@ -65,6 +61,7 @@ public class Main extends ApplicationAdapter {
         setupWorldCollision();
         player = new Player(PLAYERSTARTPOS);
         dean = new Dean(DEANSTARTPOS);
+        chest = new Chest();
     }
 
     public void setupWorld() {
@@ -103,6 +100,7 @@ public class Main extends ApplicationAdapter {
         if (Gdx.input.isKeyJustPressed(Input.Keys.F2)) {
             showCollision = !showCollision;
         }
+        
     }
 
     private void toggleFullscreen() {
@@ -118,9 +116,11 @@ public class Main extends ApplicationAdapter {
     private void togglePause() {
         if (isPaused) {
             player.unfreeze();
+            dean.unfreeze();
         }
         else {
             player.freeze();
+            dean.freeze();
         }
         isPaused = !isPaused;
     }
