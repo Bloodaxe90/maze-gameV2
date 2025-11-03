@@ -195,18 +195,11 @@ public class Main extends ApplicationAdapter {
         batch.begin();
         player.draw(batch);
         dean.draw(batch);
-        chest.draw(batch);
 
 
 
 
-        if (showCollision) { // show collisions for debugging
-            for (Rectangle rectangle : worldCollision) {
-                batch.draw(missingTexture, rectangle.x, rectangle.y , rectangle.width, rectangle.height);
-            }
-            batch.draw(missingTexture, player.getHitbox().x + 16, player.getHitbox().y+ 16, player.getHitbox().width, player.getHitbox().height);
-            batch.draw(missingTexture, dean.getHitbox().x + 16, dean.getHitbox().y+ 16, dean.getHitbox().width, dean.getHitbox().height);
-        }
+        
         batch.end();
         // Overlay text - must be before batch.end.
 
@@ -216,6 +209,16 @@ public class Main extends ApplicationAdapter {
         UI.begin();
         BitmapFont font = new BitmapFont();
         font.draw(UI, getClock(), 10, 640 - 10);
+
+        if (showCollision) { // show collisions for debugging
+            for (Rectangle rectangle : worldCollision) {
+                UI.draw(missingTexture, rectangle.x, rectangle.y , rectangle.width, rectangle.height);
+            }
+            UI.draw(missingTexture, player.getHitbox().x + 16, player.getHitbox().y+ 16, player.getHitbox().width, player.getHitbox().height);
+            UI.draw(missingTexture, dean.getHitbox().x + 16, dean.getHitbox().y+ 16, dean.getHitbox().width, dean.getHitbox().height);
+            chest.draw(batch);
+            
+        }
         UI.end();
 
     }
