@@ -2,6 +2,7 @@ package io.github.eng1group9;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -91,7 +92,7 @@ public class Main extends ApplicationAdapter {
         if (player.hasExitKey()) {
             player.handleInputs(worldCollision);
         } else {
-            player.handleInputs(Stream.concat(worldCollision.stream(), exitDoorCollision.stream()).toList());
+            player.handleInputs(Stream.concat(worldCollision.stream(), exitDoorCollision.stream()).collect(Collectors.toList()));
         }
     }
 
