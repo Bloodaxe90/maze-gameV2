@@ -115,13 +115,34 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    // Serches collision layer for name
+    // Then deletes from world collision by the rectangle
+    private void removeCollisionByName(String name) {
+        MapLayer collisionLayer = (MapLayer) testMap.getLayers().get("Collision");
+        MapObjects collisionObjects = collisionLayer.getObjects();
+
+        for (MapObject m : collisionObjects) {
+
+            if (m.getName() == null) {
+                continue;
+            }
+
+            if (!m.getName().equals(name)) {
+                continue;
+            }
+
+            Rectangle r = ((RectangleMapObject) m).getRectangle();
+            worldCollision.remove(r);
+        }
+    }
+
     private void checkForNearChestRoomDoorWithKey() {
         float playerX = player.getX();
         float playerY = player.getY();
 
         if (((playerX - 238) * (playerX - 238)) + ((playerY - 416) * (playerY - 416)) < 50) {
             if (player.hasChestRoomKey()) {
-
+                removeCollisionByName("chestRoomDoor");
             }
         }
     }
