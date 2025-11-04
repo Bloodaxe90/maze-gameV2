@@ -271,6 +271,11 @@ public class Main extends ApplicationAdapter {
         BitmapFont font = new BitmapFont();
         font.draw(UI, getClock(), 10, 640 - 10);
 
+
+        List<String> toastTexts = new LinkedList<>();
+
+
+
         if (showCollision) { // show collisions for debugging
             for (Rectangle rectangle : worldCollision) {
                 UI.draw(missingTexture, rectangle.x, rectangle.y , rectangle.width, rectangle.height);
