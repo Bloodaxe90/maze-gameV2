@@ -272,7 +272,7 @@ public class Main extends ApplicationAdapter {
 
         UI.begin();
         BitmapFont font = new BitmapFont();
-        font.draw(UI, getClock(), 10, 640 - 10);
+        font.draw(UI, "Time left: " + getClock(), 10, 640 - 10);
 
 
         ToastManager.clearExpiredToasts();
@@ -280,7 +280,7 @@ public class Main extends ApplicationAdapter {
         int offset = 0;
 
         for (String text : toastTexts) {
-            offset += 50;
+            offset += 30;
             font.draw(UI, text, 10, (640 - 10) - offset);
         }
 
