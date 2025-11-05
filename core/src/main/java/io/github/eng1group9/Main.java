@@ -26,10 +26,13 @@ public class Main extends ApplicationAdapter {
     private List<Rectangle> worldCollision;
 
     public Player player;
+    private boolean playerCaught = false;
+    private float playerCaughtTime = 2;
     final Vector2 PLAYERSTARTPOS = new Vector2(16, 532);
     final float DEFAULTPLAYERSPEED = 100;
 
     private Dean dean;
+    private int deanPunishment = 0;
     final Vector2 DEANSTARTPOS = new Vector2(32, 352);
     final float DEFAULTDEANSPEED = 100;
     final Character[] DEANPATH = {
@@ -71,6 +74,10 @@ public class Main extends ApplicationAdapter {
     public void render() {
         input();
         logic();
+        draw();
+    }
+
+    public void draw() {
         renderingSystem.draw(player, dean, showCollision, timerSystem.elapsedTime, worldCollision);
         if (isPaused) {
             renderingSystem.renderPauseOverlay(960, 640);
@@ -122,7 +129,7 @@ public class Main extends ApplicationAdapter {
     }
 
     public void togglePause() {
-        if (isPaused) {
+        if (isPaused && !playerCaught) {
             player.unfreeze();
             dean.unfreeze();
         }
@@ -135,16 +142,62 @@ public class Main extends ApplicationAdapter {
 
     public void logic() {
         // Process game logic here
-        float delta = Gdx.graphics.getDeltaTime();
-        if (!isPaused) timerSystem.update(delta);
-        timerSystem.tick();
+        if (!isPaused) timerSystem.tick();
         dean.nextMove();
         checkForKey();
         checkForNearChestRoomDoorWithKey();
+        checkDeanCatch();
+    }
+
+    /**
+     * Checks if the dean has caught the player, and punishes them if he has by removing 50s from time left. 
+     */
+    public void checkDeanCatch() {
+        if (dean.canReach(player) && !playerCaught) {
+            startPlayerCatch();
+        }
+        else if (playerCaught && !isPaused) {
+            if (playerCaughtTime <= 0) {
+                endPlayerCatch();
+                playerCaughtTime = 2;
+            }
+            else {
+                float delta = Gdx.graphics.getDeltaTime();
+                playerCaughtTime -= delta;
+            }
+        }
+    }
+
+    private void startPlayerCatch() {
+        player.freeze();
+        player.setPosition(PLAYERSTARTPOS);
+        dean.freeze();
+        dean.changeAnimation(3);
+        dean.setPosition(PLAYERSTARTPOS.x + 32, PLAYERSTARTPOS.y);
+        playerCaught = true;
+        timerSystem.addGradually(48000); // 48 not 50 because you spend 2s stood while the timer goes down.
+    }
+
+    private void endPlayerCatch() {
+        dean.setPosition(DEANSTARTPOS);
+        dean.restartPath();
+        dean.unfreeze();
+        player.unfreeze();
+        playerCaught = false;
     }
 
     @Override
     public void resize(int width, int height) {
         renderingSystem.resize(width, height);
+    }
+
+    @Override
+    public void pause() {
+        togglePause();
+    }
+
+    @Override
+    public void resume() {
+        togglePause();
     }
 }

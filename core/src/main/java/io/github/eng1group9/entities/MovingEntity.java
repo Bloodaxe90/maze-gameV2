@@ -37,7 +37,7 @@ public class MovingEntity extends AnimatedEntity {
      * @param direction The direction as either 'U' 'D' 'L' or'R' 
      * @param collisionRectangles A list of rectangles which the entity cannot move into.
      */
-    public void move(Character direction){
+    public float move(Character direction){
         if (!frozen) {
             float delta = Gdx.graphics.getDeltaTime();
             float distance = delta * speed;
@@ -59,8 +59,10 @@ public class MovingEntity extends AnimatedEntity {
             }
             if (io.github.eng1group9.Main.collisionSystem.safeToMove(newX, newY, getHitbox())) {
                 setPosition(newX, newY);
+                return distance;
             }
         }
+        return 0;
     }
 
  

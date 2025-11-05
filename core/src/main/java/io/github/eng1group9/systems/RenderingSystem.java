@@ -40,12 +40,12 @@ public class RenderingSystem {
 
     public OrthogonalTiledMapRenderer getMapRenderer() { return mapRenderer; }
 
-    public String getClock(long elapsedTime) {
+    public String getClock(float elapsedTime) {
         return Integer.toString(500 - (int)(elapsedTime / 1000));
     }
 
 
-    public void draw(Player player, Dean dean, boolean showCollision, long elapsedTime, List<Rectangle> worldCollision) {
+    public void draw(Player player, Dean dean, boolean showCollision, float elapsedTime, List<Rectangle> worldCollision) {
         ScreenUtils.clear(Color.BLACK);
         viewport.apply();
 
@@ -89,7 +89,7 @@ public class RenderingSystem {
             uiBatch.draw(missingTexture, rectangle.x, rectangle.y , rectangle.width, rectangle.height);
         }
         uiBatch.draw(missingTexture, player.getHitbox().x + 16, player.getHitbox().y+ 16, player.getHitbox().width, player.getHitbox().height);
-        uiBatch.draw(missingTexture, dean.getHitbox().x + 16, dean.getHitbox().y+ 16, dean.getHitbox().width, dean.getHitbox().height);
+        uiBatch.draw(missingTexture, dean.getReachRectangle().x + 16, dean.getReachRectangle().y+ 16, dean.getReachRectangle().width, dean.getReachRectangle().height);
     }
 
     public void resize(int width, int height) {
@@ -103,13 +103,13 @@ public class RenderingSystem {
         uiBatch.setColor(1, 1, 1, 1);
 
         font.getData().setScale(2f);
-        font.draw(uiBatch, "Max's Maze", screenWidth / 2f, (screenHeight / 2f) + 40);
+        font.draw(uiBatch, "Escape from Uni", screenWidth / 2f, (screenHeight / 2f) + 40);
         font.draw(uiBatch, "Instructions", screenWidth / 2f, (screenHeight / 2f) - 100);
         font.getData().setScale(1f);
         font.draw(uiBatch, "Press P to resume!", screenWidth / 2f, screenHeight / 2f);
         font.draw(uiBatch, "Press ESC to quit.", screenWidth / 2f, (screenHeight / 2f) - 20);
         font.draw(uiBatch, "Press E to interact.", screenWidth / 2f, (screenHeight / 2f) - 40);
-        font.draw(uiBatch, "Use WASD to move.", screenWidth / 2f, (screenHeight / 2f) - 60);
+        font.draw(uiBatch, "Use WASD or arrow keys to move.", screenWidth / 2f, (screenHeight / 2f) - 60);
         font.draw(uiBatch, "Avoid the dean and escape the maze in time!", screenWidth / 2f, (screenHeight / 2f) - 140);
 
         uiBatch.end();
