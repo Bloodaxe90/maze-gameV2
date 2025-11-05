@@ -54,7 +54,7 @@ public class RenderingSystem {
 
         camera.update();
         mapRenderer.setView(camera);
-        int[] belowPlayer = {0, 1, 2}; // the layers which should appear below the player
+        int[] belowPlayer = {0, 1, 2, 3, 4}; // the layers which should appear below the player
         mapRenderer.render(belowPlayer);
 
         worldBatch.begin();
@@ -62,9 +62,8 @@ public class RenderingSystem {
         dean.draw(worldBatch);
         worldBatch.end();
 
-        int[] abovePlayer = {3, 4, 5, 6, 7, 8, 9, 10}; // the layers which should appear above the player
+        int[] abovePlayer = { 5, 6, 7, 8, 9, 10}; // the layers which should appear above the player
         mapRenderer.render(abovePlayer);
-
         uiBatch.begin();
         font.draw(uiBatch, "Time left: " + getClock(elapsedTime), 10, 640 - 10);
 

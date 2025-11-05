@@ -23,7 +23,8 @@ public class Main extends ApplicationAdapter {
     boolean isPaused = false;
     boolean gameStarted = false;
 
-    public boolean chestDoorOpen = false;
+    public static boolean chestDoorOpen = false;
+    public static boolean mainDoorOpen = false;
 
     private TimerSystem timerSystem = new TimerSystem();
     public boolean showCollision = false;
@@ -108,10 +109,11 @@ public class Main extends ApplicationAdapter {
         float playerY = player.getY();
 
         if (((playerX - 238) * (playerX - 238)) + ((playerY - 353) * (playerY - 353)) < 50) {
-            if (player.hasChestRoomKey()) {
+            if (player.hasChestRoomKey() && !chestDoorOpen) {
                 ToastSystem.addToast("You opened the door");
                 collisionSystem.removeCollisionByName("chestRoomDoor");
                 collisionSystem.hideLayer("ChestDoorClosed");
+                chestDoorOpen = true;
             }
         }
     }
