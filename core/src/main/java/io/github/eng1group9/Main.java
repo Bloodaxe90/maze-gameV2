@@ -60,13 +60,13 @@ public class Main extends ApplicationAdapter {
     final Character[] DEANPATH = {
         'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R',
         'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D',
-        'R', 'R', 'R', 
+        'R', 'R', 'R',
         'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U',
         'L', 'L', 'L',
         'D', 'D', 'D', 'D',
         'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L'
     };
-    
+
 
     private Chest chest;
 
@@ -151,8 +151,9 @@ public class Main extends ApplicationAdapter {
         float playerX = player.getX();
         float playerY = player.getY();
 
-        if (((playerX - 238) * (playerX - 238)) + ((playerY - 416) * (playerY - 416)) < 50) {
+        if (((playerX - 238) * (playerX - 238)) + ((playerY - 353) * (playerY - 353)) < 50) {
             if (player.hasChestRoomKey()) {
+                ToastManager.addToast("You opened the door");
                 removeCollisionByName("chestRoomDoor");
             }
         }
@@ -185,8 +186,6 @@ public class Main extends ApplicationAdapter {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             tryInteract();
-
-            ToastManager.addToast("hello");
         }
     }
 
@@ -292,7 +291,7 @@ public class Main extends ApplicationAdapter {
             offset += 30;
             font.draw(UI, text, 10, (640 - 10) - offset);
         }
-        
+
         if (showCollision) { // show collisions for debugging
             renderCollision();
         }

@@ -9,10 +9,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import io.github.eng1group9.toasts.ToastManager;
 
 /**
  * Handles everything connected to the player.
- * @param startPos The players start positon. 
+ * @param startPos The players start positon.
  * @author Mat and Max.
  */
 public class Player extends MovingEntity {
@@ -51,14 +52,14 @@ public class Player extends MovingEntity {
         }
     }
 
-    
+
 
     public boolean hasExitKey() {
         return hasExitKey;
     }
 
     public void setHasExitKey(Boolean bool) {
-        System.out.println("Got exit key");
+        ToastManager.addToast("You found the exit key!");
         hasExitKey = bool;
     }
     public boolean hasChestRoomKey() {
@@ -66,10 +67,11 @@ public class Player extends MovingEntity {
     }
 
     public void setHasChestRoomKey(Boolean bool) {
+        hasChestRoomKey = bool;
+
         if (bool) {
-            System.out.println("Got key");
-            hasChestRoomKey = bool;
             Main.instance.deleteKeyTile();
+            ToastManager.addToast("You found the key!");
         }
     }
 }
