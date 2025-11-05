@@ -27,10 +27,9 @@ public class Dean extends MovingEntity {
         setHitbox(new Rectangle());
 
         reachRectangle = new Rectangle();
-        reachRectangle.setPosition(startPos.x -32, startPos.y -32);
+        reachRectangle.setPosition(startPos.x -32, startPos.y -42);
         reachRectangle.setSize(reach * 32);
         setHitbox(new Rectangle());
-
         this.path = path;
         STARTPOS = startPos;
     }
@@ -40,7 +39,7 @@ public class Dean extends MovingEntity {
         float distance = move(direction);
         nextTileDistance -= distance;
         if (!isFrozen()) updateAnimation(direction);
-        reachRectangle.setPosition(getX() - 32, getY() - 40);
+        reachRectangle.setPosition(getX() - 32, getY() - 42);
         haveIMovedOneTile();
     }
 

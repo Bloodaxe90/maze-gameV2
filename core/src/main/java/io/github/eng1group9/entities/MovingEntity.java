@@ -40,6 +40,7 @@ public class MovingEntity extends AnimatedEntity {
     public float move(Character direction){
         if (!frozen) {
             float delta = Gdx.graphics.getDeltaTime();
+            if (delta > 0.1) delta = 0;
             float distance = delta * speed;
             float newX = getX();
             float newY = getY();
