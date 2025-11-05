@@ -52,9 +52,12 @@ public class Main extends ApplicationAdapter {
 
     private Player player;
     final Vector2 PLAYERSTARTPOS = new Vector2(16, 532);
+    final float DEFAULTPLAYERSPEED = 100;
 
     private Dean dean;
     final Vector2 DEANSTARTPOS = new Vector2(16, 532);
+    final char[] DEANPATH = {'R', 'D', 'L', 'U'};
+    final float DEFAULTDEANSPEED = 10;
 
     private Chest chest;
 
@@ -69,8 +72,8 @@ public class Main extends ApplicationAdapter {
         UI = new SpriteBatch();
         setupWorld();
         setupWorldCollision();
-        player = new Player(PLAYERSTARTPOS);
-        dean = new Dean(DEANSTARTPOS);
+        player = new Player(PLAYERSTARTPOS, DEFAULTPLAYERSPEED);
+        dean = new Dean(DEANSTARTPOS, DEFAULTDEANSPEED, DEANPATH);
         chest = new Chest();
         instance = this;
     }
@@ -267,7 +270,7 @@ public class Main extends ApplicationAdapter {
         batch.end();
         // Overlay text - must be before batch.end.
 
-        int[] abovePlayer = {3, 4, 5, 6, 7}; // the layers which should appear above the player
+        int[] abovePlayer = {3, 4, 5, 6, 7, 8}; // the layers which should appear above the player
         mapRenderer.render(abovePlayer);
 
         UI.begin();
@@ -283,17 +286,9 @@ public class Main extends ApplicationAdapter {
             offset += 30;
             font.draw(UI, text, 10, (640 - 10) - offset);
         }
-
-
-
+        
         if (showCollision) { // show collisions for debugging
-            for (Rectangle rectangle : worldCollision) {
-                UI.draw(missingTexture, rectangle.x, rectangle.y , rectangle.width, rectangle.height);
-            }
-            UI.draw(missingTexture, player.getHitbox().x + 16, player.getHitbox().y+ 16, player.getHitbox().width, player.getHitbox().height);
-            UI.draw(missingTexture, dean.getHitbox().x + 16, dean.getHitbox().y+ 16, dean.getHitbox().width, dean.getHitbox().height);
-            chest.draw(UI);
-
+            renderCollision();
         }
         UI.end();
 
@@ -303,6 +298,15 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         testMap.dispose();
+    }
+
+    public void renderCollision() {
+        for (Rectangle rectangle : worldCollision) {
+                UI.draw(missingTexture, rectangle.x, rectangle.y , rectangle.width, rectangle.height);
+            }
+            UI.draw(missingTexture, player.getHitbox().x + 16, player.getHitbox().y+ 16, player.getHitbox().width, player.getHitbox().height);
+            UI.draw(missingTexture, dean.getHitbox().x + 16, dean.getHitbox().y+ 16, dean.getHitbox().width, dean.getHitbox().height);
+            chest.draw(UI);
     }
 
     @Override

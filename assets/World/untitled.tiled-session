@@ -116,10 +116,10 @@
         },
         "testMap.tmx": {
             "scale": 8,
-            "selectedLayer": 8,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 273.375,
-                "y": 97.875
+                "x": 169.625,
+                "y": 232.9375
             }
         }
     },

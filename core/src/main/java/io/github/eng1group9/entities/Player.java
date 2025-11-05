@@ -12,21 +12,24 @@ import com.badlogic.gdx.math.Vector2;
 
 /**
  * Handles everything connected to the player.
+ * @param startPos The players start positon. 
  * @author Mat and Max.
  */
-public class Player extends AnimatedEntity {
+public class Player extends MovingEntity {
 
-    private float speed = 100;
     private boolean hasExitKey = false;
     private boolean hasChestRoomKey = false;
 
-    public Player(Vector2 startPos) {
-        super(new Texture("Characters/playerAnimations.png"), new int[] {4, 4,4,4} , 32, 32);
+    public Player(Vector2 startPos, float speed) {
+        super(new Texture("Characters/playerAnimations.png"), new int[] {4, 4,4,4} , 32, 32, speed);
         setPosition(startPos);
         setScale(2);
     }
 
-
+    /**
+     * Move the player if directional keys are being pressed.
+     * @param worldCollision A list of rectangles the player cannot walk through.
+     */
     public void handleInputs(List<Rectangle> worldCollision) {
         if (!isFrozen()) {
             if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
@@ -48,51 +51,7 @@ public class Player extends AnimatedEntity {
         }
     }
 
-    public void setSpeed(float newSpeed) {
-        speed = newSpeed;
-    }
-
-    public float getSpeed() {
-        return speed;
-    }
-
-    public void move(char direction, List<Rectangle> collisionRectangles){
-        float delta = Gdx.graphics.getDeltaTime();
-        float distance = delta * speed;
-        float newX = getX();
-        float newY = getY();
-        switch (direction) {
-            case 'U':
-                newY += distance;
-                break;
-            case 'D':
-                newY -= distance;
-                break;
-            case 'L':
-                newX-= distance;
-                break;
-            case 'R':
-                newX += distance;
-                break;
-        }
-        if (safeToMove(newX, newY, collisionRectangles)) {
-                setPosition(newX, newY);
-        }
-    }
-
-
-    private boolean safeToMove(float x, float y, List<Rectangle> collisionRectangles) {
-        Rectangle testHitbox = new Rectangle();
-        testHitbox = testHitbox.set(getHitbox());
-        testHitbox.setPosition(x + 16, y + 16);
-
-        for (Rectangle rectangle : collisionRectangles) {
-            if (rectangle.overlaps(testHitbox)) {
-                return false;
-            }
-        }
-        return true;
-    }
+    
 
     public boolean hasExitKey() {
         return hasExitKey;

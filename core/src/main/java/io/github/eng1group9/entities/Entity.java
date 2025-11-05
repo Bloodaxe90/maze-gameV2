@@ -8,6 +8,7 @@ import javax.naming.directory.InvalidAttributeValueException;
 import org.w3c.dom.Text;
 import org.w3c.dom.css.Rect;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -172,5 +173,9 @@ public class Entity {
     */
     public void setScale(float newScale) {
         scale = newScale;
+    }
+
+    public void setHitbox(Rectangle hitbox) {
+        this.hitbox = hitbox;
     }
 }

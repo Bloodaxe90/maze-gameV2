@@ -95,5 +95,7 @@ public class AnimatedEntity extends Entity{
         batch.draw(currentFrame, getX(), getY(), getWidth(), getHeight());
     }
 
+    
+
 
 }
