@@ -7,10 +7,6 @@ public class TimerSystem {
         elapsedTime = 0;
     }
 
-    public void pause() { }
-
-    public void resume() { }
-
     public void update(float delta) {
         elapsedTime += (long) (delta * 1000);
     }

@@ -125,12 +125,10 @@ public class Main extends ApplicationAdapter {
         if (isPaused) {
             player.unfreeze();
             dean.unfreeze();
-            timerSystem.resume();
         }
         else {
             player.freeze();
             dean.freeze();
-            timerSystem.pause();
         }
         isPaused = !isPaused;
     }
