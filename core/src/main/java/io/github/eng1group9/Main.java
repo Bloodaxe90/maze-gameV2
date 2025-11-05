@@ -110,8 +110,6 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void render() {
-        checkForKey();
-        checkForNearChestRoomDoorWithKey();
         input();
         logic();
         draw();
@@ -249,6 +247,8 @@ public class Main extends ApplicationAdapter {
         float delta = Gdx.graphics.getDeltaTime();
         if (!isPaused) elapsedTime += (delta * 1000);
         dean.nextMove(worldCollision);
+        checkForKey();
+        checkForNearChestRoomDoorWithKey();
     }
 
     public String getClock() {
