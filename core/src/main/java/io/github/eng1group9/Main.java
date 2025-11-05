@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -20,6 +21,7 @@ public class Main extends ApplicationAdapter {
 
     boolean isFullscreen = false;
     boolean isPaused = false;
+    boolean gameStarted = false;
 
     private TimerSystem timerSystem = new TimerSystem();
     public boolean showCollision = false;
@@ -33,7 +35,6 @@ public class Main extends ApplicationAdapter {
     final float DEFAULTPLAYERSPEED = 100;
 
     private Dean dean;
-    private int deanPunishment = 0;
     final Vector2 DEANSTARTPOS = new Vector2(32, 352);
     final float DEFAULTDEANSPEED = 100;
     final Character[] DEANPATH = {
@@ -66,7 +67,7 @@ public class Main extends ApplicationAdapter {
         player = new Player(PLAYERSTARTPOS, DEFAULTPLAYERSPEED);
         dean = new Dean(DEANSTARTPOS, DEFAULTDEANSPEED, DEANPATH);
         chest = new Chest();
-
+        togglePause(); // so the game starts paused
         instance = this;
     }
 
@@ -77,14 +78,17 @@ public class Main extends ApplicationAdapter {
     @Override
     public void render() {
         input();
-        logic();
+        if (!isPaused) logic();
         draw();
     }
 
     public void draw() {
         renderingSystem.draw(player, dean, showCollision, timerSystem.elapsedTime, worldCollision);
-        if (isPaused) {
+        if (isPaused && gameStarted) {
             renderingSystem.renderPauseOverlay(960, 640);
+        }
+        else if (!gameStarted) {
+            renderingSystem.renderStartOverlay(960, 640);
         }
     }
 
@@ -113,6 +117,13 @@ public class Main extends ApplicationAdapter {
         inputSystem.handle(player);
     }
 
+    public void startGame() {
+        if (!gameStarted) {
+            gameStarted = true;
+            togglePause();
+        }
+    }
+
     public void tryInteract() {
         if (!chest.opened) {
             if (chest.distanceTo(player) < 50) {
@@ -133,7 +144,7 @@ public class Main extends ApplicationAdapter {
     }
 
     public void togglePause() {
-        if (isPaused && !playerCaught) {
+        if (isPaused && !playerCaught && gameStarted) {
             player.unfreeze();
             dean.unfreeze();
         }
@@ -146,7 +157,7 @@ public class Main extends ApplicationAdapter {
 
     public void logic() {
         // Process game logic here
-        if (!isPaused) timerSystem.tick();
+        timerSystem.tick();
         dean.nextMove();
         checkForKey();
         checkForNearChestRoomDoorWithKey();

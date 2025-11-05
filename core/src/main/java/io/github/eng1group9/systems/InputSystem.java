@@ -2,12 +2,6 @@ package io.github.eng1group9.systems;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import com.badlogic.gdx.math.Rectangle;
 import io.github.eng1group9.Main;
 import io.github.eng1group9.entities.Player;
 
@@ -31,6 +25,10 @@ public class InputSystem {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             Main.instance.tryInteract();
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            Main.instance.startGame();
+        }
+        
 
         if (!player.isFrozen()) {
             if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
