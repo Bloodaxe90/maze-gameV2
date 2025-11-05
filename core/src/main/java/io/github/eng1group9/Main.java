@@ -20,7 +20,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import io.github.eng1group9.entities.*;
 import io.github.eng1group9.systems.RenderingSystem;
-import io.github.eng1group9.toasts.ToastManager;
+import io.github.eng1group9.systems.ToastSystem;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
@@ -133,7 +133,7 @@ public class Main extends ApplicationAdapter {
 
         if (((playerX - 238) * (playerX - 238)) + ((playerY - 353) * (playerY - 353)) < 50) {
             if (player.hasChestRoomKey()) {
-                ToastManager.addToast("You opened the door");
+                ToastSystem.addToast("You opened the door");
                 removeCollisionByName("chestRoomDoor");
             }
         }

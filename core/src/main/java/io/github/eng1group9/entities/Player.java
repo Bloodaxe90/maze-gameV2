@@ -9,7 +9,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import io.github.eng1group9.toasts.ToastManager;
+import io.github.eng1group9.systems.ToastSystem;
 
 /**
  * Handles everything connected to the player.
@@ -59,7 +59,7 @@ public class Player extends MovingEntity {
     }
 
     public void setHasExitKey(Boolean bool) {
-        ToastManager.addToast("You found the exit key!");
+        ToastSystem.addToast("You found the exit key!");
         hasExitKey = bool;
     }
     public boolean hasChestRoomKey() {
@@ -71,7 +71,7 @@ public class Player extends MovingEntity {
 
         if (bool) {
             Main.instance.deleteKeyTile();
-            ToastManager.addToast("You found the key!");
+            ToastSystem.addToast("You found the key!");
         }
     }
 }

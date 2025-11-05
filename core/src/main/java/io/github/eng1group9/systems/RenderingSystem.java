@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.eng1group9.entities.Dean;
 import io.github.eng1group9.entities.Player;
-import io.github.eng1group9.toasts.ToastManager;
+import io.github.eng1group9.systems.ToastSystem;
 
 import java.util.List;
 
@@ -75,8 +75,8 @@ public class RenderingSystem {
     }
 
     public void renderToasts(BitmapFont font, SpriteBatch uiBatch) {
-        ToastManager.clearExpiredToasts();
-        List<String> toastTexts = ToastManager.getToasts();
+        ToastSystem.clearExpiredToasts();
+        List<String> toastTexts = ToastSystem.getToasts();
         int offset = 0;
 
         for (String text : toastTexts) {

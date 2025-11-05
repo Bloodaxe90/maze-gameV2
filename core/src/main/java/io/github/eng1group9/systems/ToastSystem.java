@@ -1,9 +1,27 @@
-package io.github.eng1group9.toasts;
+package io.github.eng1group9.systems;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class ToastManager {
+class ToastSystem {
+    private static class Toast {
+        private String text;
+        private long createdDate;
+
+        public Toast(String text, long createdDate) {
+            this.text = text;
+            this.createdDate = createdDate;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public long getCreatedDate() {
+            return createdDate;
+        }
+    }
+
     private static List<Toast> toasts = new LinkedList<>();
 
     public static void addToast(String text) {
@@ -36,3 +54,4 @@ public class ToastManager {
         return toastTexts;
     }
 }
+
