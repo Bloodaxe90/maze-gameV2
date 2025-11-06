@@ -65,7 +65,7 @@ public class RenderingSystem {
         dean.draw(worldBatch);
         worldBatch.end();
 
-        int[] abovePlayer = {6, 7, 8, 9, 10, 11, 12}; // the layers which should appear above the player
+        int[] abovePlayer = {6, 7, 8, 9, 10, 11, 12, 13}; // the layers which should appear above the player
         mapRenderer.render(abovePlayer);
         uiBatch.begin();
         font.draw(uiBatch, "Time left: " + getClock(elapsedTime), 10, 640 - 10);

@@ -160,7 +160,7 @@ public class TriggerSystem {
                 player.giveChestRoomKey();
                 break;
             case 2: // Get the scroll
-                
+                Main.getScroll();
                 break;
             case 3: // Standing by the switch 
                 Main.dropSpikes();

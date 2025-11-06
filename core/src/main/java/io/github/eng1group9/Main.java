@@ -30,6 +30,7 @@ public class Main extends ApplicationAdapter {
     public static boolean chestDoorOpen = false;
     public static boolean exitOpen = false;
     public static boolean spikesLowered = false;
+    public static boolean scrollUsed = false;
 
     private static TimerSystem timerSystem = new TimerSystem();
     public boolean showCollision = false;
@@ -130,6 +131,16 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    public static void getScroll() {
+        if (!scrollUsed) {
+            player.becomeInvisible();
+            RenderingSystem.hideLayer("Scroll");
+            scrollUsed = true;
+            ToastSystem.addToast("You got the Scroll!", GOOD);
+            ToastSystem.addToast("You are invisible for 15s", GOOD);
+        }
+    }
+
     public void input() {
         inputSystem.handle(player);
     }
@@ -193,6 +204,7 @@ public class Main extends ApplicationAdapter {
         dean.nextMove();
         checkDeanCatch();
         TriggerSystem.checkTouchTriggers(player);
+        player.update();
     }
 
     /**
@@ -258,5 +270,9 @@ public class Main extends ApplicationAdapter {
     @Override
     public void resume() {
         togglePause();
+    }
+
+    public void dispose() {
+        
     }
 }

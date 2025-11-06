@@ -74,7 +74,7 @@ public class Dean extends MovingEntity {
     }
 
     public boolean canReach(Player player) {
-        return player.isColliding(reachRectangle);
+        return player.isColliding(reachRectangle) && player.isVisible();
     }
 
     public void restartPath() {
