@@ -121,14 +121,15 @@ public class RenderingSystem {
 
         font.getData().setScale(2f);
         font.draw(uiBatch, "Escape from Uni", screenWidth / 2f, (screenHeight / 2f) + 40);
-        font.draw(uiBatch, "Instructions", screenWidth / 2f, (screenHeight / 2f) - 100);
+        font.draw(uiBatch, "Instructions", screenWidth / 2f, (screenHeight / 2f) - 120);
 
         font.getData().setScale(1f);
         font.draw(uiBatch, "Press P to resume!", screenWidth / 2f, screenHeight / 2f);
         font.draw(uiBatch, "Press ESC to quit.", screenWidth / 2f, (screenHeight / 2f) - 20);
         font.draw(uiBatch, "Press E to interact.", screenWidth / 2f, (screenHeight / 2f) - 40);
         font.draw(uiBatch, "Use WASD or arrow keys to move.", screenWidth / 2f, (screenHeight / 2f) - 60);
-        font.draw(uiBatch, "Avoid the dean and escape the maze in time!", screenWidth / 2f, (screenHeight / 2f) - 140);
+        font.draw(uiBatch, "Press F11 to Fullscreen.", screenWidth / 2f, (screenHeight / 2f) - 80);
+        font.draw(uiBatch, "Avoid the dean and escape the maze in time!", screenWidth / 2f, (screenHeight / 2f) - 160);
         
         uiBatch.end();
     }
@@ -141,7 +142,7 @@ public class RenderingSystem {
 
         font.getData().setScale(2f);
         font.draw(uiBatch, "Escape from Uni", screenWidth / 2f, (screenHeight / 2f) + 40);
-        font.draw(uiBatch, "Instructions", screenWidth / 2f, (screenHeight / 2f) - 100);
+        font.draw(uiBatch, "Instructions", screenWidth / 2f, (screenHeight / 2f) - 120);
 
         font.setColor(0, 1, 1, 1);
         font.draw(uiBatch, "Press Space to Start!", screenWidth / 2f, (screenHeight / 2f) - 200);
@@ -153,7 +154,8 @@ public class RenderingSystem {
         font.draw(uiBatch, "Press E to interact.", screenWidth / 2f, (screenHeight / 2f) - 40);
         font.draw(uiBatch, "Use WASD or arrow keys to move.", screenWidth / 2f, (screenHeight / 2f) - 60);
         font.draw(uiBatch, "Press P to pause!", screenWidth / 2f, screenHeight / 2f);
-        font.draw(uiBatch, "Avoid the dean and escape the maze in time!", screenWidth / 2f, (screenHeight / 2f) - 140);
+        font.draw(uiBatch, "Press F11 to Fullscreen.", screenWidth / 2f, (screenHeight / 2f) - 80);
+        font.draw(uiBatch, "Avoid the dean and escape the maze in time!", screenWidth / 2f, (screenHeight / 2f) - 160);
         
 
         uiBatch.end();

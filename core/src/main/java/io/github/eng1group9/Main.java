@@ -30,6 +30,7 @@ public class Main extends ApplicationAdapter {
 
     public static boolean chestDoorOpen = false;
     public static boolean exitOpen = false;
+    public static boolean spikesLowered = false;
 
     private static TimerSystem timerSystem = new TimerSystem();
     public boolean showCollision = false;
@@ -235,11 +236,15 @@ public class Main extends ApplicationAdapter {
     }
 
     public static void dropSpikes() {
-        collisionSystem.removeCollisionByName("chestRoomSpikes");
-        ToastSystem.addToast("You Lowered the Spikes!", GOOD);
-        RenderingSystem.hideLayer("Spikes");
-        RenderingSystem.hideLayer("Switch");
+        if (!spikesLowered) {
+            collisionSystem.removeCollisionByName("chestRoomSpikes");
+            ToastSystem.addToast("You Lowered the Spikes!", GOOD);
+            RenderingSystem.hideLayer("Spikes");
+            RenderingSystem.hideLayer("Switch");
+            spikesLowered = true;
+        }
     }
+        
 
     @Override
     public void resize(int width, int height) {
