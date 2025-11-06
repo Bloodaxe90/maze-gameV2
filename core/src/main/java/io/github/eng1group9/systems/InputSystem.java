@@ -23,7 +23,7 @@ public class InputSystem {
             Main.instance.showCollision = !Main.instance.showCollision;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            TriggerSystem.check(player);
+            TriggerSystem.checkInteractTriggers(player);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             Main.startGame();

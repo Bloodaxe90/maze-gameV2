@@ -12,35 +12,118 @@ import com.badlogic.gdx.math.Rectangle;
 
 import io.github.eng1group9.Main;
 import io.github.eng1group9.entities.Player;
+import io.github.eng1group9.systems.TriggerSystem.Trigger;
 
 /**
  * The system used to make things happen if a player enters a given area.
  * The Triggers layer on the TileMap contains Rectangles used to denote these areas.
- * The name of the Rectangle is its ID, which is used to determine what happens when it is triggered.
+ * The name of the Rectangle is in the form "ID,triggerType" 
+ * which is used to determine what happens when it is triggered, and how.
+ * 
+ * triggerType must be in the form T or I
+ * for Touch or Interact
  */
 public class TriggerSystem {
 
-    private static List<RectangleMapObject> triggers = new LinkedList<>();
+    /**
+     * A Trigger with a zone and a player it relates too. 
+     */
+    static class Trigger {
+        private int ID;
+        private Rectangle zone;
+        private boolean activateOnTouch = false;
 
-    public static void init(String tmxPath) {
-        triggers = getTriggers(tmxPath);
+        public Trigger(int ID, boolean activateOnTouch, Rectangle zone) {
+            this.ID = ID;
+            this.activateOnTouch = activateOnTouch;
+            this.zone = zone;
+        }
+
+        public int getID() {
+            return ID;
+        }
+
+        public boolean isActivateOnTouch() {
+            return activateOnTouch;
+        }
+
+        public boolean isActivateOnInteract() {
+            return !activateOnTouch;
+        }
+
+        public Rectangle getZone() {
+            return zone;
+        }
+
+        public boolean playerInZone(Player player) {
+            return player.isColliding(zone);
+        }
     }
 
-    public static List<RectangleMapObject> getTriggers(String tmxPath) {
+    private static List<Trigger> touchTriggers = new LinkedList<>();
+    private static List<Trigger> interactTriggers = new LinkedList<>();
+
+    public static void init(String tmxPath) {
+        List<Trigger> triggers = getTriggers(tmxPath);
+        for (Trigger t : triggers) {
+            if (t.isActivateOnTouch()) {
+                touchTriggers.add(t);
+            }
+            else {
+                interactTriggers.add(t);
+            }
+        }
+    }
+
+    public static List<Trigger> getTriggers(String tmxPath) {
         TiledMap map = new TmxMapLoader().load(tmxPath);
         MapLayer triggerLayer = map.getLayers().get("Triggers");
         MapObjects triggerObjects = triggerLayer.getObjects();
+        List<Trigger> triggers = new LinkedList<>();
+
         for (MapObject mapObject : triggerObjects) {
-            RectangleMapObject t = (RectangleMapObject) mapObject;
-            Rectangle nextRectangle = t.getRectangle();
-            nextRectangle.set(nextRectangle.x * 2,nextRectangle.y * 2, nextRectangle.width * 2, nextRectangle.height * 2);
+            RectangleMapObject recMapObj = (RectangleMapObject) mapObject;
+            int ID = Integer.parseInt(recMapObj.getName().split(",")[0]);
+
+            Rectangle zone = recMapObj.getRectangle();
+            zone.set(zone.x * 2, zone.y * 2, zone.width * 2, zone.height * 2);
+
+            String triggerType = recMapObj.getName().split(",")[1];
+            Trigger t = new Trigger(ID, triggerType.equals("T"), zone);
             triggers.add(t);
-            System.out.println("Loaded Trigger " + t.getName());
+            System.out.println("Loaded Trigger " + t.getID());
         }
         return triggers;
     }
 
-    public static List<RectangleMapObject> getTriggers() {
+    public static List<Trigger> getTouchTriggers() {
+        return touchTriggers;
+    }
+
+    public static List<Trigger> getInteractTriggers() {
+        return interactTriggers;
+    }
+
+    public static boolean remove(int ID) {
+        for (Trigger t : touchTriggers) {
+            if (t.getID() == ID) {
+                touchTriggers.remove(t);
+                return true;
+            }
+        }
+        for (Trigger t : interactTriggers) {
+            if (t.getID() == ID) {
+                interactTriggers.remove(t);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static List<Trigger> getTriggers() {
+        List<Trigger> triggers = new LinkedList<>();
+        triggers.addAll(touchTriggers);
+        triggers.addAll(interactTriggers);
         return triggers;
     }
 
@@ -48,11 +131,19 @@ public class TriggerSystem {
      * Will check if the given player is staninding in any triggers, and trigger them if so
      * @param player The player which is being checked
      */
-    public static void check(Player player) {
-        for (RectangleMapObject t : triggers) {
-            if (player.isColliding(t.getRectangle())) {
-                System.out.println("Triggered " + t.getName() + "!");
-                trigger(Integer.parseInt(t.getName()), player);
+    public static void checkInteractTriggers(Player player) {
+        for (Trigger t : interactTriggers) {
+            if (t.playerInZone(player)) {
+                System.out.println("Triggered " + t.getID() + "!");
+                trigger(t.getID(), player);
+            }
+        }
+    }
+
+    public static void checkTouchTriggers(Player player) {
+        for (Trigger t : touchTriggers) {
+            if (t.playerInZone(player)) {
+                trigger(t.getID(), player);
             }
         }
     }
@@ -64,7 +155,7 @@ public class TriggerSystem {
     public static void trigger(int ID, Player player) {
         switch (ID) {
             case 0: // open the main door
-                Main.openExit();
+                Main.winGame();
                 break;
             case 1: // Get the chest room key
                 player.giveChestRoomKey();
@@ -83,6 +174,9 @@ public class TriggerSystem {
                 break;
             case 6: // Standing by the chest room door
                 Main.openChestRoomDoor();
+                break;
+            case 7: // Standing by the chest room door
+                Main.openExit();
                 break;
             default:
                 break;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="140">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="142">
  <tileset firstgid="1" source="dungeons_demo.tsx"/>
  <tileset firstgid="113" source="House.tsx"/>
  <tileset firstgid="223" source="TilesetForest.tsx"/>
@@ -298,14 +298,16 @@
   <object id="126" x="171" y="206.125" width="4.375" height="57.5"/>
   <object id="128" name="chestRoomSpikes" x="226.596" y="225.375" width="56.4743" height="16.25"/>
   <object id="129" name="exitDoor" x="350.763" y="28.2083" width="33.4743" height="18.75"/>
+  <object id="140" x="136.091" y="29.5454" width="16.1818" height="12.5455"/>
  </objectgroup>
  <objectgroup color="#0000ff" id="21" name="Triggers">
-  <object id="131" name="1" x="11.8182" y="191.636" width="20" height="20.3636"/>
-  <object id="132" name="2" x="77.2728" y="206.182" width="21.2728" height="20.7273"/>
-  <object id="134" name="3" x="431.75" y="255.625" width="16.25" height="16.25"/>
-  <object id="135" name="4" x="193.5" y="14.5" width="13" height="14.5"/>
-  <object id="136" name="5" x="127.875" y="31" width="32" height="21.375"/>
-  <object id="137" name="6" x="126.5" y="110.25" width="18.5" height="18.5"/>
-  <object id="139" name="0" x="346.25" y="46" width="42.5" height="17.4545"/>
+  <object id="131" name="1,T" x="11.8182" y="191.636" width="20" height="20.3636"/>
+  <object id="132" name="2,T" x="77.2728" y="206.182" width="21.2728" height="20.7273"/>
+  <object id="134" name="3,I" x="432.083" y="250.292" width="16.25" height="16.25"/>
+  <object id="135" name="4,I" x="193.5" y="14.5" width="13" height="14.5"/>
+  <object id="136" name="5,I" x="127.875" y="31" width="32" height="23.5568"/>
+  <object id="137" name="6,I" x="126.5" y="110.25" width="18.5" height="18.5"/>
+  <object id="139" name="7,I" x="346.25" y="46" width="42.5" height="17.4545"/>
+  <object id="141" name="0,T" x="347.114" y="4.7273" width="42.5" height="17.4545"/>
  </objectgroup>
 </map>

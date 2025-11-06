@@ -17,6 +17,7 @@ import io.github.eng1group9.Main;
 import io.github.eng1group9.entities.Dean;
 import io.github.eng1group9.entities.Player;
 import io.github.eng1group9.systems.ToastSystem.Toast;
+import io.github.eng1group9.systems.TriggerSystem.Trigger;
 
 import java.util.List;
 
@@ -100,8 +101,8 @@ public class RenderingSystem {
     }
 
     public void renderTriggers(SpriteBatch uiBatch) {
-        for (RectangleMapObject t : TriggerSystem.getTriggers()) {
-            Rectangle rectangle = t.getRectangle();
+        for (Trigger t : TriggerSystem.getTriggers()) {
+            Rectangle rectangle = t.getZone();
             uiBatch.setColor(0, 1, 1, 0.75f);
             uiBatch.draw(missingTexture, rectangle.x, rectangle.y , rectangle.width, rectangle.height);
         }

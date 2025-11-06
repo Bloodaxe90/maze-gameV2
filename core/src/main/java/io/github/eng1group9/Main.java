@@ -127,7 +127,6 @@ public class Main extends ApplicationAdapter {
             collisionSystem.removeCollisionByName("exitDoor");
             collisionSystem.hideLayer("ExitClosed");
             exitOpen = true;
-            winGame();
         }
     }
 
@@ -193,6 +192,7 @@ public class Main extends ApplicationAdapter {
         timerSystem.tick();
         dean.nextMove();
         checkDeanCatch();
+        TriggerSystem.checkTouchTriggers(player);
     }
 
     /**
