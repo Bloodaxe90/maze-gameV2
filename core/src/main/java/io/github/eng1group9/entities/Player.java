@@ -1,10 +1,10 @@
 package io.github.eng1group9.entities;
 
-import io.github.eng1group9.Main;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+
+import io.github.eng1group9.systems.RenderingSystem;
 import io.github.eng1group9.systems.ToastSystem;
 
 /**
@@ -16,6 +16,7 @@ public class Player extends MovingEntity {
 
     private boolean hasExitKey = false;
     private boolean hasChestRoomKey = false;
+    private boolean hasRedPotion = false;
     private float invisibilityLeft = 0;
     private boolean invisibilityWarningGiven = true;
 
@@ -43,9 +44,21 @@ public class Player extends MovingEntity {
     public void giveChestRoomKey() {
         if (!hasChestRoomKey) {
             hasChestRoomKey = true;
-            Main.instance.deleteKeyTile();
+            RenderingSystem.hideLayer("Key");
             ToastSystem.addToast("You found the Storage Room Key!");
         }
+    }
+
+    public void giveRedPotion() {
+        if (!hasRedPotion) {
+            hasRedPotion = true;
+            RenderingSystem.hideLayer("Potion");
+            ToastSystem.addToast("You found a Red Potion?");
+        }
+    }
+
+    public boolean hasRedPotion() {
+        return hasRedPotion;
     }
 
     public void becomeInvisible() {

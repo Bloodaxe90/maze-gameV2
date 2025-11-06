@@ -31,12 +31,13 @@ public class Main extends ApplicationAdapter {
     public static boolean exitOpen = false;
     public static boolean spikesLowered = false;
     public static boolean scrollUsed = false;
+    public static int longboiBonus = 0;
 
     private static TimerSystem timerSystem = new TimerSystem();
     public boolean showCollision = false;
 
     private List<Rectangle> worldCollision;
-    final static int LONGBOIBONUS = 2000;
+    final static int LONGBOIBONUSAMOUNT = 201823;
     final static String TMXPATH = "World/testMap.tmx";
 
     public static Player player;
@@ -82,10 +83,6 @@ public class Main extends ApplicationAdapter {
         instance = this;
     }
 
-    public void deleteKeyTile() {
-        collisionSystem.deleteKeyTile();
-    }
-
     @Override
     public void render() {
         input();
@@ -93,6 +90,18 @@ public class Main extends ApplicationAdapter {
         draw();
     }
 
+    public static void checkForLongboi() {
+        Color messageColour = new Color(0.2f, 1, 0.2f ,1);
+        if (longboiBonus == 0 && !player.hasRedPotion()) {
+            ToastSystem.addToast("Hello There! I seem to have misplaced my Red Potion, could you get it for me?", messageColour);
+         }
+        else if (longboiBonus == 0 && player.hasRedPotion()){
+            longboiBonus = LONGBOIBONUSAMOUNT;
+            ToastSystem.addToast("You found my potion! Thank you!", messageColour);
+            RenderingSystem.showLayer("LONGBOI");
+        }
+    }
+    
     public void draw() {
         renderingSystem.draw(player, dean, showCollision, timerSystem.elapsedTime, worldCollision);
         switch (gameState) {
@@ -163,7 +172,7 @@ public class Main extends ApplicationAdapter {
     }
 
     public static int calculateScore() {
-        return (int)timerSystem.getTimeLeft() * 1000 + LONGBOIBONUS;
+        return (int)timerSystem.getTimeLeft() * 1000 + longboiBonus;
     }
 
     public void tryInteract() {
@@ -205,6 +214,10 @@ public class Main extends ApplicationAdapter {
         checkDeanCatch();
         TriggerSystem.checkTouchTriggers(player);
         player.update();
+    }
+
+    public void getRedPotion() {
+        
     }
 
     /**

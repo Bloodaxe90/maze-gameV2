@@ -48,7 +48,11 @@ public class RenderingSystem {
     }
 
     public static void hideLayer(String name) {
-        map.getLayers().get(name).setVisible(false);;
+        map.getLayers().get(name).setVisible(false);
+    }
+
+    public static void showLayer(String name) {
+        map.getLayers().get(name).setVisible(true);
     }
 
     public void draw(Player player, Dean dean, boolean showCollision, float elapsedTime, List<Rectangle> worldCollision) {
@@ -57,7 +61,7 @@ public class RenderingSystem {
 
         camera.update();
         mapRenderer.setView(camera);
-        int[] belowPlayer = {0, 1, 2, 3, 4, 5}; // the layers which should appear below the player
+        int[] belowPlayer = {0, 1, 2, 3, 4, 5, 6}; // the layers which should appear below the player
         mapRenderer.render(belowPlayer);
 
         worldBatch.begin();
@@ -65,7 +69,7 @@ public class RenderingSystem {
         dean.draw(worldBatch);
         worldBatch.end();
 
-        int[] abovePlayer = {6, 7, 8, 9, 10, 11, 12, 13}; // the layers which should appear above the player
+        int[] abovePlayer = {7, 8, 9, 10, 11, 12, 13, 14, 15}; // the layers which should appear above the player
         mapRenderer.render(abovePlayer);
         uiBatch.begin();
         font.draw(uiBatch, "Time left: " + getClock(elapsedTime), 10, 640 - 10);

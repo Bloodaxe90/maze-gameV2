@@ -172,7 +172,7 @@ public class TriggerSystem {
                 Main.dropSpikes();
                 break;
             case 4: // Standing by the mouse hole
-                
+                Main.checkForLongboi();
                 break;
             case 5: // Standing by the chest
                 player.giveExitKey();
@@ -182,6 +182,9 @@ public class TriggerSystem {
                 break;
             case 7: // Standing by the chest room door
                 Main.openExit();
+                break;
+            case 8: // Pickup red potion.
+                player.giveRedPotion();
                 break;
             default:
                 break;
