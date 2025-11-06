@@ -127,8 +127,9 @@ public class TriggerSystem {
     }
 
     /**
-     * Will check if the given player is staninding in any triggers, and trigger them if so
-     * @param player The player which is being checked
+     * Will check if the given player is staninding in any triggers, and trigger them if so.
+     * @param player The player which is being checked.
+     * This is run each time the player presses E.
      */
     public static void checkInteractTriggers(Player player) {
         for (Trigger t : interactTriggers) {
@@ -139,6 +140,11 @@ public class TriggerSystem {
         }
     }
 
+    /**
+     * Will check if the given player is staninding in any triggers, and trigger them if so.
+     * @param player The player which is being checked.
+     * This is run each frame.
+     */
     public static void checkTouchTriggers(Player player) {
         for (Trigger t : touchTriggers) {
             if (t.playerInZone(player)) {
