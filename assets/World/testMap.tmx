@@ -373,7 +373,7 @@
   <object id="140" x="136.091" y="29.5454" width="16.1818" height="12.5455"/>
  </objectgroup>
  <objectgroup color="#0000ff" id="21" name="Triggers">
-  <object id="131" name="1,T" x="11.8182" y="191.636" width="20" height="20.3636"/>
+  <object id="131" name="1,T" x="12.3637" y="191.636" width="19.4545" height="20.7272"/>
   <object id="132" name="2,T" x="85.6364" y="206.364" width="3.45462" height="20.7273"/>
   <object id="134" name="3,I" x="432.083" y="255.564" width="16.25" height="16.25"/>
   <object id="135" name="4,I" x="193.5" y="14.5" width="13" height="14.5"/>
