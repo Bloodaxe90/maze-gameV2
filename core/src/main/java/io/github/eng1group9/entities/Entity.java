@@ -19,10 +19,10 @@ import com.badlogic.gdx.math.Vector2;
 */
 public class Entity {
 
-    private Texture missingTexture = new Texture("missingTexture.png");
+    private Texture missingTexture = new Texture("missingTexture.png"); // Used if no texture is avalible for the entity. 
     private Sprite sprite = new Sprite(missingTexture);
-    private Rectangle hitbox = new Rectangle();
-    private boolean canCollide = true;
+    private Rectangle hitbox = new Rectangle(); 
+    private boolean canCollide = true; // wether the entity will collide with other entitys / rectangles.
     private float scale = 1;
     private float width;
     private float height;
@@ -42,36 +42,48 @@ public class Entity {
         hitbox.set(startPosition.x  + 16, startPosition.y  + 16, width, 16);
     }
 
+    /**
+     * Change the position of the entity using a Vector2D.
+     * @param newPosition - A vector defining the new position. 
+     */
     public void setPosition(Vector2 newPosition) {
         sprite.setPosition(newPosition.x, newPosition.y);
         hitbox.setPosition(newPosition.x  + 16, newPosition.y + 16);
     }
 
+    /**
+     * Change the position of the entity using a two float values.
+     * @param x - The entity's new x co-ordinate.
+     * @param y - The entity's new y co-ordinate.
+     */
     public void setPosition(float x, float y) {
         sprite.setPosition(x, y);
         hitbox.setPosition(x, y);
     }
 
+    /**
+     * @return The current position of the entity as a Vector2D.
+     */
     public Vector2 getPosition() {
         return new Vector2(sprite.getX(), sprite.getY());
     }
 
+    /**
+     * Set the x co-ordinate of the entity. 
+     * @param x - The new x co-ordinate. 
+     */
     public void setX(float x) {
         sprite.setX(x);
         hitbox.setX(x + (0.5f * width));
     }
 
+    /**
+     * Set the y co-ordinate of the entity. 
+     * @param y - The new x co-ordinate. 
+     */
     public void setY(float y) {
         sprite.setY(y);
         hitbox.setY(y + (0.5f * height));
-    }
-
-    /**
-    * @return the entity's x co-ordinate.
-    */
-    public void translate(float x, float y) {
-        sprite.translate(x, y);
-        hitbox.setPosition(sprite.getX(), sprite.getY());
     }
 
     /**
@@ -88,6 +100,10 @@ public class Entity {
         return sprite.getY();
     }
 
+    /**
+     * Render the entity. 
+     * @param batch - The SpriteBatch this entity should be rendered with. 
+     */
     public void draw(SpriteBatch batch) {
         sprite.draw(batch);
     }
@@ -147,24 +163,31 @@ public class Entity {
     }
 
     /**
-     * @return the width of this sprite (before scaling).
+     * @return the width of this entity (after scaling).
      */
     public float getWidth() {
         return sprite.getWidth() * scale;
     }
 
+    /**
+     * @return the height of this entity (after scaling).
+     */
     public float getHeight() {
         return sprite.getWidth() * scale;
     }
 
     /**
-     * Sets the scale used to stretch the sprite when drawn (in x and y).
+     * Sets the scale used to stretch the entity when drawn (in x and y).
      * @param newScale
     */
     public void setScale(float newScale) {
         scale = newScale;
     }
 
+    /**
+     * Update the hitbox of an entity.  
+     * @param hitbox - The entity's new hitbox. 
+     */
     public void setHitbox(Rectangle hitbox) {
         this.hitbox = hitbox;
     }

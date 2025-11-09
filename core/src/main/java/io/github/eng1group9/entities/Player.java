@@ -9,8 +9,8 @@ import io.github.eng1group9.systems.ToastSystem;
 
 /**
  * Handles everything connected to the player.
- * @param startPos The players start positon.
- * @author Mat and Max.
+ * @param startPos - The players start positon.
+ * @param speed - How fast the player will move.
  */
 public class Player extends MovingEntity {
 
@@ -26,21 +26,33 @@ public class Player extends MovingEntity {
         setScale(2);
     }
 
+    /**
+     * @return wether the player has the key to open the exit.
+     */
     public boolean hasExitKey() {
         return hasExitKey;
     }
 
+    /**
+     * Give the player the key to open the exit.
+     */
     public void giveExitKey() {
         if (!hasExitKey) {
             hasExitKey = true;
             ToastSystem.addToast("You found the Exit Key!");
         }
     }
-
+    
+    /**
+     * @return wether the player has the key to open the room with the chest.
+     */
     public boolean hasChestRoomKey() {
         return hasChestRoomKey;
     }
 
+    /**
+     * Give the player the key to open the room with the chest.
+     */
     public void giveChestRoomKey() {
         if (!hasChestRoomKey) {
             hasChestRoomKey = true;
@@ -49,6 +61,9 @@ public class Player extends MovingEntity {
         }
     }
 
+    /**
+     * Give the player the red potion they must give to LongBoi.
+     */
     public void giveRedPotion() {
         if (!hasRedPotion) {
             hasRedPotion = true;
@@ -57,16 +72,25 @@ public class Player extends MovingEntity {
         }
     }
 
+    /**
+     * @return wether the player has the potion for LongBoi.
+     */
     public boolean hasRedPotion() {
         return hasRedPotion;
     }
 
+    /**
+     * Make the player invisible for 15s, so they cannot be spotted by the Dean.
+     */
     public void becomeInvisible() {
         invisibilityLeft = 15;
         invisibilityWarningGiven = false;
     }
     
-
+    /**
+     * Move the player in the given direction 
+     * @param direction The direction to move (D = Down, U = Up, L = Left, R = Right).
+     */
     @Override
     public float move(Character direction) {
         int animationOffset = 0;
@@ -88,11 +112,16 @@ public class Player extends MovingEntity {
         return super.move(direction);
     }
 
+    /**
+     * @return Wether the player is visible (to the Dean).
+     */
     public boolean isVisible() {
         return invisibilityLeft <= 0;
     }
 
-
+    /**
+     * Used to update the players invisiblity timer (could be used for more).
+     */
     public void update() {
 
         if (!isVisible()) {

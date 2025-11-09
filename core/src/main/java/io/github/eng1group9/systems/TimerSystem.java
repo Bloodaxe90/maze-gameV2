@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 
 import io.github.eng1group9.Main;
 
+/**
+ * System used to keep track of how much time the player has left.
+ */
 public class TimerSystem {
     public float elapsedTime;
     private float timeTooAdd;
@@ -24,6 +27,9 @@ public class TimerSystem {
         timeTooAdd += amount;
     }
 
+    /**
+     * Update the timer.
+     */
     public void tick() {
         float delta = Gdx.graphics.getDeltaTime();
         elapsedTime += (delta * 1000) + getExtraTime(delta);
@@ -32,6 +38,9 @@ public class TimerSystem {
         }
     }
 
+    /**
+     * @return How much time should be added to the timer as a result of the addGradually method. 
+     */
     private float getExtraTime(float delta) {
         if (timeTooAdd <= 0) return 0;
         float change = delta * 25000;
@@ -40,6 +49,9 @@ public class TimerSystem {
         return change;
     }
 
+    /**
+     * @return How much time the player has left to escape.
+     */
     public float getTimeLeft() {
         return 500 - (int)(elapsedTime / 1000);
     }

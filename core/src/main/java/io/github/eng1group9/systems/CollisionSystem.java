@@ -5,17 +5,22 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Rectangle;
 
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Handles player collision. 
+ */
 public class CollisionSystem {
     private List<Rectangle> worldCollision;
     private TiledMap map;
 
+    /**
+     * Take a tilemap and setup a list of collision rectangles using the "Collision" layer. 
+     * @param map - The tilemap (.tmx file). 
+     */
     public void init(TiledMap map) {
         this.map = map;
         MapLayer collisionLayer = map.getLayers().get("Collision");
@@ -30,8 +35,10 @@ public class CollisionSystem {
 
     public List<Rectangle> getWorldCollision() { return worldCollision; }
     
-    // Serches collision Rectangle for name
-    // Then deletes from world collision by the rectangle
+    /**
+     * Serches collision Rectangle for name, then deletes from world collision by the rectangle.
+     * @param name - The name of the rectangle. 
+     */
     public void removeCollisionByName(String name) {
         MapLayer collisionLayer = map.getLayers().get("Collision");
         MapObjects collisionObjects = collisionLayer.getObjects();
@@ -51,27 +58,13 @@ public class CollisionSystem {
         }
     }
 
-    
-
-    public void showLayer(String name) {
-        map.getLayers().get(name).setVisible(true);;
-    }
-
-    public void deleteKeyTile() {
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("key");
-
-        // i = 1; j = 7
-        for (int i = 0; i < 30; i++) {
-            for (int j = 0; j < 30; j++) {
-                Cell cell = layer.getCell(i, j);
-
-                if (cell != null) {
-                    cell.setTile(null);
-                }
-            }
-        }
-    }
-
+    /**
+     * Check if it is safe for an entity to move to a given location. 
+     * @param x - The x co-ordinate to check.
+     * @param y - The y co-ordinate to check.
+     * @param currentHitbox - The hitbox of the entity you wish to check. 
+     * @return True if the entity will not hit collision when it moves there. 
+     */
     public boolean safeToMove(float x, float y, Rectangle currentHitbox) {
         Rectangle testHitbox = new Rectangle();
         testHitbox = testHitbox.set(currentHitbox);

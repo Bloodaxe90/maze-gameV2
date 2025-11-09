@@ -5,9 +5,13 @@ import com.badlogic.gdx.Input;
 import io.github.eng1group9.Main;
 import io.github.eng1group9.entities.Player;
 
+/**
+* Handles user input, both for movement and misc inputs.
+*/
 public class InputSystem {
     /**
-     * Move the player if directional keys are being pressed.
+     * Processes user input, both for movement and misc inputs.
+     * @param player - the player to move based on input.
      */
     public void handle(Player player) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.F11)) {

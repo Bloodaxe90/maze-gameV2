@@ -27,11 +27,11 @@ public class Main extends ApplicationAdapter {
     /// 3 = Win
     /// 4 = Lose
 
-    public static boolean chestDoorOpen = false;
-    public static boolean exitOpen = false;
-    public static boolean spikesLowered = false;
-    public static boolean scrollUsed = false;
-    public static int longboiBonus = 0;
+    public static boolean chestDoorOpen = false; // Wether the door to the chest room has been opened.
+    public static boolean exitOpen = false; // Wether the exit is open/
+    public static boolean spikesLowered = false; // Wether the spikes in the chest room have been lowered.
+    public static boolean scrollUsed = false; // Wether the scroll power up has been collected.
+    public static int longboiBonus = 0; // the bonus to add based on wether LongBoi was found. 
 
     private static TimerSystem timerSystem = new TimerSystem();
     public boolean showCollision = false;
@@ -41,15 +41,15 @@ public class Main extends ApplicationAdapter {
     final static String TMXPATH = "World/testMap.tmx";
 
     public static Player player;
-    private static boolean playerCaught = false;
-    private float playerCaughtTime = 2;
-    final Vector2 PLAYERSTARTPOS = new Vector2(16, 532);
-    final float DEFAULTPLAYERSPEED = 100;
+    private static boolean playerCaught = false; // Wether the player is currently being held by the Dean.
+    private float playerCaughtTime = 2; // how many seconds the Dean will hold the player when caught.
+    final Vector2 PLAYERSTARTPOS = new Vector2(16, 532); // Where the player begins the game, and returns to when caught.
+    final float DEFAULTPLAYERSPEED = 100; // The players speed. 
 
     private static Dean dean;
-    final Vector2 DEANSTARTPOS = new Vector2(32, 352);
+    final Vector2 DEANSTARTPOS = new Vector2(32, 352); // Where the Dean begins the game, and returns to after catching the player.
     final float DEFAULTDEANSPEED = 100;
-    final Character[] DEANPATH = {
+    final Character[] DEANPATH = { // The path the dean will take (D = Down, U = Up, L = Left, R = Right). The path will loop. 
         'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R',
         'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D',
         'R', 'R', 'R',
@@ -61,9 +61,6 @@ public class Main extends ApplicationAdapter {
 
     final static Color BAD = new Color(1,1,0,1);
     final static Color GOOD = new Color(0,1,1,1);
-
-
-    private Chest chest;
 
     public static Main instance;
     public static RenderingSystem renderingSystem = new RenderingSystem();
@@ -78,18 +75,22 @@ public class Main extends ApplicationAdapter {
         worldCollision = collisionSystem.getWorldCollision();
         player = new Player(PLAYERSTARTPOS, DEFAULTPLAYERSPEED);
         dean = new Dean(DEANSTARTPOS, DEFAULTDEANSPEED, DEANPATH);
-        chest = new Chest();
         togglePause();
         instance = this;
     }
 
     @Override
     public void render() {
-        input();
+        inputSystem.handle(player);
         if (gameState == 1) logic();
         draw();
     }
 
+    /**
+     * Check if the player has the red potion.
+     * If they do, show Long Boi and complete the hidden event. 
+     * If not, tell the player they must find the potion. 
+     */
     public static void checkForLongboi() {
         Color messageColour = new Color(0.2f, 1, 0.2f ,1);
         if (longboiBonus == 0 && !player.hasRedPotion()) {
@@ -101,7 +102,7 @@ public class Main extends ApplicationAdapter {
             RenderingSystem.showLayer("LONGBOI");
         }
     }
-    
+
     public void draw() {
         renderingSystem.draw(player, dean, showCollision, timerSystem.elapsedTime, worldCollision);
         switch (gameState) {
@@ -122,6 +123,10 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    /**
+     * Open the door of the room with the chest.
+     * Remove its hitbox and graphic. 
+     */
     public static void openChestRoomDoor() {
         if (player.hasChestRoomKey() && !chestDoorOpen) {
             ToastSystem.addToast("You Opened the Door!", GOOD);
@@ -131,6 +136,10 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    /**
+     * Open the exit.
+     * Remove its hitbox and hide its graphic. 
+     */
     public static void openExit() {
         if (player.hasExitKey() && !exitOpen) {
             ToastSystem.addToast("You Opened the Exit!", GOOD);
@@ -140,6 +149,10 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    /**
+     * Give the scroll powerup to the player, making the player invisible for 15s.
+     * Hide the scroll graphic. 
+     */
     public static void getScroll() {
         if (!scrollUsed) {
             player.becomeInvisible();
@@ -150,10 +163,10 @@ public class Main extends ApplicationAdapter {
         }
     }
 
-    public void input() {
-        inputSystem.handle(player);
-    }
-
+    /**
+     * Set the game to the started state, and unpause it. 
+     * Used once to start the game. 
+     */
     public static void startGame() {
         if (gameState == 0) {
             gameState = 2;
@@ -161,29 +174,33 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    /**
+     * Set the game to the win state, used when the player escapes. 
+     */
     public static void winGame() {
         togglePause();
         gameState = 3;
     }
 
+    /**
+     * Set the game to the lose state, used when the player runs out of time. 
+     */
     public static void LoseGame() {
         togglePause();
         gameState = 4;
     }
 
+    /**
+     * Calculate the players score based on how much time was left and wether they found Long Boi. 
+     * @return The score.
+     */
     public static int calculateScore() {
         return (int)timerSystem.getTimeLeft() * 1000 + longboiBonus;
     }
 
-    public void tryInteract() {
-        if (!chest.opened) {
-            if (chest.distanceTo(player) < 50) {
-                player.giveExitKey();
-                chest.open();
-            }
-        }
-    }
-
+    /**
+     * Toggle wether the window should be in Windowed or Fullcreen mode. 
+     */
     public void toggleFullscreen() {
         if (isFullscreen) {
                 Gdx.graphics.setWindowedMode(960, 640);
@@ -194,6 +211,10 @@ public class Main extends ApplicationAdapter {
             isFullscreen = !isFullscreen;
     }
 
+    /**
+     * Toggle wether the game shoudl be paused. 
+     * This will freeze the player/dean, stop all game logic and display the pause overlay. 
+     */
     public static void togglePause() {
         if (gameState == 2 && !playerCaught) {
             player.unfreeze();
@@ -207,17 +228,16 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    /**
+     * Where the game process its logic each frame. 
+     * It will not run if the game is paused. 
+     */
     public void logic() {
-        // Process game logic here
         timerSystem.tick();
         dean.nextMove();
         checkDeanCatch();
         TriggerSystem.checkTouchTriggers(player);
         player.update();
-    }
-
-    public void getRedPotion() {
-        
     }
 
     /**
@@ -239,6 +259,11 @@ public class Main extends ApplicationAdapter {
         }
     }
 
+    /**
+     * Run when the player is first caught by the game. 
+     * This will begin the sequence where the player is held in detention while the timer goes down.
+     * This will freeze the player and dean. 
+     */
     private void startPlayerCatch() {
         player.freeze();
         player.setPosition(PLAYERSTARTPOS);
@@ -251,6 +276,11 @@ public class Main extends ApplicationAdapter {
         ToastSystem.addToast("You were stuck being lectured for 50s!", BAD);
     }
 
+    /**
+     * This will end the sequence where the player is held in detention while the timer goes down.
+     * This will unfreeze the player and dean.
+     * It will rest the dean to the start of its patrol. 
+     */
     private void endPlayerCatch() {
         dean.setPosition(DEANSTARTPOS);
         dean.restartPath();
@@ -259,6 +289,9 @@ public class Main extends ApplicationAdapter {
         playerCaught = false;
     }
 
+    /**
+     * Use to drop remove the spikes in the chest room when the switch is pressed. 
+     */
     public static void dropSpikes() {
         if (!spikesLowered) {
             collisionSystem.removeCollisionByName("chestRoomSpikes");
@@ -283,9 +316,5 @@ public class Main extends ApplicationAdapter {
     @Override
     public void resume() {
         togglePause();
-    }
-
-    public void dispose() {
-        
     }
 }

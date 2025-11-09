@@ -18,6 +18,9 @@ import io.github.eng1group9.systems.TriggerSystem.Trigger;
 
 import java.util.List;
 
+/**
+ * Handles drawing and displaying frames. 
+ */
 public class RenderingSystem {
     private Texture missingTexture;
     private SpriteBatch worldBatch;
@@ -28,6 +31,12 @@ public class RenderingSystem {
     private OrthogonalTiledMapRenderer mapRenderer;
     private static TiledMap map;
 
+    /**
+     * Takes and tileset and sets up a renderer to display it.
+     * @param tmxPath - The path to the tileset (.tmx file).
+     * @param viewportWidth - how many pixels wide the world is. 
+     * @param viewportHeight - how many pixels high the world is. 
+     */
     public void initWorld(String tmxPath, int viewportWidth, int viewportHeight) {
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, viewportWidth, viewportHeight);
@@ -43,18 +52,39 @@ public class RenderingSystem {
 
     public OrthogonalTiledMapRenderer getMapRenderer() { return mapRenderer; }
 
+    /**
+     * Return the display used for the timer.
+     * @param elapsedTime - The time that has passed since the game started.
+     * @return The string that should be used for the clock display.
+     */
     public String getClock(float elapsedTime) {
         return Integer.toString(500 - (int)(elapsedTime / 1000));
     }
 
+    /**
+     * Hide a layer so that tiles on it are NOT rendered. 
+     * @param name - The name of the layer.
+     */
     public static void hideLayer(String name) {
         map.getLayers().get(name).setVisible(false);
     }
 
+    /**
+     * Show a layer so that tiles on it are rendered. 
+     * @param name - The name of the layer.
+     */
     public static void showLayer(String name) {
         map.getLayers().get(name).setVisible(true);
     }
 
+    /**
+     * Draw a frame to display.
+     * @param player - The current player object.
+     * @param dean - The dean object. 
+     * @param showCollision - Wether to render the zones for collision / triggers (dev mode).
+     * @param elapsedTime - How much time has passed since the game began. 
+     * @param worldCollision - A list of rectangles representing the games collison. 
+     */
     public void draw(Player player, Dean dean, boolean showCollision, float elapsedTime, List<Rectangle> worldCollision) {
         ScreenUtils.clear(Color.BLACK);
         viewport.apply();
@@ -83,6 +113,12 @@ public class RenderingSystem {
         uiBatch.end();
     }
 
+    /**
+     * Render the toast display on the top left of the screen. 
+     * This is used to display text messages to the user for 5s. 
+     * @param font The BitmapFont which used to render the text. 
+     * @param uiBatch - The SpriteBatch used for this (should be the ui batch).
+     */
     public void renderToasts(BitmapFont font, SpriteBatch uiBatch) {
         ToastSystem.clearExpiredToasts();
         List<Toast> toasts = ToastSystem.getToasts();
@@ -96,6 +132,13 @@ public class RenderingSystem {
         font.setColor(1, 1, 1, 1);
     }
 
+    /**
+     * Render the zones for collision / triggers (dev mode).
+     * @param uiBatch - The SpriteBatch used for this (should be the ui batch).
+     * @param worldCollision - A list of rectangles representing the games collison. 
+     * @param player
+     * @param dean
+     */
     public void renderCollision(SpriteBatch uiBatch, List<Rectangle> worldCollision, Player player, Dean dean) {
         for (Rectangle rectangle : worldCollision) {
             uiBatch.setColor(1, 0, 0, 0.75f);
@@ -105,6 +148,10 @@ public class RenderingSystem {
         uiBatch.draw(missingTexture, dean.getReachRectangle().x + 16, dean.getReachRectangle().y+ 16, dean.getReachRectangle().width, dean.getReachRectangle().height);
     }
 
+    /**
+     * Render the zones for triggers (dev mode).
+     * @param uiBatch - The SpriteBatch used for this (should be the ui batch).
+     */
     public void renderTriggers(SpriteBatch uiBatch) {
         for (Trigger t : TriggerSystem.getTriggers()) {
             Rectangle rectangle = t.getZone();
@@ -117,6 +164,11 @@ public class RenderingSystem {
         viewport.update(width, height);
     }
 
+    /**
+     * Display the pause overlay, with instructions and controls. 
+     * @param screenWidth - how many pixels wide the screen is. 
+     * @param screenHeight - how many pixels high the screen is. 
+     */
     public void renderPauseOverlay(int screenWidth, int screenHeight) {
         uiBatch.begin();
         uiBatch.setColor(0, 0, 0, 0.5f);
@@ -138,6 +190,11 @@ public class RenderingSystem {
         uiBatch.end();
     }
 
+    /**
+     * Display the start overlay, with instructions, controls and how to start the game. 
+     * @param screenWidth - how many pixels wide the screen is. 
+     * @param screenHeight - how many pixels high the screen is. 
+     */
     public void renderStartOverlay(int screenWidth, int screenHeight) {
         uiBatch.begin();
         uiBatch.setColor(0, 0, 0, 0.5f);
@@ -165,7 +222,14 @@ public class RenderingSystem {
         uiBatch.end();
     }
 
-    public void renderWinOverlay(int screenWidth, int screenHeight, float timeLeft, int Score) {
+    /**
+     * Display the win overlay, with your score and how much time was left. 
+     * @param screenWidth - How many pixels wide the screen is. 
+     * @param screenHeight - How many pixels high the screen is. 
+     * @param timeLeft - How much time was left when the player escaped.
+     * @param score - the score the player managed to get. 
+     */
+    public void renderWinOverlay(int screenWidth, int screenHeight, float timeLeft, int score) {
         uiBatch.begin();
         uiBatch.setColor(0, 0, 0, 0.5f);
         uiBatch.draw(missingTexture, 0, 0, screenWidth, screenHeight);
@@ -177,11 +241,16 @@ public class RenderingSystem {
         font.setColor(1, 1, 1, 1);
         font.getData().setScale(1f);
         font.draw(uiBatch, "Time Left: " + timeLeft, screenWidth / 2f, screenHeight / 2f);
-        font.draw(uiBatch, "Score: " + Integer.toString(Score), screenWidth / 2f, (screenHeight / 2f) - 20);
+        font.draw(uiBatch, "Score: " + Integer.toString(score), screenWidth / 2f, (screenHeight / 2f) - 20);
         font.draw(uiBatch, "Press ESC to quit.", screenWidth / 2f, (screenHeight / 2f) - 40);
         uiBatch.end();
     }
 
+    /**
+     * Display the lose overlay, for when you run out of time. 
+     * @param screenWidth - How many pixels wide the screen is. 
+     * @param screenHeight - How many pixels high the screen is. 
+     */
     public void renderLoseOverlay(int screenWidth, int screenHeight) {
         uiBatch.begin();
         uiBatch.setColor(0, 0, 0, 0.5f);

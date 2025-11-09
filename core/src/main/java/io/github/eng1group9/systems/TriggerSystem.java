@@ -74,6 +74,12 @@ public class TriggerSystem {
         }
     }
 
+    /**
+     * Return a list of all triggers in a tileset. 
+     * This should only be used when first loading the tileset. 
+     * @param tmxPath - The path to the tileset (.tmx file).
+     * @return A list of all Triggers. 
+     */
     public static List<Trigger> getTriggers(String tmxPath) {
         TiledMap map = new TmxMapLoader().load(tmxPath);
         MapLayer triggerLayer = map.getLayers().get("Triggers");
@@ -95,14 +101,25 @@ public class TriggerSystem {
         return triggers;
     }
 
+    /**
+     * @return A list of all touch triggers in the system (Name = ID,T).
+     */
     public static List<Trigger> getTouchTriggers() {
         return touchTriggers;
     }
 
+    /**
+     * @return A list of all touch triggers in the system (Name = ID,I).
+     */
     public static List<Trigger> getInteractTriggers() {
         return interactTriggers;
     }
 
+    /**
+     * Remove a trigger from the system. 
+     * @param ID - The ID of the trigger which should be removed. 
+     * @return True if it was successful. 
+     */
     public static boolean remove(int ID) {
         for (Trigger t : touchTriggers) {
             if (t.getID() == ID) {
@@ -119,6 +136,9 @@ public class TriggerSystem {
         return false;
     }
 
+    /**
+     * @return A list of all triggers in the system (both types).
+     */
     public static List<Trigger> getTriggers() {
         List<Trigger> triggers = new LinkedList<>();
         triggers.addAll(touchTriggers);

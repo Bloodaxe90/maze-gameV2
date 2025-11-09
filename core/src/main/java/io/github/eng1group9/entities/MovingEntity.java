@@ -4,26 +4,33 @@ import com.badlogic.gdx.graphics.Texture;
 
 /**
  * An animated entity which can move. This class handles speed and collision. 
- * @param spriteSheetTexture The texture contaning the frames laid out in a grid, which are then used to create the aniamtions.
- * @param frameNumbers An array of integers which state how many frames are in each animation, values should match the number of sprites on each row of the spriteSheet.
- * @param tileWidth How wide each tile in the SpriteSheet is in pixels.
- * @param tileHeight How high each tile in the SpriteSheet is in pixels.
- * @param speed How fast the entity will move.
+ * @param spriteSheetTexture - The texture contaning the frames laid out in a grid, which are then used to create the aniamtions.
+ * @param frameNumbers - An array of integers which state how many frames are in each animation, values should match the number of sprites on each row of the spriteSheet.
+ * @param tileWidth - How wide each tile in the SpriteSheet is in pixels.
+ * @param tileHeight - How high each tile in the SpriteSheet is in pixels.
+ * @param speed - How fast the entity will move.
  */
 public class MovingEntity extends AnimatedEntity {
 
     private float speed = 0;
     private boolean frozen = false;
-
+    
     public MovingEntity(Texture spriteSheetTexture, int[] frameNumbers, int tileWidth, int tileHeight, float speed) {
         super(spriteSheetTexture, frameNumbers, tileWidth, tileHeight);
         this.speed = speed;
     }
 
+    /**
+     * Update the speed of the entity. 
+     * @param newSpeed - How fast the entity will now move.
+     */
     public void setSpeed(float newSpeed) {
         speed = newSpeed;
     }
 
+     /**
+     * @return The speed of the entity.
+     */
     public float getSpeed() {
         return speed;
     }
@@ -63,17 +70,25 @@ public class MovingEntity extends AnimatedEntity {
     }
 
  
-
+    /**
+     * Prevent the entity from moving, and pause their animation.
+     */
     public void freeze() {
         frozen = true;
         pauseAnimation();
     }
 
+    /**
+     * Allow the entity to move, and resume their animation.
+     */
     public void unfreeze() {
         frozen = false;
         playAnimation();
     }
 
+    /**
+     * @return Wether the entity is frozen.
+     */
     public boolean isFrozen() {
         return frozen;
     }

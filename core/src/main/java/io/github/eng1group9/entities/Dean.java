@@ -6,6 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * This is the Dean, the games negative event and antagonist. 
  * They will not collide with the walls, but will catch the player if they get too close.
+ * @param startPos - Where the dean will start. 
+ * @param speed - How fast the dean will move. 
+ * @param path - The deans path, it will follow this on loop. 
  */
 public class Dean extends MovingEntity {
     private int reach = 3; // size of dean hitbox in tiles (3x3)
@@ -29,6 +32,10 @@ public class Dean extends MovingEntity {
         STARTPOS = startPos;
     }
 
+    /**
+     * Move the dean along its set path.
+     * It will move in a given direction until it has moved one tile, then look at the next direction. 
+     */
     public void nextMove() {
         Character direction = getNextDirection();
         float distance = move(direction);
@@ -39,7 +46,7 @@ public class Dean extends MovingEntity {
     }
 
     /**
-     * Check if the Dean has move on tile yet, and if so move to the next step in its path.
+     * Check if the Dean has move on tile yet, and if so move on to the next step in its path.
      */
     private void haveIMovedOneTile() {
         if (nextTileDistance <= 0) {
@@ -48,6 +55,9 @@ public class Dean extends MovingEntity {
         }
     }
 
+    /**
+     * @return The direction the dean should move in next. 
+     */
     private Character getNextDirection() {
         if (moveNum >= path.length) {
             moveNum = 0;
@@ -56,6 +66,10 @@ public class Dean extends MovingEntity {
         return path[moveNum];
     }
 
+    /**
+     * Update the dean's animation based on its current direction. 
+     * @param direction - The direction the dean is moving.
+     */
     private void updateAnimation(Character direction) {
         switch (direction) {
                 case 'U':
@@ -73,15 +87,27 @@ public class Dean extends MovingEntity {
             }
     }
 
+    /**
+     * Check if a player is within the dean's reach. 
+     * Will be false if the given player is invisible. 
+     * @param player - The player to check against.
+     * @return True if the player is in the deans reach zone.
+     */
     public boolean canReach(Player player) {
         return player.isColliding(reachRectangle) && player.isVisible();
     }
 
+    /**
+     * Make the dean go back to the start of its path (first instruction). 
+     */
     public void restartPath() {
         moveNum = 0;
         nextTileDistance = 32;
     }
 
+    /**
+     * @return The dean's reach rectangle. 
+     */
     public Rectangle getReachRectangle() {
         return reachRectangle;
     }
