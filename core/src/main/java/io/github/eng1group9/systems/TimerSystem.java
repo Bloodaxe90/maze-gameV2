@@ -1,5 +1,7 @@
 package io.github.eng1group9.systems;
 
+import java.sql.Date;
+
 import com.badlogic.gdx.Gdx;
 
 import io.github.eng1group9.Main;
@@ -8,8 +10,9 @@ import io.github.eng1group9.Main;
  * System used to keep track of how much time the player has left.
  */
 public class TimerSystem {
-    public float elapsedTime;
+    public static float elapsedTime = 0;// time passed in seconds;
     private float timeTooAdd;
+    private static final float TIMESTARTVALUE = 300;
 
     public TimerSystem() {
         elapsedTime = 0;
@@ -32,7 +35,7 @@ public class TimerSystem {
      */
     public void tick() {
         float delta = Gdx.graphics.getDeltaTime();
-        elapsedTime += (delta * 1000) + getExtraTime(delta);
+        elapsedTime += delta + getExtraTime(delta);
         if (getTimeLeft() <= 0) {
             Main.LoseGame();
         }
@@ -43,7 +46,7 @@ public class TimerSystem {
      */
     private float getExtraTime(float delta) {
         if (timeTooAdd <= 0) return 0;
-        float change = delta * 25000;
+        float change = delta * 25;
         if (timeTooAdd < change) change = timeTooAdd;
         timeTooAdd -= change;
         return change;
@@ -52,8 +55,34 @@ public class TimerSystem {
     /**
      * @return How much time the player has left to escape.
      */
-    public float getTimeLeft() {
-        return 500 - (int)(elapsedTime / 1000);
+    public static int getTimeLeft() {
+        return (int)(TIMESTARTVALUE - elapsedTime);
+    }
+
+    public static String getClockDisplay() {
+        int timeLeft = getTimeLeft();
+        System.out.println(timeLeft / 60);
+        String mins = getMinsDisplay(timeLeft);
+        String secs = getSecsDisplay(timeLeft);
+        return "Time Left: " + mins + ":" + secs;
+        
     }
     
+    private static String getMinsDisplay(int seconds) {
+        return Integer.toString(getMins(seconds));
+    }
+
+    private static int getMins(int seconds) {
+        return Math.floorDiv(seconds, 60);
+    }
+
+    private static String getSecsDisplay(int timeLeft) {
+        int secsValue = getSecs(timeLeft);
+        if (secsValue < 10) return "0" + Integer.toString(secsValue);
+        return Integer.toString(secsValue);
+    }
+
+    private static int getSecs(int timeLeft) {
+        return timeLeft - (getMins(timeLeft) * 60);
+    }
 }

@@ -42,13 +42,15 @@ public class Main extends ApplicationAdapter {
 
     public static Player player;
     private static boolean playerCaught = false; // Wether the player is currently being held by the Dean.
-    private float playerCaughtTime = 2; // how many seconds the Dean will hold the player when caught.
+    final float INITALPLAYERCAUGHTTIME = 2;
+    private float playerCaughtTime = INITALPLAYERCAUGHTTIME; // how many seconds the Dean will hold the player when caught.
     final Vector2 PLAYERSTARTPOS = new Vector2(16, 532); // Where the player begins the game, and returns to when caught.
     final float DEFAULTPLAYERSPEED = 100; // The players speed. 
 
     private static Dean dean;
     final Vector2 DEANSTARTPOS = new Vector2(32, 352); // Where the Dean begins the game, and returns to after catching the player.
     final float DEFAULTDEANSPEED = 100;
+    final int DEANPUNISHMENT = 50; // The number of seconds the Dean adds to the timer.
     final Character[] DEANPATH = { // The path the dean will take (D = Down, U = Up, L = Left, R = Right). The path will loop. 
         'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R',
         'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D',
@@ -195,7 +197,7 @@ public class Main extends ApplicationAdapter {
      * @return The score.
      */
     public static int calculateScore() {
-        return (int)timerSystem.getTimeLeft() * 1000 + longboiBonus;
+        return TimerSystem.getTimeLeft() * 1000 + longboiBonus;
     }
 
     /**
@@ -250,7 +252,7 @@ public class Main extends ApplicationAdapter {
         else if (playerCaught && gameState == 1) {
             if (playerCaughtTime <= 0) {
                 endPlayerCatch();
-                playerCaughtTime = 2;
+                playerCaughtTime = INITALPLAYERCAUGHTTIME;
             }
             else {
                 float delta = Gdx.graphics.getDeltaTime();
@@ -271,7 +273,7 @@ public class Main extends ApplicationAdapter {
         dean.changeAnimation(3);
         dean.setPosition(PLAYERSTARTPOS.x + 32, PLAYERSTARTPOS.y);
         playerCaught = true;
-        timerSystem.addGradually(48000); // 48 not 50 because you spend 2s stood while the timer goes down.
+        timerSystem.addGradually(48); // 48 not 50 because you spend 2s stood while the timer goes down.
         ToastSystem.addToast("You were caught by the Dean!", BAD);
         ToastSystem.addToast("You were stuck being lectured for 50s!", BAD);
     }

@@ -53,15 +53,6 @@ public class RenderingSystem {
     public OrthogonalTiledMapRenderer getMapRenderer() { return mapRenderer; }
 
     /**
-     * Return the display used for the timer.
-     * @param elapsedTime - The time that has passed since the game started.
-     * @return The string that should be used for the clock display.
-     */
-    public String getClock(float elapsedTime) {
-        return Integer.toString(500 - (int)(elapsedTime / 1000));
-    }
-
-    /**
      * Hide a layer so that tiles on it are NOT rendered. 
      * @param name - The name of the layer.
      */
@@ -102,7 +93,7 @@ public class RenderingSystem {
         int[] abovePlayer = {7, 8, 9, 10, 11, 12, 13, 14, 15}; // the layers which should appear above the player
         mapRenderer.render(abovePlayer);
         uiBatch.begin();
-        font.draw(uiBatch, "Time left: " + getClock(elapsedTime), 10, 640 - 10);
+        font.draw(uiBatch, TimerSystem.getClockDisplay(), 10, 640 - 10);
 
         renderToasts(font, uiBatch);
 
