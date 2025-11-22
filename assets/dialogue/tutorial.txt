@@ -1,0 +1,5 @@
+Controls:
+WASD or the Arrow Keys to move
+P, ESC, or Left Click to pause/unpause
+Enter or SPACE to skip/close dialogue
+Mouse Wheel to scroll long dialogue

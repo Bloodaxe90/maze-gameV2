@@ -1,0 +1,11 @@
+ui.png
+size:1024,256
+repeat:none
+keycard
+bounds:0,0,256,256
+dialogue
+bounds:512,176,320,80
+hotbar
+bounds:512,137,203,39
+sausage_roll
+bounds:256,0,256,256
