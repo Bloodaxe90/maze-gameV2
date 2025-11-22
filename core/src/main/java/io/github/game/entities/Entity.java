@@ -49,7 +49,12 @@ public abstract class Entity {
         try {
             assert startingProperties != null;
             Rectangle startArea = startingProperties.getRectangle();
-            this.hitbox = new Rectangle(startArea);
+            this.hitbox = new Rectangle(
+                startArea.x + (startArea.width / 4f),
+                startArea.y + (startArea.height / 4f),
+                startArea.width / 2f,
+                startArea.height / 2f
+            );
             this.position = new Vector2(startArea.x, startArea.y);
             this.size = new Vector2(startArea.width, startArea.height);
         } catch (NullPointerException e) {
@@ -86,14 +91,11 @@ public abstract class Entity {
     }
 
     public void addSprite(String name, float duration, Animation.PlayMode playMode, TextureAtlas spriteAtlas) {
-        Gdx.app.log("e", AnimationLoader.getAnimation(id + "_" + name, duration, spriteAtlas, playMode) + " " + id + "_" + name);
-
         spriteMap.put(id + "_" + name, AnimationLoader.getAnimation(id + "_" + name, duration, spriteAtlas, playMode));
     }
 
 
     public void setSprite(String name) {
-        Gdx.app.log("e", spriteMap.get(id + "_" + name) + " " + id + "_" + name);
         sprite = new Sprite(spriteMap.get(id + "_" + name).getKeyFrame(stateTime));
     }
 

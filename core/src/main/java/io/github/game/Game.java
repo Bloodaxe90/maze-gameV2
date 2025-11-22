@@ -117,17 +117,18 @@ public class Game extends ApplicationAdapter {
         ScreenUtils.clear(Color.BLACK);
 
         gameViewport.apply();
-        environmentManager.render(gameCamera);
+        environmentManager.renderBackground(gameCamera);
 
         spriteBatch.setProjectionMatrix(gameViewport.getCamera().combined);
         spriteBatch.begin();
 
-                enemyManager.render(spriteBatch);
+        enemyManager.render(spriteBatch);
         player.render(spriteBatch, gameViewport);
 
         spriteBatch.end();
+        environmentManager.renderForeground(gameCamera);
 
-                ui.render();
+        ui.render();
     }
 
 

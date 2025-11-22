@@ -13,11 +13,11 @@ public class PauseMenu extends Element {
 
     public PauseMenu(String id, String hostLayer, Skin skin) {
         super(id, hostLayer, skin);
-
-                pauseText = new Label("PAUSED\n\n" + DialogueLoader.getDialogue("tutorial"), skin);
+        this.center();
+        pauseText = new Label("PAUSED\n\n" + DialogueLoader.getDialogue("tutorial"), skin);
         pauseText.setAlignment(Align.center);
 
-                this.add(pauseText).center();
+        this.add(pauseText).center();
     }
 
 

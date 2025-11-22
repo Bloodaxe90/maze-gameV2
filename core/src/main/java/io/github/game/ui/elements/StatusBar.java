@@ -16,10 +16,11 @@ public class StatusBar extends Element {
 
     public StatusBar(String id, String hostLayer, Skin skin) {
         super(id, hostLayer, skin);
-
+        this.top().right();
         status = new Label("", skin);
-        updateStatusText();         status.setAlignment(Align.topRight);
-        this.add(status).expand().fill().pad(30);
+        updateStatusText();
+        status.setAlignment(Align.topRight);
+        this.add(status);
     }
 
 
