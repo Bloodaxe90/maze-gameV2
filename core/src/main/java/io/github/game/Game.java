@@ -11,19 +11,16 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import io.github.game.entities.enemy.EnemyManager;
 import io.github.game.entities.player.Player;
 import io.github.game.ui.UiManager;
-import io.github.game.utils.io.AudioPlayer;
 
 
 public class Game extends ApplicationAdapter {
 
     private SpriteBatch spriteBatch;
-    private FitViewport gameViewport;
-    private OrthographicCamera gameCamera;
+    private CameraManager cameraManager;
 
     private EnvironmentManager environmentManager;
     private Player player;
@@ -33,7 +30,7 @@ public class Game extends ApplicationAdapter {
 
     public static TiledMap MAP;
     public static final Vector2 WORLD_SIZE = new Vector2(320 * 3, 240 * 3);
-    private UiManager ui;
+    private UiManager uiManager;
 
     @Override
     public void create() {
@@ -41,9 +38,6 @@ public class Game extends ApplicationAdapter {
         MAP = new TmxMapLoader().load("assets/maps/map.tmx");
 
         spriteBatch = new SpriteBatch();
-
-        gameCamera = new OrthographicCamera();
-        gameViewport = new FitViewport(WORLD_SIZE.x, WORLD_SIZE.y, gameCamera);
 
         environmentManager = new EnvironmentManager();
         player = new Player(
@@ -54,7 +48,11 @@ public class Game extends ApplicationAdapter {
 
         enemyManager = new EnemyManager(new TextureAtlas("assets/atlas/enemies.atlas"));
 
-        ui = new UiManager(new TextureAtlas("assets/ui/ui.atlas"), gameViewport);
+        uiManager = new UiManager(new TextureAtlas("assets/ui/ui.atlas"));
+
+        cameraManager = new CameraManager(
+            Game.WORLD_SIZE.x / 2f, Game.WORLD_SIZE.y / 2f, 0.5f
+        );
 
         playing = false;
     }
@@ -62,7 +60,7 @@ public class Game extends ApplicationAdapter {
     @Override
     public void render() {
         input();
-        logic();
+        update();
         draw();
     }
 
@@ -77,17 +75,17 @@ public class Game extends ApplicationAdapter {
         }
 
         if (playing) {
-            if (ui.getDialogueBox().isVisible()) {
+            if (uiManager.getDialogueBox().isVisible()) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                    if (!ui.getDialogueBox().isFinished()) {
-                        ui.getDialogueBox().skip();
+                    if (!uiManager.getDialogueBox().isFinished()) {
+                        uiManager.getDialogueBox().skip();
                     } else {
-                        ui.getDialogueBox().hideDialogue();
+                        uiManager.getDialogueBox().hideDialogue();
                     }
                 }
                 return;
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.T)) ui.getToastBar().addToast("Sigma on the wall whos the fiarest of them all its me sigma rizzler", Color.BLUE);
+            if (Gdx.input.isKeyJustPressed(Input.Keys.T)) uiManager.getToastBar().addToast("Sigma on the wall whos the fiarest of them all its me sigma rizzler", Color.BLUE);
 
             player.setInteract(Gdx.input.isKeyJustPressed(Input.Keys.E));
             player.setMovingUp(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W));
@@ -98,42 +96,45 @@ public class Game extends ApplicationAdapter {
     }
 
 
-    public void logic() {
+    public void update() {
         float delta_t = Gdx.graphics.getDeltaTime();
         if (playing) {
 
-            if (!ui.getDialogueBox().isVisible()) {
+            if (!uiManager.getDialogueBox().isVisible()) {
                 enemyManager.update(delta_t, this);
             }
 
             player.update(delta_t, this);
         }
-
-        ui.update(delta_t, playing, player);
+        cameraManager.update(player);
+        uiManager.update(delta_t, playing, player);
     }
 
 
     public void draw() {
         ScreenUtils.clear(Color.BLACK);
 
-        gameViewport.apply();
-        environmentManager.renderBackground(gameCamera);
+        uiManager.getViewport().apply();
+        cameraManager.getViewport().apply();
 
-        spriteBatch.setProjectionMatrix(gameViewport.getCamera().combined);
+        OrthographicCamera camera = this.cameraManager.getCamera();
+        environmentManager.renderBackground(camera);
+        spriteBatch.setProjectionMatrix(camera.combined);
+
         spriteBatch.begin();
 
         enemyManager.render(spriteBatch);
-        player.render(spriteBatch, gameViewport);
+        player.render(spriteBatch, uiManager.getViewport());
 
         spriteBatch.end();
-        environmentManager.renderForeground(gameCamera);
+        environmentManager.renderForeground(camera);
 
-        ui.render();
+        uiManager.render();
     }
 
 
     private boolean isGameOver() {
-                if (ui.getPauseMenu().getText().toLowerCase().replaceAll("[^a-z]", "").contains("gameover")) {
+        if (uiManager.getPauseMenu().getText().toLowerCase().replaceAll("[^a-z]", "").contains("gameover")) {
             playing = false;
             return true;
         }
@@ -142,7 +143,8 @@ public class Game extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
-                gameViewport.update(width, height, true);
+        cameraManager.resize(width, height);
+        uiManager.resize(width, height);
     }
 
     public Player getPlayer() {
@@ -157,8 +159,8 @@ public class Game extends ApplicationAdapter {
         return environmentManager;
     }
 
-    public UiManager getUi() {
-        return ui;
+    public UiManager getUiManager() {
+        return uiManager;
     }
 
     @Override
@@ -168,6 +170,6 @@ public class Game extends ApplicationAdapter {
         environmentManager.dispose();
         player.dispose();
         enemyManager.dispose();
-        ui.dispose();
+        uiManager.dispose();
     }
 }

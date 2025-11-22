@@ -160,11 +160,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup color="#ff0000" id="7" name="Entity" visible="0">
+ <objectgroup color="#ff0000" id="7" name="Entity">
   <object id="328" name="player" x="530.79" y="296.309" width="32" height="32"/>
   <object id="330" name="professor" x="149.332" y="338.033" width="32" height="32"/>
  </objectgroup>
- <objectgroup color="#00f1f9" id="8" name="UI" visible="0">
+ <objectgroup color="#00f1f9" id="8" name="UI">
   <object id="332" name="dialogue" x="11.156" y="403.485" width="935.857" height="304.705"/>
   <object id="333" name="status_bar" x="845.005" y="9.14471" width="109.065" height="83.2433"/>
   <object id="334" name="pause_menu" x="351.114" y="223.421" width="254.921" height="220.181"/>

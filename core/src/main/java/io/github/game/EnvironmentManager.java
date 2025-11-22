@@ -41,7 +41,6 @@ public class EnvironmentManager {
                 }
             }
         }
-        Gdx.app.log("e", backgroundIndices.size + " " + foregroundIndices.size);
 
         this.backgroundLayers = backgroundIndices.toArray();
         this.foregroundLayers = foregroundIndices.toArray();

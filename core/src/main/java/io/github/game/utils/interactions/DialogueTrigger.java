@@ -23,7 +23,7 @@ public class DialogueTrigger implements Trigger {
 
     @Override
     public void trigger(Game game) {
-        DialogueBox dialogueBox = game.getUi().getDialogueBox();
+        DialogueBox dialogueBox = game.getUiManager().getDialogueBox();
         game.getPlayer().stopMoving();
         if (!dialogueBox.isVisible()) {
             dialogueBox.showDialogue(dialogue);
@@ -35,7 +35,7 @@ public class DialogueTrigger implements Trigger {
             );
 
             if (event && firstInteraction) {
-                game.getUi().getStatusBar().incrementEventCounter();
+                game.getUiManager().getStatusBar().incrementEventCounter();
                 firstInteraction = false;
             }
         }

@@ -5,7 +5,8 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import io.github.game.Game;
 import io.github.game.entities.player.Player;
 import io.github.game.ui.elements.DialogueBox;
 import io.github.game.ui.elements.Hotbar;
@@ -17,11 +18,21 @@ import io.github.game.ui.elements.ToastBar;
 
 public class UiManager {
 
-    private final Stage stage;     private final Skin skin;     private final DialogueBox dialogueBox;     private final Hotbar hotbar;     private final PauseMenu pauseMenu;     private final StatusBar statusBar;     private final ToastBar toastBar;     private final TextureAtlas uiAtlas;
+    private final FitViewport uiViewport;
 
+    private final Stage stage;
+    private final Skin skin;
+    private final DialogueBox dialogueBox;
+    private final Hotbar hotbar;
+    private final PauseMenu pauseMenu;
+    private final StatusBar statusBar;
+    private final ToastBar toastBar;
+    private final TextureAtlas uiAtlas;
 
-    public UiManager(TextureAtlas uiAtlas, Viewport uiViewport) {
+    public UiManager(TextureAtlas uiAtlas) {
+        this.uiViewport = new FitViewport(Game.WORLD_SIZE.x, Game.WORLD_SIZE.y);
         this.stage = new Stage(uiViewport);
+
         String layerName = "UI";
         this.uiAtlas = uiAtlas;
         this.skin = new Skin(Gdx.files.internal("uiskin.json"));
@@ -51,9 +62,12 @@ public class UiManager {
 
     public void update(float delta, boolean playing, Player player) {
         if (playing) {
-            stage.act(delta);             hotbar.updateInventory(player.getInventory());             statusBar.update(delta);         }
+            stage.act(delta);
+            hotbar.updateInventory(player.getInventory());
+            statusBar.update(delta);
+        }
 
-                if (statusBar.isTimeUp()) {
+        if (statusBar.isTimeUp()) {
             playing = false;
             setupGameOverScreen("Loss\nYou timed out");
         }
@@ -70,6 +84,10 @@ public class UiManager {
 
     public void render() {
         stage.draw();
+    }
+
+    public void resize(int width, int height) {
+        uiViewport.update(width, height, true);
     }
 
 
@@ -106,5 +124,9 @@ public class UiManager {
 
     public ToastBar getToastBar() {
         return toastBar;
+    }
+
+    public FitViewport getViewport() {
+        return uiViewport;
     }
 }

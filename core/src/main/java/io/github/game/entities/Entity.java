@@ -51,7 +51,7 @@ public abstract class Entity {
             Rectangle startArea = startingProperties.getRectangle();
             this.hitbox = new Rectangle(
                 startArea.x + (startArea.width / 4f),
-                startArea.y + (startArea.height / 4f),
+                startArea.y,
                 startArea.width / 2f,
                 startArea.height / 2f
             );
@@ -107,7 +107,7 @@ public abstract class Entity {
 
     public void setXPos(Float XPos) {
         position.x = XPos;
-        hitbox.setX(XPos);     }
+        hitbox.setX(XPos + (size.y / 4f));     }
 
 
     public void setYPos(Float YPos) {
