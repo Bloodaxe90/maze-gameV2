@@ -35,5 +35,9 @@ public class Element extends Table {
     public Element(String id, String hostLayer, Skin skin) {
         this(id, hostLayer, skin, null);
     }
+
+    protected <T> T getStartingProperty(String propertyName, Class<T> type) {
+        return MapLoader.getCustomProperty(this.startingProperties, propertyName, type);
+    }
 }
 

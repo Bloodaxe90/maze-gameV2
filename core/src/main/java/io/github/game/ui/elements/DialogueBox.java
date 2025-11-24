@@ -28,16 +28,16 @@ public class DialogueBox extends Element {
     private ScrollPane scrollPane;
 
 
-    public DialogueBox(String id, String hostLayer, float letterTime, Skin skin, TextureAtlas uiAtlas) {
+    public DialogueBox(String id, String hostLayer, Skin skin, TextureAtlas uiAtlas) {
         super(id, hostLayer, skin, uiAtlas);
 
-        this.letterTime = letterTime;
+        this.letterTime = getStartingProperty("letterTime", Float.class);
 
-                textLabel = new Label("", getSkin());
+        textLabel = new Label("", getSkin());
         textLabel.setWrap(true);
         textLabel.setAlignment(Align.topLeft);
 
-                scrollPane = new ScrollPane(textLabel, getSkin());
+        scrollPane = new ScrollPane(textLabel, getSkin());
         ScrollPane.ScrollPaneStyle style = new ScrollPane.ScrollPaneStyle(scrollPane.getStyle());
         style.background = null;         scrollPane.setStyle(style);
         scrollPane.setFadeScrollBars(false);

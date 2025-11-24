@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="344">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="347">
  <properties>
   <property name="background" type="bool" value="true"/>
  </properties>
@@ -160,15 +160,51 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup color="#ff0000" id="7" name="Entity">
-  <object id="328" name="player" x="530.79" y="296.309" width="32" height="32"/>
-  <object id="330" name="professor" x="149.332" y="338.033" width="32" height="32"/>
+ <objectgroup color="#ff0000" id="7" name="Enemy">
+  <object id="345" name="professor1" x="741.6" y="202.932" width="32" height="32">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="range" type="float" value="4"/>
+    <property name="speed" type="float" value="100"/>
+    <property name="trigger" value="Dialogue,0,true,true"/>
+   </properties>
+  </object>
+  <object id="346" name="professor" x="154.106" y="332.086" width="32" height="32">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="range" type="float" value="4"/>
+    <property name="speed" type="float" value="100"/>
+    <property name="trigger" value="Dialogue,0,true,true"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup color="#00ff11" id="11" name="Player">
+  <object id="344" name="player" x="524.076" y="286.894" width="32" height="32">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="footstepFrequency" type="float" value="3"/>
+    <property name="speed" type="float" value="100"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#00f1f9" id="8" name="UI">
-  <object id="332" name="dialogue" x="11.156" y="403.485" width="935.857" height="304.705"/>
-  <object id="333" name="status_bar" x="845.005" y="9.14471" width="109.065" height="83.2433"/>
+  <object id="332" name="dialogue" x="11.156" y="403.485" width="935.857" height="304.705">
+   <properties>
+    <property name="letterTime" type="float" value="0.05"/>
+   </properties>
+  </object>
+  <object id="333" name="status_bar" x="845.005" y="9.14471" width="109.065" height="83.2433">
+   <properties>
+    <property name="maxEvents" type="int" value="6"/>
+    <property name="startTime" type="float" value="300"/>
+   </properties>
+  </object>
   <object id="334" name="pause_menu" x="351.114" y="223.421" width="254.921" height="220.181"/>
-  <object id="336" name="toast_bar" x="351.478" y="11.8975" width="249.949" height="123.765"/>
+  <object id="336" name="toast_bar" x="351.478" y="11.8975" width="249.949" height="123.765">
+   <properties>
+    <property name="duration" type="float" value="5"/>
+   </properties>
+  </object>
   <object id="337" name="hotbar" x="14.4058" y="9.3064" width="317.457" height="60.9892"/>
  </objectgroup>
  <objectgroup id="6" name="Collision">

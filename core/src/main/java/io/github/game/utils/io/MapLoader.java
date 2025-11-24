@@ -1,5 +1,6 @@
 package io.github.game.utils.io;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -43,5 +44,9 @@ public final class MapLoader {
             }
         }
         return null;
+    }
+
+    public static <T> T getCustomProperty(RectangleMapObject rectangle, String propertyName, Class<T> type) {
+        return rectangle.getProperties().get(propertyName, type);
     }
 }

@@ -1,7 +1,9 @@
 package io.github.game.entities.player;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -20,26 +22,19 @@ public class Player extends MovableEntity {
     private boolean interact = false;
 
     private final Array<Item> inventory;
-    private final TextureAtlas spriteAtlas;
     private float footstepTimer = 0;
     private final float footstepTimeout;
 
 
-    public Player(String id,
-                  String hostLayer,
-                  float footstepFrequency,
-                  float speed,
-                  TextureAtlas spriteAtlas) {
-
-        super(id, hostLayer, speed, true, spriteAtlas);
-
-        this.spriteAtlas = spriteAtlas;
+    public Player(RectangleMapObject properties, TextureAtlas spriteAtlas) {
+        super(properties, spriteAtlas);
         this.inventory = new Array<>(Hotbar.NUM_SLOTS);
-        this.footstepTimeout = 1 / footstepFrequency;
+        this.footstepTimeout = 1 / getStartingProperty("footstepFrequency", Float.class);
+
     }
 
 
-    public void render(SpriteBatch batch, FitViewport viewport) {
+    public void render(SpriteBatch batch) {
         super.render(batch);
     }
 
@@ -49,7 +44,7 @@ public class Player extends MovableEntity {
 
         if (!active) return;
         Vector2 velocity = new Vector2(0f, 0f);
-                if (movingLeft) velocity.x = -speed;
+        if (movingLeft) velocity.x = -speed;
         if (movingRight) velocity.x = speed;
         if (movingUp) velocity.y = speed;
         if (movingDown) velocity.y = -speed;
@@ -70,16 +65,16 @@ public class Player extends MovableEntity {
         if (position.x < 0 || position.x + size.x > Game.WORLD_SIZE.x) {
             velocity.x = 0;
             setXPos(MathUtils.clamp(position.x, 0, Game.WORLD_SIZE.x - size.x));
-        } else if (game.getEnvironmentManager().checkCollision(hitbox) || game.getEnemyManager().checkCollision(hitbox)) {
-                        velocity.x = 0;
+        } else if (game.getEnvironmentManager().checkCollision(this) || game.getEntityManager().checkCollision(this)) {
+            velocity.x = 0;
             setXPos(oldX);
         }
 
-                setYPos(newY);
+        setYPos(newY);
         if (position.y < 0 || position.y + size.y > Game.WORLD_SIZE.y) {
             velocity.y = 0;
             setYPos(MathUtils.clamp(position.y, 0, Game.WORLD_SIZE.y - size.y));
-        } else if (game.getEnvironmentManager().checkCollision(hitbox) || game.getEnemyManager().checkCollision(hitbox)) {
+        } else if (game.getEnvironmentManager().checkCollision(this) || game.getEntityManager().checkCollision(this)) {
                         velocity.y = 0;
             setYPos(oldY);
         }
@@ -94,7 +89,7 @@ public class Player extends MovableEntity {
     if (velocity.isZero()) {
             footstepTimer = 0;
         } else {
-                        if (footstepTimer > footstepTimeout || footstepTimer == 0) {
+        if (footstepTimer > footstepTimeout || footstepTimer == 0) {
                 AudioPlayer.playSound("footstep" + MathUtils.random(1, 3), 0.5f, MathUtils.random(0.5f, 3f));
                 footstepTimer = 0;
             }
@@ -132,12 +127,5 @@ public class Player extends MovableEntity {
 
     public void stopMoving() {
         movingLeft = movingRight = movingUp = movingDown = false;
-    }
-
-
-
-
-    public void dispose() {
-        spriteAtlas.dispose();
     }
 }

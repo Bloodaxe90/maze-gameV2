@@ -5,22 +5,26 @@ import com.badlogic.gdx.Gdx;
 
 public final class DialogueLoader {
 
-        public final static String PATH = "dialogue/";
+    public final static String PATH = "dialogue/";
 
-        private final static String BLOCK_SEPERATOR = "---";
+    private final static String BLOCK_SEPERATOR = "---";
 
+    public static String getBlock(String id, int optionNumber) {
+        if (!id.endsWith(".txt")) id += ".txt";
+        String text;
+        try {
+             text = Gdx.files.internal(PATH + id).readString();
+        } catch (Exception e) {
+             text = Gdx.files.internal(PATH + id.replaceAll("\\d", "")).readString();
+        }
 
-    public static String getBlock(String filename, int optionNumber) {
-        if (!filename.endsWith(".txt")) filename += ".txt";
-        String text = Gdx.files.internal(PATH + filename).readString();
+        String[] blocks = text.split(BLOCK_SEPERATOR);
 
-                String[] blocks = text.split(BLOCK_SEPERATOR);
-
-                for (int i = 0; i < blocks.length; i++) {
+        for (int i = 0; i < blocks.length; i++) {
             blocks[i] = blocks[i].trim();
         }
 
-                return blocks[optionNumber];
+        return blocks[optionNumber];
     }
 
 

@@ -15,11 +15,10 @@ import io.github.game.ui.elements.StatusBar;
 import io.github.game.ui.elements.ToastBar;
 
 
-
 public class UiManager {
-
     private final FitViewport uiViewport;
 
+    private String layerName;
     private final Stage stage;
     private final Skin skin;
     private final DialogueBox dialogueBox;
@@ -29,15 +28,15 @@ public class UiManager {
     private final ToastBar toastBar;
     private final TextureAtlas uiAtlas;
 
-    public UiManager(TextureAtlas uiAtlas) {
+    public UiManager(String layerName) {
         this.uiViewport = new FitViewport(Game.WORLD_SIZE.x, Game.WORLD_SIZE.y);
         this.stage = new Stage(uiViewport);
 
-        String layerName = "UI";
-        this.uiAtlas = uiAtlas;
+        this.layerName = layerName;
+        this.uiAtlas = new TextureAtlas("assets/atlas/" + layerName + ".atlas");
         this.skin = new Skin(Gdx.files.internal("uiskin.json"));
 
-                this.dialogueBox = new DialogueBox("dialogue", layerName,0.05f, this.skin, uiAtlas);
+        this.dialogueBox = new DialogueBox("dialogue", layerName, this.skin, uiAtlas);
         this.dialogueBox.setVisible(false);
         this.stage.addActor(this.dialogueBox);
 

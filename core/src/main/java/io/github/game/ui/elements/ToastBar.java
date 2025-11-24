@@ -25,11 +25,12 @@ public class ToastBar extends Element {
     }
 
     private final List<Toast> activeToasts;
-    private static final float DEFAULT_DURATION = 5.0f;
+    private float duration;
 
     public ToastBar(String id, String hostLayer, Skin skin) {
         super(id, hostLayer, skin);
         this.activeToasts = new LinkedList<>();
+        this.duration = getStartingProperty("duration", Float.class);
         setClip(true);
         this.top();
 
@@ -45,7 +46,7 @@ public class ToastBar extends Element {
         label.setAlignment(Align.center);
         label.setWrap(true);
 
-        Toast toast = new Toast(label, DEFAULT_DURATION);
+        Toast toast = new Toast(label, duration);
         activeToasts.add(toast);
 
         this.add(label).width(getWidth()).row();

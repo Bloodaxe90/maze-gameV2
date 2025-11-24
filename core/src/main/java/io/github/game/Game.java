@@ -6,13 +6,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import io.github.game.entities.enemy.EnemyManager;
+import io.github.game.entities.EntityManager;
 import io.github.game.entities.player.Player;
 import io.github.game.ui.UiManager;
 
@@ -23,8 +22,7 @@ public class Game extends ApplicationAdapter {
     private CameraManager cameraManager;
 
     private EnvironmentManager environmentManager;
-    private Player player;
-    private EnemyManager enemyManager;
+    private EntityManager entityManager;
 
     public boolean playing;
 
@@ -40,15 +38,9 @@ public class Game extends ApplicationAdapter {
         spriteBatch = new SpriteBatch();
 
         environmentManager = new EnvironmentManager();
-        player = new Player(
-            "player",
-                "Entity",
-            3f, 100,
-            new TextureAtlas("assets/atlas/player.atlas"));
+        entityManager = new EntityManager();
 
-        enemyManager = new EnemyManager(new TextureAtlas("assets/atlas/enemies.atlas"));
-
-        uiManager = new UiManager(new TextureAtlas("assets/ui/ui.atlas"));
+        uiManager = new UiManager("UI");
 
         cameraManager = new CameraManager(
             Game.WORLD_SIZE.x / 2f, Game.WORLD_SIZE.y / 2f, 0.5f
@@ -86,7 +78,7 @@ public class Game extends ApplicationAdapter {
                 return;
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.T)) uiManager.getToastBar().addToast("Sigma on the wall whos the fiarest of them all its me sigma rizzler", Color.BLUE);
-
+            Player player = entityManager.getPlayer();
             player.setInteract(Gdx.input.isKeyJustPressed(Input.Keys.E));
             player.setMovingUp(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W));
             player.setMovingDown(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S));
@@ -101,13 +93,11 @@ public class Game extends ApplicationAdapter {
         if (playing) {
 
             if (!uiManager.getDialogueBox().isVisible()) {
-                enemyManager.update(delta_t, this);
+                entityManager.update(delta_t, this);
             }
-
-            player.update(delta_t, this);
         }
-        cameraManager.update(player);
-        uiManager.update(delta_t, playing, player);
+        cameraManager.update(entityManager.getPlayer());
+        uiManager.update(delta_t, playing, entityManager.getPlayer());
     }
 
 
@@ -123,8 +113,7 @@ public class Game extends ApplicationAdapter {
 
         spriteBatch.begin();
 
-        enemyManager.render(spriteBatch);
-        player.render(spriteBatch, uiManager.getViewport());
+        entityManager.render(spriteBatch);
 
         spriteBatch.end();
         environmentManager.renderForeground(camera);
@@ -147,12 +136,8 @@ public class Game extends ApplicationAdapter {
         uiManager.resize(width, height);
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public EnemyManager getEnemyManager() {
-        return enemyManager;
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 
     public EnvironmentManager getEnvironmentManager() {
@@ -168,8 +153,7 @@ public class Game extends ApplicationAdapter {
         MAP.dispose();
         spriteBatch.dispose();
         environmentManager.dispose();
-        player.dispose();
-        enemyManager.dispose();
+        entityManager.dispose();
         uiManager.dispose();
     }
 }

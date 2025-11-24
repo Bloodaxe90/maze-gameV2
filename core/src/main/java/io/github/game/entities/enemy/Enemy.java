@@ -1,27 +1,25 @@
 package io.github.game.entities.enemy;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 
 import io.github.game.Game;
 import io.github.game.entities.MovableEntity;
-import io.github.game.utils.interactions.Trigger;
+import io.github.game.utils.io.TriggerLoader;
+import io.github.game.utils.triggers.Trigger;
 
 
 public class Enemy extends MovableEntity {
 
     private float range;
 
-    public Enemy(String id,
-                 String hostLayer,
-                 Trigger trigger,
-                 float range,
-                 float speed, TextureAtlas spriteAtlas) {
+    public Enemy(RectangleMapObject properties,
+                 TextureAtlas spriteAtlas) {
 
-        super(id, hostLayer, speed, true, spriteAtlas);
+        super(properties, spriteAtlas);
 
-        this.range = range;
-        this.trigger = trigger;
+        this.range = getStartingProperty("range", Float.class);
     }
 
 
@@ -32,7 +30,7 @@ public class Enemy extends MovableEntity {
 
         Vector2 velocity = new Vector2(0f, 0f);
 
-                Vector2 dir = game.getPlayer().getPos().sub(this.position);
+                Vector2 dir = game.getEntityManager().getPlayer().getPos().sub(this.position);
 
                 float distanceToPlayer = (float) Math.sqrt(dir.x * dir.x + dir.y * dir.y);
 
@@ -56,11 +54,11 @@ public class Enemy extends MovableEntity {
         float oldY = position.y;
 
                 setXPos(newX);
-        if (game.getEnvironmentManager().checkCollision(hitbox)) {
+        if (game.getEnvironmentManager().checkCollision(this)) {
             setXPos(oldX);         }
 
                 setYPos(newY);
-        if (game.getEnvironmentManager().checkCollision(hitbox)) {
+        if (game.getEnvironmentManager().checkCollision(this)) {
            setYPos(oldY);
         }
 

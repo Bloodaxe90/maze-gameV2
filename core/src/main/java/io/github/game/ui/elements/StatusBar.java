@@ -10,13 +10,15 @@ public class StatusBar extends Element {
 
     private Label status;
     private int eventsCompleted = 0;
-    public static final int MAX_EVENTS = 6;
-    private float timeRemaining = 300f;
+    private int maxEvents;
+    private float timeRemaining;
 
 
     public StatusBar(String id, String hostLayer, Skin skin) {
         super(id, hostLayer, skin);
         this.top().right();
+        this.maxEvents = getStartingProperty("maxEvents", Integer.class);
+        this.timeRemaining = getStartingProperty("startTime", Float.class);
         status = new Label("", skin);
         updateStatusText();
         status.setAlignment(Align.topRight);
@@ -39,12 +41,12 @@ public class StatusBar extends Element {
         int seconds = (int) (timeRemaining % 60);
         String formattedTime = String.format("%d:%02d", minutes, seconds);
 
-        status.setText("Events: " + eventsCompleted + "/" + MAX_EVENTS + "\nTime: " + formattedTime);
+        status.setText("Events: " + eventsCompleted + "/" + maxEvents + "\nTime: " + formattedTime);
     }
 
 
     public void incrementEventCounter() {
-        if (eventsCompleted < MAX_EVENTS) {
+        if (eventsCompleted < maxEvents) {
             eventsCompleted++;
         }
     }
@@ -54,6 +56,13 @@ public class StatusBar extends Element {
         return status.getText().toString();
     }
 
+    public int getMaxEvents() {
+        return maxEvents;
+    }
+
+    public float getTimeRemaining() {
+        return timeRemaining;
+    }
 
     public boolean isTimeUp() {
         return timeRemaining <= 0;

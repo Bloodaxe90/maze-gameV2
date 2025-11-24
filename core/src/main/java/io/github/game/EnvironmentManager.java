@@ -1,6 +1,5 @@
 package io.github.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
@@ -10,7 +9,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.IntArray; // LibGDX utility for int arrays
+import com.badlogic.gdx.utils.IntArray;
+import io.github.game.entities.Entity;
 import io.github.game.utils.io.MapLoader;
 
 
@@ -33,7 +33,6 @@ public class EnvironmentManager {
         for (int i = 0; i < mapLayers.getCount(); i++) {
             MapLayer layer = mapLayers.get(i);
             if (layer instanceof TiledMapTileLayer) {
-                Gdx.app.log("", layer.getName() + " " + layer.getProperties().toString());
                 if (layer.getProperties().get("background", Boolean.class)) {
                     backgroundIndices.add(i);
                 } else {
@@ -60,25 +59,23 @@ public class EnvironmentManager {
         }
     }
 
-    public boolean checkCollision(Rectangle hitbox) {
-                for (RectangleMapObject rectangle : collidables) {
-            if (rectangle != null) {
-                Rectangle mapRect = rectangle.getRectangle();
-
-                                if (Intersector.overlaps(hitbox, mapRect)) {
-                    return true;
+    public boolean checkCollision(Entity entity) {
+        if (entity.isCollidable()) {
+            for (RectangleMapObject rectangle : collidables) {
+                if (rectangle != null) {
+                    Rectangle mapRect = rectangle.getRectangle();
+                    if (Intersector.overlaps(entity.getHitbox(), mapRect)) {
+                        return true;
+                    }
                 }
             }
         }
         return false;
     }
 
-
-
     public int getTileSize() {
         return Game.MAP.getProperties().get("tilewidth", Integer.class);
     }
-
 
     public void dispose() {
         environmentRenderer.dispose();

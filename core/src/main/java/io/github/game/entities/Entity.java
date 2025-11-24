@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,7 +13,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import io.github.game.Game;
-import io.github.game.utils.interactions.Trigger;
+import io.github.game.utils.io.TriggerLoader;
+import io.github.game.utils.triggers.Trigger;
 import io.github.game.utils.io.AnimationLoader;
 import io.github.game.utils.io.MapLoader;
 
@@ -22,7 +22,7 @@ import io.github.game.utils.io.MapLoader;
 public abstract class Entity {
 
     protected String id;
-    private RectangleMapObject startingProperties;
+    private final RectangleMapObject startingProperties;
     protected Vector2 position;
     protected Vector2 size;
 
@@ -37,15 +37,15 @@ public abstract class Entity {
     protected boolean triggered;
 
     protected boolean active = true;
+    protected TextureAtlas spriteAtlas;
 
-    public Entity(String id,
-                  String hostLayer,
-                  Trigger trigger,
-                  boolean collidable) {
+    public Entity(RectangleMapObject properties,
+                  TextureAtlas spriteAtlas
+                  ) {
 
-        this.id = id;
-        this.startingProperties = MapLoader.getLayerRectangle(id, hostLayer);
-        this.trigger = trigger;
+        this.startingProperties = properties;
+        this.spriteAtlas = spriteAtlas;
+
         try {
             assert startingProperties != null;
             Rectangle startArea = startingProperties.getRectangle();
@@ -60,15 +60,40 @@ public abstract class Entity {
         } catch (NullPointerException e) {
             Gdx.app.log("ERROR", String.valueOf(e));
         }
-
-        this.collidable = collidable;
+        this.id = startingProperties.getName();
+        createTrigger();
+        createSprites();
+        this.collidable = getStartingProperty("collidable", Boolean.class);
     }
 
-    public Entity(String id,
-                  String hostLayer,
-                  boolean collidable) {
+    private void createTrigger() {
 
-        this(id, hostLayer, null, collidable);
+        String triggerInfo = getStartingProperty("trigger", String.class);
+        if (triggerInfo != null) {
+            if (triggerInfo.contains(",")) {
+                triggerInfo = triggerInfo.replaceFirst(",", "," + id + ",");
+            } else {
+                triggerInfo = triggerInfo + "," + id;
+            }
+        }
+        this.trigger = TriggerLoader.loadTrigger(triggerInfo);
+
+    }
+
+    private void createSprites() {
+        String sprites = getStartingProperty("Sprites", String.class);
+        if (sprites != null) {
+            for (String spriteInfo : sprites.split(",")) {
+                int lastUnderscoreIndex = spriteInfo.lastIndexOf("/");
+                if (lastUnderscoreIndex != -1) {
+                    String name = spriteInfo.substring(0, lastUnderscoreIndex);
+                    float duration = Float.parseFloat(spriteInfo.substring(lastUnderscoreIndex + 1));
+                    addSprite(name, duration);
+                } else {
+                    Gdx.app.log("ERROR", "No duration provided for entity " + id + "s sprites");
+                }
+            }
+        }
     }
 
     public void render(SpriteBatch batch) {
@@ -90,13 +115,34 @@ public abstract class Entity {
         triggered = false;         }
     }
 
-    public void addSprite(String name, float duration, Animation.PlayMode playMode, TextureAtlas spriteAtlas) {
-        spriteMap.put(id + "_" + name, AnimationLoader.getAnimation(id + "_" + name, duration, spriteAtlas, playMode));
+    public void addSprite(String name, float duration) {
+        String key = id + "_" + name;
+        Animation<TextureRegion> animation = AnimationLoader.getAnimation(
+            key,
+            duration,
+            spriteAtlas,
+            Animation.PlayMode.LOOP);
+        if (animation == null) {
+            key = id.replaceAll("\\d", "") + "_" + name;
+            animation = AnimationLoader.getAnimation(
+                key,
+                duration,
+                spriteAtlas,
+                Animation.PlayMode.LOOP);
+        }
+        spriteMap.put(key, animation);
     }
 
 
     public void setSprite(String name) {
-        sprite = new Sprite(spriteMap.get(id + "_" + name).getKeyFrame(stateTime));
+        Animation<TextureRegion> animation = spriteMap.get(id + "_" + name);
+
+        if (animation == null) {
+            animation = spriteMap.get(id.replaceAll("\\d", "") + "_" + name);
+        }
+
+        this.sprite = animation.getKeyFrame(stateTime);
+
     }
 
 
@@ -140,7 +186,7 @@ public abstract class Entity {
     }
 
     protected <T> T getStartingProperty(String propertyName, Class<T> type) {
-        return startingProperties.getProperties().get(propertyName, type);
+        return MapLoader.getCustomProperty(this.startingProperties, propertyName, type);
     }
 
     public boolean isCollidable() {
@@ -149,5 +195,9 @@ public abstract class Entity {
 
     public void setTriggered(boolean triggered) {
         this.triggered = triggered;
+    }
+
+    public void dispose() {
+        spriteAtlas.dispose();
     }
 }
