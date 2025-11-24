@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
-import io.github.game.entities.Entity;
+import io.github.game.entity.Entity;
 import io.github.game.utils.io.MapLoader;
 
 

@@ -1,16 +1,14 @@
-package io.github.game.entities.player;
+package io.github.game.entity.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import io.github.game.Game;
-import io.github.game.entities.MovableEntity;
+import io.github.game.entity.MovableEntity;
 import io.github.game.ui.elements.Hotbar;
 import io.github.game.ui.elements.Item;
 import io.github.game.utils.io.AudioPlayer;

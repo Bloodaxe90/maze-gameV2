@@ -1,16 +1,13 @@
-package io.github.game.entities;
+package io.github.game.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.math.Rectangle;
 
 import io.github.game.Game;
-import io.github.game.entities.player.Player;
+import io.github.game.entity.entities.Player;
 import io.github.game.utils.io.MapLoader;
-import io.github.game.utils.triggers.Trigger;
 import org.reflections.Reflections;
 
 import java.util.HashMap;
@@ -25,10 +22,7 @@ public class EntityManager {
     public EntityManager() {
         Set<Class<? extends Entity>> childClasses = new Reflections("io.github.game.entities").getSubTypesOf(Entity.class);
         for (Class<? extends Entity> childClass : childClasses) {
-
             String layerName = childClass.getSimpleName();
-
-
             for (RectangleMapObject properties : MapLoader.getLayerRectangles(layerName)) {
                 try {
                     entities.put(

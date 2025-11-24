@@ -1,4 +1,4 @@
-package io.github.game.entities;
+package io.github.game.entity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -83,12 +83,17 @@ public abstract class Entity {
     private void createSprites() {
         String sprites = getStartingProperty("Sprites", String.class);
         if (sprites != null) {
+            boolean initialSpriteSet = false;
             for (String spriteInfo : sprites.split(",")) {
                 int lastUnderscoreIndex = spriteInfo.lastIndexOf("/");
                 if (lastUnderscoreIndex != -1) {
                     String name = spriteInfo.substring(0, lastUnderscoreIndex);
                     float duration = Float.parseFloat(spriteInfo.substring(lastUnderscoreIndex + 1));
                     addSprite(name, duration);
+                    if (!initialSpriteSet) {
+                        initialSpriteSet = true;
+                        setSprite(name);
+                    }
                 } else {
                     Gdx.app.log("ERROR", "No duration provided for entity " + id + "s sprites");
                 }

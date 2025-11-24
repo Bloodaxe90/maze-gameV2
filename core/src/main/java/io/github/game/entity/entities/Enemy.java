@@ -1,18 +1,16 @@
-package io.github.game.entities.enemy;
+package io.github.game.entity.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 
 import io.github.game.Game;
-import io.github.game.entities.MovableEntity;
-import io.github.game.utils.io.TriggerLoader;
-import io.github.game.utils.triggers.Trigger;
+import io.github.game.entity.MovableEntity;
 
 
 public class Enemy extends MovableEntity {
 
-    private float range;
+    private final float range;
 
     public Enemy(RectangleMapObject properties,
                  TextureAtlas spriteAtlas) {

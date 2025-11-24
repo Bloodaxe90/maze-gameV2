@@ -2,7 +2,6 @@ package io.github.game.utils.triggers;
 
 import com.badlogic.gdx.Gdx;
 import io.github.game.Game;
-import io.github.game.entities.Entity;
 import io.github.game.ui.elements.DialogueBox;
 import io.github.game.utils.io.DialogueLoader;
 

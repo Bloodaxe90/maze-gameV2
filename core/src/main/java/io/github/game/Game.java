@@ -11,8 +11,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import io.github.game.entities.EntityManager;
-import io.github.game.entities.player.Player;
+import io.github.game.entity.EntityManager;
+import io.github.game.entity.entities.Player;
 import io.github.game.ui.UiManager;
 
 

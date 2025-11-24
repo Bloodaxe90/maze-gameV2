@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.game.Game;
-import io.github.game.entities.player.Player;
+import io.github.game.entity.entities.Player;
 import io.github.game.ui.elements.DialogueBox;
 import io.github.game.ui.elements.Hotbar;
 import io.github.game.ui.elements.PauseMenu;
@@ -18,7 +18,6 @@ import io.github.game.ui.elements.ToastBar;
 public class UiManager {
     private final FitViewport uiViewport;
 
-    private String layerName;
     private final Stage stage;
     private final Skin skin;
     private final DialogueBox dialogueBox;
@@ -32,7 +31,6 @@ public class UiManager {
         this.uiViewport = new FitViewport(Game.WORLD_SIZE.x, Game.WORLD_SIZE.y);
         this.stage = new Stage(uiViewport);
 
-        this.layerName = layerName;
         this.uiAtlas = new TextureAtlas("assets/atlas/" + layerName + ".atlas");
         this.skin = new Skin(Gdx.files.internal("uiskin.json"));
 
@@ -40,20 +38,20 @@ public class UiManager {
         this.dialogueBox.setVisible(false);
         this.stage.addActor(this.dialogueBox);
 
-                this.pauseMenu = new PauseMenu("pause_menu", layerName, skin);
+        this.pauseMenu = new PauseMenu("pause_menu", layerName, skin);
         this.pauseMenu.setVisible(false);
         this.stage.addActor(pauseMenu);
 
-                this.hotbar = new Hotbar("hotbar", layerName, skin, uiAtlas);
+        this.hotbar = new Hotbar("hotbar", layerName, skin, uiAtlas);
         this.stage.addActor(this.hotbar);
 
-                this.statusBar = new StatusBar("status_bar", layerName, skin);
+        this.statusBar = new StatusBar("status_bar", layerName, skin);
         this.stage.addActor(statusBar);
 
-                this.toastBar = new ToastBar("toast_bar", layerName, skin);
+        this.toastBar = new ToastBar("toast_bar", layerName, skin);
         this.stage.addActor(toastBar);
 
-                InputMultiplexer multiplexer = new InputMultiplexer();
+        InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this.stage);
         Gdx.input.setInputProcessor(multiplexer);
     }
