@@ -20,7 +20,7 @@ public class Enemy extends MovableEntity {
         this.range = getStartingProperty("range", Float.class);
     }
 
-
+    @Override
     public void update(float delta_t, Game game) {
         super.update(delta_t, game);
 
@@ -51,11 +51,11 @@ public class Enemy extends MovableEntity {
         float oldX = position.x;
         float oldY = position.y;
 
-                setXPos(newX);
+        setXPos(newX);
         if (game.getEnvironmentManager().checkCollision(this)) {
-            setXPos(oldX);         }
-
-                setYPos(newY);
+            setXPos(oldX);
+        }
+        setYPos(newY);
         if (game.getEnvironmentManager().checkCollision(this)) {
            setYPos(oldY);
         }

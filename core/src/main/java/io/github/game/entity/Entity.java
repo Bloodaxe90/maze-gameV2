@@ -61,13 +61,14 @@ public abstract class Entity {
             Gdx.app.log("ERROR", String.valueOf(e));
         }
         this.id = startingProperties.getName();
+        Gdx.app.log("ERROR", id + "1");
+
         createTrigger();
         createSprites();
         this.collidable = getStartingProperty("collidable", Boolean.class);
     }
 
     private void createTrigger() {
-
         String triggerInfo = getStartingProperty("trigger", String.class);
         if (triggerInfo != null) {
             if (triggerInfo.contains(",")) {
@@ -81,13 +82,14 @@ public abstract class Entity {
     }
 
     private void createSprites() {
-        String sprites = getStartingProperty("Sprites", String.class);
+        String sprites = getStartingProperty("sprites", String.class);
         if (sprites != null) {
             boolean initialSpriteSet = false;
             for (String spriteInfo : sprites.split(",")) {
                 int lastUnderscoreIndex = spriteInfo.lastIndexOf("/");
                 if (lastUnderscoreIndex != -1) {
                     String name = spriteInfo.substring(0, lastUnderscoreIndex);
+
                     float duration = Float.parseFloat(spriteInfo.substring(lastUnderscoreIndex + 1));
                     addSprite(name, duration);
                     if (!initialSpriteSet) {

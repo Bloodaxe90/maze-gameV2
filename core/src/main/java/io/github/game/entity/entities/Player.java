@@ -31,12 +31,12 @@ public class Player extends MovableEntity {
 
     }
 
-
+    @Override
     public void render(SpriteBatch batch) {
         super.render(batch);
     }
 
-
+    @Override
     public void update(float delta_t, Game game) {
         super.update(delta_t, game);
 
@@ -121,6 +121,10 @@ public class Player extends MovableEntity {
     public void setInteract(boolean interact) {this.interact = interact; }
 
     public Array<Item> getInventory() { return inventory; }
+
+    public boolean isInteract() {
+        return interact;
+    }
 
 
     public void stopMoving() {

@@ -20,7 +20,7 @@ public class EntityManager {
     protected Map<String, Entity> entities = new HashMap<>();
 
     public EntityManager() {
-        Set<Class<? extends Entity>> childClasses = new Reflections("io.github.game.entities").getSubTypesOf(Entity.class);
+        Set<Class<? extends Entity>> childClasses = new Reflections("io.github.game.entity").getSubTypesOf(Entity.class);
         for (Class<? extends Entity> childClass : childClasses) {
             String layerName = childClass.getSimpleName();
             for (RectangleMapObject properties : MapLoader.getLayerRectangles(layerName)) {
