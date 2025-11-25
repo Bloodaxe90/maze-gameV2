@@ -216,7 +216,7 @@
   <object id="343" x="502.918" y="443.241" width="33.1248" height="15.7737"/>
  </objectgroup>
  <objectgroup color="#0005ff" id="12" name="Interactable">
-  <object id="347" name="professor2" x="132.304" y="132.304" width="107.696" height="107.696">
+  <object id="347" name="professor2" x="348.086" y="187.431" width="107.696" height="25.793">
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="sprites" value="back/1"/>

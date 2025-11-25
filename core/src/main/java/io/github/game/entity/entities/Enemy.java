@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import io.github.game.Game;
 import io.github.game.entity.MovableEntity;
 
-
 public class Enemy extends MovableEntity {
 
     private final float range;

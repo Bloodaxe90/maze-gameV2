@@ -79,7 +79,7 @@ public class Game extends ApplicationAdapter {
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.T)) uiManager.getToastBar().addToast("Sigma on the wall whos the fiarest of them all its me sigma rizzler", Color.BLUE);
             Player player = entityManager.getPlayer();
-            player.setInteract(Gdx.input.isKeyJustPressed(Input.Keys.E));
+            player.setInteract(Gdx.input.isKeyPressed(Input.Keys.E));
             player.setMovingUp(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W));
             player.setMovingDown(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S));
             player.setMovingLeft(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A));
