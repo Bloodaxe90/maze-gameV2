@@ -28,7 +28,9 @@ public class Player extends MovableEntity {
         super(properties, spriteAtlas);
         this.inventory = new Array<>(Hotbar.NUM_SLOTS);
         this.footstepTimeout = 1 / getStartingProperty("footstepFrequency", Float.class);
-
+        for (String item : getStartingProperty("items", String.class).split(",")) {
+            addItem(item);
+        }
     }
 
     @Override
