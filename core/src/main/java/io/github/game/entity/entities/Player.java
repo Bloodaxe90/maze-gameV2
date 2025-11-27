@@ -63,7 +63,7 @@ public class Player extends MovableEntity {
         if (position.x < 0 || position.x + size.x > Game.WORLD_SIZE.x) {
             velocity.x = 0;
             setXPos(MathUtils.clamp(position.x, 0, Game.WORLD_SIZE.x - size.x));
-        } else if (game.getEnvironmentManager().checkCollision(this) || game.getEntityManager().checkCollision(this)) {
+        } else if (game.getEnvironmentSystem().checkCollision(this) || game.getEntitySystem().checkCollision(this)) {
             velocity.x = 0;
             setXPos(oldX);
         }
@@ -72,7 +72,7 @@ public class Player extends MovableEntity {
         if (position.y < 0 || position.y + size.y > Game.WORLD_SIZE.y) {
             velocity.y = 0;
             setYPos(MathUtils.clamp(position.y, 0, Game.WORLD_SIZE.y - size.y));
-        } else if (game.getEnvironmentManager().checkCollision(this) || game.getEntityManager().checkCollision(this)) {
+        } else if (game.getEnvironmentSystem().checkCollision(this) || game.getEntitySystem().checkCollision(this)) {
                         velocity.y = 0;
             setYPos(oldY);
         }

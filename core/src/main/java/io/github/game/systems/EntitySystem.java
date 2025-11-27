@@ -1,4 +1,4 @@
-package io.github.game.entity;
+package io.github.game.systems;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 
 import io.github.game.Game;
+import io.github.game.entity.Entity;
 import io.github.game.entity.entities.Player;
 import io.github.game.utils.io.MapLoader;
 import org.reflections.Reflections;
@@ -15,11 +16,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-public class EntityManager {
+public class EntitySystem {
 
     protected Map<String, Entity> entities = new HashMap<>();
 
-    public EntityManager() {
+    public EntitySystem() {
         Set<Class<? extends Entity>> childClasses = new Reflections("io.github.game.entity").getSubTypesOf(Entity.class);
         for (Class<? extends Entity> childClass : childClasses) {
             String layerName = childClass.getSimpleName();

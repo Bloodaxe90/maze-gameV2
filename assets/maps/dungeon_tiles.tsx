@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="dungeons_demo" tilewidth="16" tileheight="16" tilecount="112" columns="16">
- <image source="dungeons_tiles.png" width="256" height="112"/>
+<tileset version="1.10" tiledversion="1.11.2" name="dungeon_tiles" tilewidth="16" tileheight="16" tilecount="112" columns="16">
+ <image source="dungeon_tiles.png" width="256" height="112"/>
  <tile id="25">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="16" height="16"/>

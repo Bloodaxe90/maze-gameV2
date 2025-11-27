@@ -27,11 +27,11 @@ public class Enemy extends MovableEntity {
 
         Vector2 velocity = new Vector2(0f, 0f);
 
-                Vector2 dir = game.getEntityManager().getPlayer().getPos().sub(this.position);
+                Vector2 dir = game.getEntitySystem().getPlayer().getPos().sub(this.position);
 
                 float distanceToPlayer = (float) Math.sqrt(dir.x * dir.x + dir.y * dir.y);
 
-                if (distanceToPlayer <= range * game.getEnvironmentManager().getTileSize() || range < 0) {
+                if (distanceToPlayer <= range * game.getEnvironmentSystem().getTileSize() || range < 0) {
             velocity.x = (dir.x / distanceToPlayer) * this.speed;
             velocity.y = (dir.y / distanceToPlayer) * this.speed;
         } else {
@@ -51,11 +51,11 @@ public class Enemy extends MovableEntity {
         float oldY = position.y;
 
         setXPos(newX);
-        if (game.getEnvironmentManager().checkCollision(this)) {
+        if (game.getEnvironmentSystem().checkCollision(this)) {
             setXPos(oldX);
         }
         setYPos(newY);
-        if (game.getEnvironmentManager().checkCollision(this)) {
+        if (game.getEnvironmentSystem().checkCollision(this)) {
            setYPos(oldY);
         }
 

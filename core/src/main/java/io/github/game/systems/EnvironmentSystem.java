@@ -1,4 +1,4 @@
-package io.github.game;
+package io.github.game.systems;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
@@ -10,11 +10,12 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
+import io.github.game.Game;
 import io.github.game.entity.Entity;
 import io.github.game.utils.io.MapLoader;
 
 
-public class EnvironmentManager {
+public class EnvironmentSystem {
 
     private final OrthogonalTiledMapRenderer environmentRenderer;
     private final Array<RectangleMapObject> collidables;
@@ -22,7 +23,7 @@ public class EnvironmentManager {
     private final int[] backgroundLayers;
     private final int[] foregroundLayers;
 
-    public EnvironmentManager() {
+    public EnvironmentSystem() {
         this.environmentRenderer = new OrthogonalTiledMapRenderer(Game.MAP, 1f);
         this.collidables = MapLoader.getLayerRectangles("Collision");
 

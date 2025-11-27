@@ -1,19 +1,19 @@
-package io.github.game; // or io.github.game.managers
+package io.github.game.systems; // or io.github.game.managers
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import io.github.game.Game;
 import io.github.game.entity.entities.Player;
 
-public class CameraManager {
+public class CameraSystem {
 
     private final OrthographicCamera camera;
     private final Viewport viewport;
     private float drift;
 
-    public CameraManager(float width, float height, float drift) {
+    public CameraSystem(float width, float height, float drift) {
 
         this.camera = new OrthographicCamera();
         this.viewport = new FitViewport(width, height, camera);

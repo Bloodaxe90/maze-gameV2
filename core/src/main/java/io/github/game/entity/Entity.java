@@ -61,7 +61,6 @@ public abstract class Entity {
             Gdx.app.log("ERROR", String.valueOf(e));
         }
         this.id = startingProperties.getName();
-        Gdx.app.log("ERROR", id + "1");
 
         createTrigger();
         createSprites();

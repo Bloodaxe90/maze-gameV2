@@ -1,4 +1,4 @@
-package io.github.game.ui;
+package io.github.game.systems;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -15,7 +15,7 @@ import io.github.game.ui.elements.StatusBar;
 import io.github.game.ui.elements.ToastBar;
 
 
-public class UiManager {
+public class UiSystem {
     private final FitViewport uiViewport;
 
     private final Stage stage;
@@ -27,7 +27,7 @@ public class UiManager {
     private final ToastBar toastBar;
     private final TextureAtlas uiAtlas;
 
-    public UiManager(String layerName) {
+    public UiSystem(String layerName) {
         this.uiViewport = new FitViewport(Game.WORLD_SIZE.x, Game.WORLD_SIZE.y);
         this.stage = new Stage(uiViewport);
 
