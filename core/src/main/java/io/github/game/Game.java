@@ -27,11 +27,15 @@ public class Game extends ApplicationAdapter {
 
     public static boolean PLAYING = false;
     public static TiledMap MAP;
-    public static final Vector2 WORLD_SIZE = new Vector2(320 * 3, 240 * 3);
+    public static int TILE_SIZE;
+    public static Vector2 WORLD_SIZE;
+    public static final Vector2 SCREEN_SIZE = new Vector2(1920, 1440);
 
     @Override
     public void create() {
         MAP = new TmxMapLoader().load("assets/maps/map.tmx");
+        TILE_SIZE = MAP.getProperties().get("tilewidth", Integer.class);
+        WORLD_SIZE = new Vector2(MAP.getProperties().get("width", Integer.class) * TILE_SIZE, MAP.getProperties().get("height", Integer.class) * TILE_SIZE);
 
         inputSystem = new InputSystem(this);
         updateSystem = new UpdateSystem(this);
@@ -43,7 +47,7 @@ public class Game extends ApplicationAdapter {
         uiSystem = new UiSystem("UI");
 
         cameraSystem = new CameraSystem(
-            Game.WORLD_SIZE.x / 2f, Game.WORLD_SIZE.y / 2f, 0.5f
+            480, 360, 0.5f
         );
     }
 
