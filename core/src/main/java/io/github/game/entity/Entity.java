@@ -141,6 +141,7 @@ public abstract class Entity {
 
 
     public void setSprite(String name) {
+        if (name.isEmpty()) return;
         Animation<TextureRegion> animation = spriteMap.get(id + "_" + name);
 
         if (animation == null) {

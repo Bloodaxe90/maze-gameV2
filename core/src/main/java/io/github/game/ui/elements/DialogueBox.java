@@ -1,6 +1,7 @@
 package io.github.game.ui.elements;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -118,15 +119,15 @@ public class DialogueBox extends Element {
             AudioPlayer.playSound("speak1", 1f, MathUtils.random(2f, 3f));
         }
 
-                if (oldLength != visibleTextLength) {
+        if (oldLength != visibleTextLength) {
             textLabel.setText(fullText.substring(0, visibleTextLength));
         }
 
-                if (visibleTextLength >= fullText.length()) {
+        if (visibleTextLength >= fullText.length()) {
             isFinished = true;
         }
 
-                if (!isFinished) {
+        if (!isFinished) {
             scrollPane.layout();
             scrollPane.setScrollPercentY(1.0f);
         }
@@ -134,11 +135,13 @@ public class DialogueBox extends Element {
 
 
     public void showDialogue(String message) {
-        startDialogue(message);
-        setVisible(true);
+        if (!message.isEmpty()) {
+            startDialogue(message);
+            setVisible(true);
 
-        Stage stage = this.getStage();
-        if (stage != null) stage.setScrollFocus(scrollPane);
+            Stage stage = this.getStage();
+            if (stage != null) stage.setScrollFocus(scrollPane);
+        }
     }
 
 

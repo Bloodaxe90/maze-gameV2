@@ -8,11 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.game.Game;
 import io.github.game.entity.entities.Player;
-import io.github.game.ui.elements.DialogueBox;
-import io.github.game.ui.elements.Hotbar;
-import io.github.game.ui.elements.PauseMenu;
-import io.github.game.ui.elements.StatusBar;
-import io.github.game.ui.elements.ToastBar;
+import io.github.game.ui.elements.*;
 
 
 public class UiSystem {
@@ -24,6 +20,7 @@ public class UiSystem {
     private final Hotbar hotbar;
     private final PauseMenu pauseMenu;
     private final StatusBar statusBar;
+    private final Leaderboard leaderboard;
     private final ToastBar toastBar;
     private final TextureAtlas uiAtlas;
 
@@ -48,6 +45,10 @@ public class UiSystem {
         this.statusBar = new StatusBar("status_bar", layerName, skin);
         this.stage.addActor(statusBar);
 
+        this.leaderboard = new Leaderboard("leaderboard", layerName, skin);
+        this.leaderboard.setVisible(false);
+        this.stage.addActor(leaderboard);
+
         this.toastBar = new ToastBar("toast_bar", layerName, skin);
         this.stage.addActor(toastBar);
 
@@ -69,7 +70,9 @@ public class UiSystem {
             setupGameOverScreen("Loss\nYou timed out");
         }
 
-        pauseMenu.setVisible(!playing);     }
+        pauseMenu.setVisible(!playing);
+        leaderboard.setVisible(!playing);
+    }
 
 
     public void setupGameOverScreen(String text) {
@@ -91,6 +94,7 @@ public class UiSystem {
     public void dispose() {
         stage.dispose();
         skin.dispose();
+        leaderboard.save();
         uiAtlas.dispose();
     }
 

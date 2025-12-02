@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="350">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="351">
  <properties>
   <property name="background" type="bool" value="true"/>
  </properties>
@@ -168,7 +168,7 @@
     <property name="collidable" type="bool" value="true"/>
     <property name="range" type="float" value="4"/>
     <property name="speed" type="float" value="100"/>
-    <property name="trigger" value="Dialogue,0,true,true,touch"/>
+    <property name="trigger" value="Dialogue,0,0,null,true,true,0,touch"/>
    </properties>
   </object>
   <object id="346" name="professor" x="154.106" y="332.086" width="32" height="32">
@@ -176,7 +176,7 @@
     <property name="collidable" type="bool" value="true"/>
     <property name="range" type="float" value="4"/>
     <property name="speed" type="float" value="100"/>
-    <property name="trigger" value="Dialogue,0,true,true,touch"/>
+    <property name="trigger" value="Dialogue,0,-1,null,true,true,0,touch"/>
    </properties>
   </object>
  </objectgroup>
@@ -209,6 +209,7 @@
    </properties>
   </object>
   <object id="337" name="hotbar" x="14.4058" y="9.3064" width="317.457" height="60.9892"/>
+  <object id="350" name="leaderboard" x="6.5395" y="157.909" width="208.921" height="300.181"/>
  </objectgroup>
  <objectgroup id="6" name="Collision">
   <object id="338" x="436.772" y="377.542" width="20.3776" height="16.1675"/>
@@ -219,11 +220,11 @@
   <object id="343" x="502.918" y="443.241" width="33.1248" height="15.7737"/>
  </objectgroup>
  <objectgroup color="#0005ff" id="12" name="Interactable">
-  <object id="347" name="professor2" x="128.315" y="131.323" width="129.59" height="93.781">
+  <object id="347" name="professor2" x="128.315" y="131.323" width="46.2139" height="39.9072">
    <properties>
     <property name="collidable" type="bool" value="true"/>
-    <property name="sprites" value="back/1"/>
-    <property name="trigger" value="Dialogue,0,true,true,interact"/>
+    <property name="sprites" value="back/1,right/1"/>
+    <property name="trigger" value="Dialogue,0,-1,right,false,true,0,interact"/>
    </properties>
   </object>
  </objectgroup>

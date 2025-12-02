@@ -12,6 +12,7 @@ public class StatusBar extends Element {
     private int eventsCompleted = 0;
     private int maxEvents;
     private float timeRemaining;
+    private int score = 0;
 
 
     public StatusBar(String id, String hostLayer, Skin skin) {
@@ -27,13 +28,14 @@ public class StatusBar extends Element {
 
 
     public void update(float delta) {
-                if (!isTimeUp()) {
+        if (!isTimeUp()) {
             timeRemaining -= delta;
         } else {
             timeRemaining = 0;
         }
 
-        updateStatusText();     }
+        updateStatusText();
+    }
 
 
     private void updateStatusText() {
@@ -41,7 +43,7 @@ public class StatusBar extends Element {
         int seconds = (int) (timeRemaining % 60);
         String formattedTime = String.format("%d:%02d", minutes, seconds);
 
-        status.setText("Events: " + eventsCompleted + "/" + maxEvents + "\nTime: " + formattedTime);
+        status.setText("Events: " + eventsCompleted + "/" + maxEvents + "\nTime: " + formattedTime + "\nScore: " + score);
     }
 
 
@@ -51,6 +53,13 @@ public class StatusBar extends Element {
         }
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void addScore(int score) {
+        this.score += score;
+    }
 
     public String getStatusText() {
         return status.getText().toString();

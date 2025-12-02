@@ -24,6 +24,9 @@ public final class DialogueLoader {
             blocks[i] = blocks[i].trim();
         }
 
+        if (optionNumber < blocks.length - 1) {
+            return "";
+        }
         return blocks[optionNumber];
     }
 

@@ -1,6 +1,5 @@
 package io.github.game.utils.triggers;
 
-import com.badlogic.gdx.Gdx;
 import io.github.game.Game;
 import io.github.game.entity.entities.Player;
 import io.github.game.ui.elements.DialogueBox;
@@ -11,22 +10,24 @@ public class DialogueTrigger implements Trigger {
 
     private final String id;
     private final String dialogue;
+    private final String toastText;
+    private final String interactionSprite;
     private final boolean destroy;
     private final boolean event;
+    private final int score;
     private final TriggerType type;
-    private enum TriggerType{TOUCH, INTERACT};
 
     private boolean firstInteraction = true;
 
     public DialogueTrigger(String[] args) {
         this.id = args[0];
-
         this.dialogue = DialogueLoader.getBlock(id, Integer.parseInt(args[1]));
-
-        this.destroy = Boolean.parseBoolean(args[2]);
-        this.event = Boolean.parseBoolean(args[3]);
-        this.type = TriggerType.valueOf(args[4].toUpperCase());
-    }
+        this.toastText = DialogueLoader.getBlock(id, Integer.parseInt(args[2]));
+        this.interactionSprite = args[3].equalsIgnoreCase("null") ? "" : args[3];
+        this.destroy = Boolean.parseBoolean(args[4]);
+        this.event = Boolean.parseBoolean(args[5]);
+        this.score = Integer.parseInt(args[6]);
+        this.type = TriggerType.valueOf(args[7].toUpperCase());    }
 
     @Override
     public void trigger(Game game) {
@@ -41,9 +42,12 @@ public class DialogueTrigger implements Trigger {
         DialogueBox dialogueBox = game.getUiSystem().getDialogueBox();
         if (!dialogueBox.isVisible()) {
             dialogueBox.showDialogue(dialogue);
+            game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
 
             if (event && firstInteraction) {
                 game.getUiSystem().getStatusBar().incrementEventCounter();
+                game.getUiSystem().getToastBar().addToast(toastText);
+                game.getUiSystem().getStatusBar().addScore(score);
                 firstInteraction = false;
             }
         }

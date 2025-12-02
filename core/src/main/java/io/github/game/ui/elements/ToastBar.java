@@ -41,15 +41,17 @@ public class ToastBar extends Element {
     }
 
     public void addToast(String text, Color color) {
-        Label label = new Label(text, getSkin());
-        label.setColor(color);
-        label.setAlignment(Align.center);
-        label.setWrap(true);
+        if (!text.isEmpty()) {
+            Label label = new Label(text, getSkin());
+            label.setColor(color);
+            label.setAlignment(Align.center);
+            label.setWrap(true);
 
-        Toast toast = new Toast(label, duration);
-        activeToasts.add(toast);
+            Toast toast = new Toast(label, duration);
+            activeToasts.add(toast);
 
-        this.add(label).width(getWidth()).row();
+            this.add(label).width(getWidth()).row();
+        }
     }
 
     @Override

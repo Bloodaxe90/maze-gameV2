@@ -10,22 +10,27 @@ public class TakeItemTrigger implements Trigger {
     private final String id;
     private final String item;
     private final String dialogueDefault;
+    private final String toastText;
     private final String dialogueTake;
+    private final String interactionSprite;
     private final boolean destroy;
     private final boolean event;
+    private final int score;
     private boolean firstInteraction = true;
 
-    private enum TriggerType{TOUCH, INTERACT};
     private final TriggerType type;
 
     public TakeItemTrigger(String[] args) {
         this.id = args[0];
         this.item = args[1];
         this.dialogueDefault = DialogueLoader.getBlock(id, Integer.parseInt(args[2]));
-        this.dialogueTake = DialogueLoader.getBlock(id, Integer.parseInt(args[3]));
-        this.destroy = Boolean.parseBoolean(args[4]);
-        this.event = Boolean.parseBoolean(args[5]);
-        this.type = TriggerType.valueOf(args[6].toUpperCase());
+        this.toastText = DialogueLoader.getBlock(id, Integer.parseInt(args[3]));
+        this.dialogueTake = DialogueLoader.getBlock(id, Integer.parseInt(args[4]));
+        this.interactionSprite = args[4].equalsIgnoreCase("null") ? "" : args[4];
+        this.destroy = Boolean.parseBoolean(args[6]);
+        this.event = Boolean.parseBoolean(args[7]);
+        this.score = Integer.parseInt(args[8]);
+        this.type = TriggerType.valueOf(args[9].toUpperCase());
     }
 
     @Override
@@ -42,9 +47,12 @@ public class TakeItemTrigger implements Trigger {
         if (player.hasItem(item)) {
             player.removeItem(item);
             dialogueBox.showDialogue(dialogueTake);
+            game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
 
             if (event && firstInteraction) {
                 game.getUiSystem().getStatusBar().incrementEventCounter();
+                game.getUiSystem().getToastBar().addToast(toastText);
+                game.getUiSystem().getStatusBar().addScore(score);
                 firstInteraction = false;
             }
         } else {
@@ -56,5 +64,6 @@ public class TakeItemTrigger implements Trigger {
         }
         if (isInteractTrigger) {
             player.setInteract(false);
-        }      }
+        }
+    }
 }
