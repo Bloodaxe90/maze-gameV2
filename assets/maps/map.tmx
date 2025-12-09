@@ -478,25 +478,25 @@
   </object>
  </objectgroup>
  <objectgroup color="#00f1f9" id="8" name="UI">
-  <object id="332" name="dialogue" x="16" y="288" width="935.857" height="304.705">
+  <object id="332" name="dialogue" x="13.7728" y="864.317" width="1252.12" height="407.675">
    <properties>
     <property name="letterTime" type="float" value="0.05"/>
    </properties>
   </object>
-  <object id="333" name="status_bar" x="1040" y="0" width="237.065" height="180.939">
+  <object id="333" name="status_bar" x="1033.32" y="6.68151" width="237.065" height="180.939">
    <properties>
     <property name="maxEvents" type="int" value="6"/>
     <property name="startTime" type="float" value="300"/>
    </properties>
   </object>
-  <object id="334" name="pause_menu" x="352" y="236.181" width="569.837" height="787.819"/>
+  <object id="334" name="pause_menu" x="449.996" y="476.716" width="402.799" height="259.979"/>
   <object id="336" name="toast_bar" x="512" y="0" width="249.949" height="123.765">
    <properties>
     <property name="duration" type="float" value="5"/>
    </properties>
   </object>
-  <object id="337" name="hotbar" x="14.4058" y="9.3064" width="317.457" height="70.6936"/>
-  <object id="350" name="leaderboard" x="6.5395" y="157.909" width="208.921" height="300.181"/>
+  <object id="337" name="hotbar" x="14.4058" y="9.3064" width="442.179" height="98.4675"/>
+  <object id="350" name="leaderboard" x="4.31233" y="451.896" width="208.921" height="300.181"/>
  </objectgroup>
  <objectgroup id="6" name="Collision">
   <object id="338" x="436.772" y="377.542" width="20.3776" height="16.1675"/>
