@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.game.ui.Element;
 import io.github.game.utils.io.AudioPlayer;
 
@@ -29,8 +31,8 @@ public class DialogueBox extends Element {
     private ScrollPane scrollPane;
 
 
-    public DialogueBox(String id, String hostLayer, Skin skin, TextureAtlas uiAtlas) {
-        super(id, hostLayer, skin, uiAtlas);
+    public DialogueBox(String id, String hostLayer, FitViewport uiViewport, Skin skin, TextureAtlas uiAtlas) {
+        super(id, hostLayer, uiViewport, skin, uiAtlas);
 
         this.letterTime = getStartingProperty("letterTime", Float.class);
 
@@ -40,7 +42,8 @@ public class DialogueBox extends Element {
 
         scrollPane = new ScrollPane(textLabel, getSkin());
         ScrollPane.ScrollPaneStyle style = new ScrollPane.ScrollPaneStyle(scrollPane.getStyle());
-        style.background = null;         scrollPane.setStyle(style);
+        style.background = null;
+        scrollPane.setStyle(style);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);
 
@@ -92,10 +95,10 @@ public class DialogueBox extends Element {
         textTimer += delta;
         int oldLength = visibleTextLength;
 
-                while (textTimer >= letterTime && visibleTextLength < fullText.length()) {
+        while (textTimer >= letterTime && visibleTextLength < fullText.length()) {
             visibleTextLength++;
-                        char thisChar = fullText.charAt(visibleTextLength - 1);
-                        switch (thisChar) {
+            char thisChar = fullText.charAt(visibleTextLength - 1);
+            switch (thisChar) {
                 case '.':
                 case ':':
                 case '?':

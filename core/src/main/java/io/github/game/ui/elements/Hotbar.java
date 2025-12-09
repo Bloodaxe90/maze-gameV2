@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.game.Game;
 import io.github.game.ui.Element;
 
@@ -17,15 +18,14 @@ public class Hotbar extends Element {
     private final TextureAtlas itemAtlas;
 
 
-    public Hotbar(String id, String hostName, Skin skin, TextureAtlas uiAtlas) {
-        super(id, hostName, skin, uiAtlas);
+    public Hotbar(String id, String hostName, FitViewport uiViewport, Skin skin, TextureAtlas uiAtlas) {
+        super(id, hostName, uiViewport, skin, uiAtlas);
 
         this.itemAtlas = uiAtlas;
         this.itemIcons = new Array<>(NUM_SLOTS);
 
         float padding = 5f;
 
-        float iconsY = 2f;
         float slotWidth = getWidth() / padding;
         int iconSize = (int) ((getWidth() - 46) / padding);
         float firstIconX = padding;
@@ -35,7 +35,7 @@ public class Hotbar extends Element {
             itemIcon.setVisible(false);
 
             float iconX = firstIconX + (i * slotWidth);
-            itemIcon.setPosition(iconX, iconsY);
+            itemIcon.setPosition(iconX, -padding);
             itemIcon.setSize(iconSize, iconSize);
 
             itemIcons.add(itemIcon);

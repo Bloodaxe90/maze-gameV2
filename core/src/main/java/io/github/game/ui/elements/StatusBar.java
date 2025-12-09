@@ -3,6 +3,7 @@ package io.github.game.ui.elements;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.game.ui.Element;
 
 
@@ -15,8 +16,8 @@ public class StatusBar extends Element {
     private int score = 0;
 
 
-    public StatusBar(String id, String hostLayer, Skin skin) {
-        super(id, hostLayer, skin);
+    public StatusBar(String id, String hostLayer, FitViewport uiViewport, Skin skin) {
+        super(id, hostLayer, uiViewport, skin);
         this.top().right();
         this.maxEvents = getStartingProperty("maxEvents", Integer.class);
         this.timeRemaining = getStartingProperty("startTime", Float.class);

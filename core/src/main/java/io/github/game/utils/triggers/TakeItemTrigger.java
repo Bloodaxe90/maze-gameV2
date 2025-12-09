@@ -26,7 +26,7 @@ public class TakeItemTrigger implements Trigger {
         this.dialogueDefault = DialogueLoader.getBlock(id, Integer.parseInt(args[2]));
         this.toastText = DialogueLoader.getBlock(id, Integer.parseInt(args[3]));
         this.dialogueTake = DialogueLoader.getBlock(id, Integer.parseInt(args[4]));
-        this.interactionSprite = args[4].equalsIgnoreCase("null") ? "" : args[4];
+        this.interactionSprite = args[5].equalsIgnoreCase("null") ? "" : args[5];
         this.destroy = Boolean.parseBoolean(args[6]);
         this.event = Boolean.parseBoolean(args[7]);
         this.score = Integer.parseInt(args[8]);

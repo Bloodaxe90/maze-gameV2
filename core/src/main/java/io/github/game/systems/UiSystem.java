@@ -25,31 +25,31 @@ public class UiSystem {
     private final TextureAtlas uiAtlas;
 
     public UiSystem(String layerName) {
-        this.uiViewport = new FitViewport(Game.WORLD_SIZE.x, Game.WORLD_SIZE.y);
+        this.uiViewport = new FitViewport(960, 640);
         this.stage = new Stage(uiViewport);
 
         this.uiAtlas = new TextureAtlas("assets/atlas/" + layerName + ".atlas");
         this.skin = new Skin(Gdx.files.internal("uiskin.json"));
 
-        this.dialogueBox = new DialogueBox("dialogue", layerName, this.skin, uiAtlas);
+        this.dialogueBox = new DialogueBox("dialogue", layerName, uiViewport, this.skin, uiAtlas);
         this.dialogueBox.setVisible(false);
         this.stage.addActor(this.dialogueBox);
 
-        this.pauseMenu = new PauseMenu("pause_menu", layerName, skin);
+        this.pauseMenu = new PauseMenu("pause_menu", layerName, uiViewport, skin);
         this.pauseMenu.setVisible(false);
         this.stage.addActor(pauseMenu);
 
-        this.hotbar = new Hotbar("hotbar", layerName, skin, uiAtlas);
+        this.hotbar = new Hotbar("hotbar", layerName, uiViewport, skin, uiAtlas);
         this.stage.addActor(this.hotbar);
 
-        this.statusBar = new StatusBar("status_bar", layerName, skin);
+        this.statusBar = new StatusBar("status_bar", layerName, uiViewport, skin);
         this.stage.addActor(statusBar);
 
-        this.leaderboard = new Leaderboard("leaderboard", layerName, skin);
+        this.leaderboard = new Leaderboard("leaderboard", layerName, uiViewport, skin);
         this.leaderboard.setVisible(false);
         this.stage.addActor(leaderboard);
 
-        this.toastBar = new ToastBar("toast_bar", layerName, skin);
+        this.toastBar = new ToastBar("toast_bar", layerName, uiViewport, skin);
         this.stage.addActor(toastBar);
 
         InputMultiplexer multiplexer = new InputMultiplexer();

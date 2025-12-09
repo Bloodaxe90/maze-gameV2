@@ -3,6 +3,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.game.ui.Element;
 
 import java.util.Iterator;
@@ -27,8 +28,8 @@ public class ToastBar extends Element {
     private final List<Toast> activeToasts;
     private float duration;
 
-    public ToastBar(String id, String hostLayer, Skin skin) {
-        super(id, hostLayer, skin);
+    public ToastBar(String id, String hostLayer, FitViewport uiViewport, Skin skin) {
+        super(id, hostLayer, uiViewport, skin);
         this.activeToasts = new LinkedList<>();
         this.duration = getStartingProperty("duration", Float.class);
         setClip(true);

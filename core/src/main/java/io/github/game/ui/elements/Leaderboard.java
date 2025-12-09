@@ -5,6 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.game.ui.Element;
 
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class Leaderboard extends Element {
     private final int MAX_ENTRIES = 5;
     private final Label leaderboardLabel;
 
-    public Leaderboard(String id, String hostLayer, Skin skin) {
-        super(id, hostLayer, skin);
+    public Leaderboard(String id, String hostLayer, FitViewport uiViewport, Skin skin) {
+        super(id, hostLayer, uiViewport, skin);
         this.highScores = new ArrayList<>();
 
         this.leaderboardLabel = new Label("", skin);
