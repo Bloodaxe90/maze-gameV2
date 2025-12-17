@@ -1,5 +1,6 @@
 package io.github.game.entity.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -75,7 +76,7 @@ public class Player extends MovableEntity {
             velocity.y = 0;
             setYPos(MathUtils.clamp(position.y, 0, Game.WORLD_SIZE.y - size.y));
         } else if (game.getEnvironmentSystem().checkCollision(this) || game.getEntitySystem().checkCollision(this)) {
-                        velocity.y = 0;
+            velocity.y = 0;
             setYPos(oldY);
         }
 

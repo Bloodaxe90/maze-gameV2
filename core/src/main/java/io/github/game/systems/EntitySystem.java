@@ -65,11 +65,12 @@ public class EntitySystem {
         if (entity1.isCollidable()) {
             if (!entities.isEmpty()) {
                 for (Entity entity2 : entities.values()) {
-                    if (entity1.isCollidable() && !entity1.equals(entity2))
+                    if (entity2.isCollidable() && !entity1.equals(entity2)) {
                         if (entity2.getHitbox().overlaps(entity1.getHitbox())) {
                             entity2.setTriggered(true);
                             return true;
                         }
+                    }
                 }
             }
         }

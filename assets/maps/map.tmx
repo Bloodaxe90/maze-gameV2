@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="523">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="524">
  <properties>
   <property name="background" type="bool" value="true"/>
  </properties>
@@ -743,7 +743,6 @@
   <object id="426" x="1203" y="718.5" width="28.5" height="11.5" rotation="-90"/>
   <object id="427" x="1203" y="718.5" width="28.5" height="11.5" rotation="-90"/>
   <object id="428" x="112" y="576" width="1015.33" height="16"/>
-  <object id="429" x="103.333" y="912" width="335.667" height="7.5" rotation="-90"/>
   <object id="430" x="176" y="880" width="1016" height="32"/>
   <object id="432" x="1184" y="506" width="8" height="374"/>
   <object id="433" x="1120.67" y="506" width="7.33333" height="69.3333"/>
@@ -819,18 +818,23 @@
   <object id="520" x="1040" y="784" width="32" height="16"/>
   <object id="521" x="1040.67" y="656.667" width="47" height="11"/>
   <object id="522" x="1088" y="656" width="16" height="16"/>
+  <object id="523" x="103.311" y="591.58" width="7.74086" height="314.398"/>
  </objectgroup>
- <objectgroup color="#0005ff" id="12" name="Interactable" locked="1">
-  <object id="347" name="professor2" x="128.315" y="131.323" width="46.2139" height="39.9072">
+ <objectgroup color="#0005ff" id="12" name="Interactable">
+  <object id="347" name="professor2" x="399.718" y="600.291" width="46.2139" height="39.9072">
    <properties>
-    <property name="collidable" type="bool" value="true"/>
+    <property name="collidable" type="bool" value="false"/>
     <property name="sprites" value="back/1,right/1"/>
     <property name="trigger" value="Dialogue,0,-1,right,false,true,0,interact"/>
    </properties>
   </object>
   <object id="355" name="lever1" x="976" y="1216" width="16" height="16"/>
   <object id="356" name="spike1" x="704" y="992" width="16" height="32"/>
-  <object id="357" name="door1" x="128" y="912" width="32" height="48"/>
+  <object id="357" name="door1" x="128" y="912" width="32" height="48">
+   <properties>
+    <property name="collidable" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="509" name="door1" x="1136" y="480" width="32" height="48"/>
  </objectgroup>
 </map>

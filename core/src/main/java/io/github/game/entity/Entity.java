@@ -103,7 +103,7 @@ public abstract class Entity {
     }
 
     public void render(SpriteBatch batch) {
-        if (active) {
+        if (active && this.sprite != null) {
             batch.draw(sprite, position.x, position.y, size.x, size.y);
         }
     };
@@ -141,7 +141,7 @@ public abstract class Entity {
 
 
     public void setSprite(String name) {
-        if (name.isEmpty()) return;
+        if (name == null || name.isEmpty() || spriteMap.isEmpty()) return;
         Animation<TextureRegion> animation = spriteMap.get(id + "_" + name);
 
         if (animation == null) {
