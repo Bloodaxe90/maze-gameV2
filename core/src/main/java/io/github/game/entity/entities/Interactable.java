@@ -2,6 +2,7 @@ package io.github.game.entity.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+
 import io.github.game.Game;
 import io.github.game.entity.Entity;
 
