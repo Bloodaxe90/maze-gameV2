@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="524">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="530">
  <properties>
   <property name="background" type="bool" value="true"/>
  </properties>
@@ -621,15 +621,17 @@
     <property name="collidable" type="bool" value="true"/>
     <property name="range" type="float" value="4"/>
     <property name="speed" type="float" value="100"/>
-    <property name="trigger" value="Dialogue,0,0,null,true,true,0,touch"/>
+    <property name="sprites" value=""/>
+    <property name="trigger" value="Dialogue,0,0,null,true,false,true,0,touch"/>
    </properties>
   </object>
-  <object id="346" name="professor" x="154.106" y="332.086" width="32" height="32">
+  <object id="346" name="professor" x="570.014" y="505.128" width="32" height="32">
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="range" type="float" value="4"/>
     <property name="speed" type="float" value="100"/>
-    <property name="trigger" value="Dialogue,0,-1,null,true,true,0,touch"/>
+    <property name="sprites" value=""/>
+    <property name="trigger" value="Dialogue,0,0,null,true,false,true,0,touch"/>
    </properties>
   </object>
   <object id="351" name="professor3" x="1104" y="1200" width="32" height="32">
@@ -637,13 +639,15 @@
     <property name="collidable" type="bool" value="true"/>
     <property name="range" type="float" value="4"/>
     <property name="speed" type="float" value="100"/>
-    <property name="trigger" value="Dialogue,0,0,null,true,true,0,touch"/>
+    <property name="sprites" value=""/>
+    <property name="trigger" value="Dialogue,0,0,null,true,false,true,0,touch"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup color="#00ff11" id="11" name="Player">
   <object id="344" name="player" x="640" y="608" width="32" height="32">
    <properties>
+    <property name="boostItem" value="keycard/5.0"/>
     <property name="collidable" type="bool" value="true"/>
     <property name="footstepFrequency" type="float" value="3"/>
     <property name="items" value="keycard"/>
@@ -670,7 +674,7 @@
    </properties>
   </object>
   <object id="337" name="hotbar" x="14.4058" y="9.3064" width="442.179" height="98.4675"/>
-  <object id="350" name="leaderboard" x="4.31233" y="451.896" width="208.921" height="300.181"/>
+  <object id="350" name="leaderboard" x="62.0324" y="451.896" width="208.921" height="300.181"/>
  </objectgroup>
  <objectgroup id="6" name="Collision">
   <object id="338" x="436.772" y="377.542" width="20.3776" height="16.1675"/>
@@ -821,13 +825,6 @@
   <object id="523" x="103.311" y="591.58" width="7.74086" height="314.398"/>
  </objectgroup>
  <objectgroup color="#0005ff" id="12" name="Interactable">
-  <object id="347" name="professor2" x="399.718" y="600.291" width="46.2139" height="39.9072">
-   <properties>
-    <property name="collidable" type="bool" value="false"/>
-    <property name="sprites" value="back/1,right/1"/>
-    <property name="trigger" value="Dialogue,0,-1,right,false,true,0,interact"/>
-   </properties>
-  </object>
   <object id="355" name="lever1" x="976" y="1216" width="16" height="16"/>
   <object id="356" name="spike1" x="704" y="992" width="16" height="32"/>
   <object id="357" name="door1" x="128" y="912" width="32" height="48">
@@ -836,5 +833,33 @@
    </properties>
   </object>
   <object id="509" name="door1" x="1136" y="480" width="32" height="48"/>
+  <object id="524" name="professor2" x="415.508" y="599.026" width="46.2139" height="39.9072">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="sprites" value="back/1,right/1"/>
+    <property name="trigger" value="Dialogue,-1,0,right,false,true,true,0,touch"/>
+   </properties>
+  </object>
+  <object id="525" name="professor5" x="253.589" y="603.125" width="46.2139" height="39.9072">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="sprites" value="left/1,front/1"/>
+    <property name="trigger" value="PlayerSpeed,2.0,5.0,front,true,false,true,100,TOUCH"/>
+   </properties>
+  </object>
+  <object id="528" name="professor4" x="796.733" y="596.976" width="46.2139" height="39.9072">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="sprites" value="left/1,front/1"/>
+    <property name="trigger" value="GiveTakeItem,keycard,false,0,0,0,front,true,false,false,0,interact"/>
+   </properties>
+  </object>
+  <object id="529" name="professor6" x="885.879" y="601.496" width="46.2139" height="39.9072">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="sprites" value="left/1,front/1"/>
+    <property name="trigger" value="GameWin,keycard,0,0,front,false,false,true,1000,interact"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
