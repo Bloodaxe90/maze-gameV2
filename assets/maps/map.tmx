@@ -625,12 +625,14 @@
     <property name="trigger" value="Dialogue,0,0,null,true,false,true,0,touch"/>
    </properties>
   </object>
-  <object id="346" name="professor" x="570.014" y="505.128" width="32" height="32">
+  <object id="346" name="professor" x="576" y="528" width="16" height="16">
    <properties>
     <property name="collidable" type="bool" value="true"/>
+    <property name="path" value="U2,R4,D2,L4"/>
     <property name="range" type="float" value="4"/>
     <property name="speed" type="float" value="100"/>
     <property name="sprites" value=""/>
+    <property name="trackSpeed" type="float" value="100"/>
     <property name="trigger" value="Dialogue,0,0,null,true,false,true,0,touch"/>
    </properties>
   </object>
@@ -832,7 +834,7 @@
     <property name="collidable" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="509" name="door1" x="1136" y="480" width="32" height="48"/>
+  <object id="509" name="door2" x="1136" y="480" width="32" height="48"/>
   <object id="524" name="professor2" x="415.508" y="599.026" width="46.2139" height="39.9072">
    <properties>
     <property name="collidable" type="bool" value="true"/>

@@ -40,25 +40,36 @@ public abstract class MovableEntity extends Entity{
 
 
     /**
-     * Updates the entities current sprite based on its velocity
+     * Updates the entities current sprite based on its velocity, prioritising
+     * the axis with the largest movement
      * @param velocity The current movement velocity of the entity
      */
     public void updateSprite(Vector2 velocity) {
-        // If velocity is zero, the sprite should be "idle", otherwise it's moving
+        // If not moving, use the 'idle' prefix and keep the last direction
         String prefix = velocity.isZero() ? "idle" : "";
 
-        // Determine the facing direction based on the velocity vector
-        if (velocity.x > 0) {
-            currentSpriteDirection = "right";
-        } else if (velocity.x < 0) {
-            currentSpriteDirection = "left";
-        } else if (velocity.y > 0) {
-            currentSpriteDirection = "back"; // Y positive is usually up/back in game worlds
-        } else if (velocity.y < 0) {
-            currentSpriteDirection = "front"; // Y negative is usually down/front
+        // Only change the facing direction if the entity is actually moving
+        if (!velocity.isZero()) {
+            // Compare the absolute values of x and y velocity
+            if (Math.abs(velocity.x) > Math.abs(velocity.y)) {
+                // If moving more horizontally
+                if (velocity.x > 0) {
+                    currentSpriteDirection = "right";
+                } else {
+                    currentSpriteDirection = "left";
+                }
+            } else {
+                // If moving more vertically (or equally)
+                if (velocity.y > 0) {
+                    currentSpriteDirection = "back";
+                } else {
+                    currentSpriteDirection = "front";
+                }
+            }
         }
 
         // Combine the prefix and direction to get the final animation name
+        // e.g. "idle" + "front" -> "idlefront"
         setSprite(prefix + currentSpriteDirection);
     }
 
