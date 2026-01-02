@@ -101,7 +101,7 @@ public abstract class Entity {
      */
     private void createSprites() {
         String sprites = getStartingProperty("sprites", String.class);
-        if (sprites != null) {
+        if (sprites != null && !sprites.isEmpty()) {
             boolean initialSpriteSet = false;
             // The property is a comma separated list, i.e. "idle/0.2,walk/0.1"
             for (String spriteInfo : sprites.split(",")) {

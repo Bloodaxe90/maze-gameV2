@@ -630,7 +630,7 @@
     <property name="collidable" type="bool" value="true"/>
     <property name="range" type="float" value="4"/>
     <property name="speed" type="float" value="100"/>
-    <property name="sprites" value=""/>
+    <property name="sprites" value="right/1"/>
     <property name="trigger" value="Dialogue,0,0,null,true,false,true,0,touch"/>
    </properties>
   </object>
@@ -837,7 +837,7 @@
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="sprites" value="back/1,right/1"/>
-    <property name="trigger" value="Dialogue,-1,0,right,false,true,true,0,touch"/>
+    <property name="trigger" value="Dialogue,-1,0,null,false,true,true,0,touch"/>
    </properties>
   </object>
   <object id="525" name="professor5" x="253.589" y="603.125" width="46.2139" height="39.9072">
