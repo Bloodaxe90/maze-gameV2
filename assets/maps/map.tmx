@@ -839,7 +839,7 @@
   <object id="357" name="door1" x="128" y="912" width="32" height="48">
    <properties>
     <property name="collidable" type="bool" value="true"/>
-    <property name="sprites" value="left/1,front/1"/>
+    <property name="sprites" value="door-closed/1"/>
     <property name="trigger" value="GiveTakeItem,key,false,-1,-1,-1,door-open,true,true,false,0,interact"/>
    </properties>
   </object>
