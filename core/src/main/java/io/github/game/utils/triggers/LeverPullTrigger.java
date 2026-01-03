@@ -29,7 +29,7 @@ public class LeverPullTrigger implements Trigger {
         // The dialogue text is loaded from a file using an index from the args (-1 for no text)
         this.toastText = DialogueLoader.getBlock(id, Integer.parseInt(args[1]));
         // If the sprite name is "null" the sprite wont change
-        this.interactionSprite = args[2].equalsIgnoreCase("null") ? "" : args[6];
+        this.interactionSprite = args[2].equalsIgnoreCase("null") ? "" : args[2];
         this.event = Boolean.parseBoolean(args[3].toLowerCase());
         this.score = Integer.parseInt(args[4]);
         this.type = TriggerType.valueOf(args[5].toUpperCase());
