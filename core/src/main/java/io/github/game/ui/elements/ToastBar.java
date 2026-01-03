@@ -1,14 +1,15 @@
 package io.github.game.ui.elements;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import io.github.game.ui.Element;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import io.github.game.ui.Element;
 
 /**
  * A UI element that displays temporary, pop up messages at the top of the screen
