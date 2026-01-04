@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="533">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="534">
  <properties>
   <property name="background" type="bool" value="true"/>
  </properties>
@@ -155,7 +155,7 @@
 0,0,0,0,0,0,129,207,208,208,209,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,163,164,165,163,164,165,163,164,165,163,164,165,163,164,165,163,164,163,164,165,163,164,165,163,164,165,163,164,165,163,164,175,175,166,0,0,0,0,0,
 0,0,0,0,0,0,129,207,208,208,209,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,174,163,166,0,0,0,0,0,
 0,0,0,0,0,0,140,207,208,208,209,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,175,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,175,176,174,166,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -647,9 +647,9 @@
   </object>
  </objectgroup>
  <objectgroup color="#00ff11" id="11" name="Player">
-  <object id="344" name="player" x="640" y="608" width="32" height="32">
+  <object id="344" name="player" x="128" y="816" width="32" height="32">
    <properties>
-    <property name="boostItem" value="keycard/5.0"/>
+    <property name="boostItem" value="keycard/1.0"/>
     <property name="collidable" type="bool" value="true"/>
     <property name="footstepFrequency" type="float" value="3"/>
     <property name="items" value="keycard,keycard"/>
@@ -839,8 +839,8 @@
   <object id="357" name="door1" x="128" y="912" width="32" height="48">
    <properties>
     <property name="collidable" type="bool" value="true"/>
-    <property name="sprites" value="door-closed/1"/>
-    <property name="trigger" value="GiveTakeItem,key,false,-1,-1,-1,door-open,true,true,false,0,interact"/>
+    <property name="sprites" value="closed/1,open/1"/>
+    <property name="trigger" value="GiveTakeItem,keycard,false,-1,-1,-1,open,true,true,false,0,interact"/>
    </properties>
   </object>
   <object id="509" name="door2" x="1136" y="480" width="32" height="48"/>
