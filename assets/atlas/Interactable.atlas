@@ -45,3 +45,7 @@ door_closed1
 bounds:132,132,32,41
 door_open1
 bounds:2,2,32,41
+chest_invisible_1
+bounds:0,0,0,0
+key_invisible_1
+bounds:0,0,0,0
