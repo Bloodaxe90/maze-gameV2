@@ -61,8 +61,8 @@ public class GameWinTrigger implements Trigger {
             game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
 
             // Add score and show toast message on the first interaction
-            if (event && firstInteraction) {
-                game.getUiSystem().getStatusBar().incrementEventCounter();
+            if (firstInteraction) {
+                if (event) game.getUiSystem().getStatusBar().incrementEventCounter();
                 game.getUiSystem().getToastBar().addToast(toastText);
                 game.getUiSystem().getStatusBar().addScore(score);
                 firstInteraction = false;
