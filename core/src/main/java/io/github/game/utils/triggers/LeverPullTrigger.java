@@ -63,8 +63,8 @@ public class LeverPullTrigger implements Trigger {
             player.setInteract(false);
         }
 
-            if (event && firstInteraction) {
-                game.getUiSystem().getStatusBar().incrementEventCounter();
+            if (firstInteraction) {
+                if (event) game.getUiSystem().getStatusBar().incrementEventCounter();
                 game.getUiSystem().getToastBar().addToast(toastText);
                 game.getUiSystem().getStatusBar().addScore(score);
 

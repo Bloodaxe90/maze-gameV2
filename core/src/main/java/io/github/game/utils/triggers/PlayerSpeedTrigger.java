@@ -62,8 +62,8 @@ public class PlayerSpeedTrigger implements Trigger {
         game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
 
         // If this is a story event and it's the first time interacting
-        if (event && firstInteraction) {
-            game.getUiSystem().getStatusBar().incrementEventCounter();
+        if (firstInteraction) {
+            if (event) game.getUiSystem().getStatusBar().incrementEventCounter();
             game.getUiSystem().getStatusBar().addScore(score);
 
             // Set the flag so this block doesn't run again
