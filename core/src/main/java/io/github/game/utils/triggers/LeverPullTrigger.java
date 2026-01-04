@@ -53,6 +53,7 @@ public class LeverPullTrigger implements Trigger {
         // If this is a story event and it's the first time interacting
 
         // Disable the spikes
+        game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
 
 
         // Change sprite once pulled
