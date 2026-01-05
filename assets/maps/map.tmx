@@ -780,9 +780,9 @@
   <object id="466" x="548" y="703.667" width="7.66667" height="7.33333"/>
   <object id="467" x="640" y="704.333" width="31.6667" height="11"/>
   <object id="468" x="463.667" y="704" width="32.3333" height="12.3333"/>
-  <object id="469" x="993" y="703.667" width="30.6667" height="12"/>
+  <object id="469" x="993" y="703.667" width="30.6667" height="10.25"/>
   <object id="470" x="872" y="656" width="160" height="47.6663"/>
-  <object id="471" x="882" y="706.333" width="11.6667" height="9"/>
+  <object id="471" x="882" y="706.333" width="11.6667" height="8.25"/>
   <object id="472" x="898.667" y="703.667" width="10" height="9.33333"/>
   <object id="473" x="1024.33" y="703.667" width="8.33333" height="87.6666"/>
   <object id="474" x="871.667" y="703.333" width="8" height="91"/>
@@ -822,10 +822,10 @@
   <object id="516" x="1047" y="426.5" width="18" height="33"/>
   <object id="517" x="705.667" y="705.333" width="12" height="8.66667"/>
   <object id="518" x="723.667" y="702.333" width="10.6667" height="9.33333"/>
-  <object id="519" x="815.667" y="703" width="32" height="13.3333"/>
+  <object id="519" x="815.667" y="703" width="32" height="11.3333"/>
   <object id="520" x="1040" y="784" width="32" height="16"/>
-  <object id="521" x="1040.67" y="656.667" width="47" height="11"/>
-  <object id="522" x="1088" y="656" width="16" height="16"/>
+  <object id="521" x="1040.67" y="659.417" width="47" height="8.25"/>
+  <object id="522" x="1088" y="659.25" width="16" height="12.75"/>
   <object id="523" x="103.311" y="591.58" width="7.74086" height="314.398"/>
   <object id="524" x="640" y="800" width="46.6667" height="11.6667"/>
  </objectgroup>
@@ -837,7 +837,7 @@
     <property name="trigger" value="LeverPull,0,back,true,100,interact,professor67,front"/>
    </properties>
   </object>
-  <object id="357" name="door1" x="128" y="912" width="32" height="48">
+  <object id="357" name="door1" x="128" y="919.75" width="32" height="40.25">
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="sprites" value="closed/1,open/1"/>
@@ -856,13 +856,6 @@
     <property name="collidable" type="bool" value="true"/>
     <property name="sprites" value="left/1,front/1"/>
     <property name="trigger" value="PlayerSpeed,2.0,5.0,front,true,false,true,100,TOUCH"/>
-   </properties>
-  </object>
-  <object id="528" name="professor4" x="796.733" y="596.976" width="46.2139" height="39.9072">
-   <properties>
-    <property name="collidable" type="bool" value="true"/>
-    <property name="sprites" value="left/1,front/1"/>
-    <property name="trigger" value="GiveTakeItem,key,true,0,0,0,front,false,false,false,0,interact"/>
    </properties>
   </object>
   <object id="529" name="professor6" x="16" y="352" width="46.2139" height="39.9072">
