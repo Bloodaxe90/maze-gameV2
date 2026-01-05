@@ -19,6 +19,7 @@ public class LeverPullTrigger implements Trigger {
     private final TriggerType type; // If the trigger should be triggered on interaction (pressing E) or on touch
     private final String triggerableID; // The ID of the triggerable which this lever is controlled by.
     private boolean firstInteraction = true;
+    private final String triggerableSprite;
 
     /**
      * Constructor that parses trigger data from a string array
@@ -34,6 +35,7 @@ public class LeverPullTrigger implements Trigger {
         this.score = Integer.parseInt(args[4]);
         this.type = TriggerType.valueOf(args[5].toUpperCase());
         this.triggerableID = args[6].toLowerCase();
+        this.triggerableSprite = args[7].equalsIgnoreCase("null") ? "" : args[7];
     }
 
     @Override
@@ -53,9 +55,11 @@ public class LeverPullTrigger implements Trigger {
         // If this is a story event and it's the first time interacting
 
         // Disable the spikes
+        game.getEntitySystem().getEntities().get(triggerableID).setCollidable(false);
 
 
         // Change sprite once pulled
+        game.getEntitySystem().getEntities().get(triggerableID).setSprite(triggerableSprite);
         game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
 
         // Reset the player's interact flag
@@ -63,8 +67,8 @@ public class LeverPullTrigger implements Trigger {
             player.setInteract(false);
         }
 
-            if (event && firstInteraction) {
-                game.getUiSystem().getStatusBar().incrementEventCounter();
+            if (firstInteraction) {
+                if (event) game.getUiSystem().getStatusBar().incrementEventCounter();
                 game.getUiSystem().getToastBar().addToast(toastText);
                 game.getUiSystem().getStatusBar().addScore(score);
 

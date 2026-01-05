@@ -24,11 +24,16 @@ public final class DialogueLoader {
 
         String text;
         try {
-            // Try to read the file with the full name
-            text = Gdx.files.internal(PATH + id).readString();
+            try {
+                // Try to read the file with the full name
+                text = Gdx.files.internal(PATH + id).readString();
+            } catch (Exception e) {
+                // If that fails try a generic version by removing numbers
+                text = Gdx.files.internal(PATH + id.replaceAll("\\d", "")).readString();
+            }
         } catch (Exception e) {
-            // If that fails try a generic version by removing numbers
-            text = Gdx.files.internal(PATH + id.replaceAll("\\d", "")).readString();
+            Gdx.app.log("ERROR", "Failed to find " + id + " in " + PATH);
+            return "";
         }
 
         // Split the file's content into different blocks using our separator

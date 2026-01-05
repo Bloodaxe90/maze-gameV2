@@ -41,3 +41,17 @@ professor_idleright1
 bounds:0,64,32,32
 professor_idleleft1
 bounds:0,96,32,32
+door_closed1
+bounds:128,46,32,41
+door_open1
+bounds:128,87,32,41
+lever_down1
+bounds:160,98,9,14
+lever_up1
+bounds:176,114,9,14
+spikes_down1
+bounds:128,30,16,16
+spikes_up1
+bounds:160,112,16,16
+chest_invisible1
+bounds:0,0,0,0
