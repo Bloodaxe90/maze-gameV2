@@ -616,7 +616,7 @@
 </data>
  </layer>
  <objectgroup color="#ff0000" id="7" name="Enemy">
-  <object id="345" name="professor1" x="741.6" y="202.932" width="32" height="32">
+  <object id="345" name="professor1" x="720" y="256" width="32" height="32">
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="range" type="float" value="4"/>
@@ -625,7 +625,7 @@
     <property name="trigger" value="Dialogue,0,0,null,true,false,true,0,touch"/>
    </properties>
   </object>
-  <object id="346" name="professor" x="1136" y="608" width="32" height="32">
+  <object id="346" name="professor2" x="1136" y="608" width="32" height="32">
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="path" value="D13,L63,U13,R63"/>
@@ -858,7 +858,7 @@
     <property name="trigger" value="PlayerSpeed,2.0,5.0,front,true,false,true,100,TOUCH"/>
    </properties>
   </object>
-  <object id="529" name="professor6" x="16" y="352" width="46.2139" height="39.9072">
+  <object id="529" name="professor6" x="16" y="352" width="32" height="32">
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="sprites" value="left/1,front/1"/>
