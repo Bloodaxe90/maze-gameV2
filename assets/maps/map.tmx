@@ -649,7 +649,7 @@
   </object>
  </objectgroup>
  <objectgroup color="#00ff11" id="11" name="Player">
-  <object id="344" name="player" x="848" y="1152" width="32" height="32">
+  <object id="344" name="player" x="544" y="816" width="32" height="32">
    <properties>
     <property name="boostItem" value="keycard/1.5"/>
     <property name="collidable" type="bool" value="true"/>
