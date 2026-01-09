@@ -1,6 +1,7 @@
 package io.github.game.utils.triggers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import io.github.game.Game;
 import io.github.game.entity.entities.Player;
 import io.github.game.ui.elements.DialogueBox;
@@ -71,13 +72,14 @@ public class GiveTakeItemTrigger implements Trigger {
             } else {
                 player.removeItem(item);
             }
+
             dialogueBox.showDialogue(itemMoveDialogue);
             game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
 
             // Add score and show toast message on the first interaction
             if (firstInteraction) {
                 if (event) game.getUiSystem().getStatusBar().incrementEventCounter();
-                game.getUiSystem().getToastBar().addToast(toastText);
+                game.getUiSystem().getToastBar().addToast(toastText, Color.BLUE);
                 game.getUiSystem().getStatusBar().addScore(score);
                 firstInteraction = false;
                 if (uncollidable) {

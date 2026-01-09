@@ -1,5 +1,6 @@
 package io.github.game.utils.triggers;
 
+import com.badlogic.gdx.graphics.Color;
 import io.github.game.Game;
 import io.github.game.entity.entities.Player;
 import io.github.game.ui.elements.DialogueBox;
@@ -69,7 +70,7 @@ public class LeverPullTrigger implements Trigger {
 
             if (firstInteraction) {
                 if (event) game.getUiSystem().getStatusBar().incrementEventCounter();
-                game.getUiSystem().getToastBar().addToast(toastText);
+                game.getUiSystem().getToastBar().addToast(toastText, Color.BLUE);
                 game.getUiSystem().getStatusBar().addScore(score);
 
                 // Set the flag so this block doesn't run again
