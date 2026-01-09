@@ -1,5 +1,6 @@
 package io.github.game.utils.triggers;
 
+import com.badlogic.gdx.graphics.Color;
 import io.github.game.Game;
 import io.github.game.entity.entities.Player;
 
@@ -57,7 +58,8 @@ public class PlayerSpeedTrigger implements Trigger {
 
         // We can add a toast message to let the player know what happened
         String effect = (speedMultiplier > 1.0f ? "Speed Boost!" : "Slowed Down!") + " " + duration + "s";
-        game.getUiSystem().getToastBar().addToast(effect);
+        Color colour = (speedMultiplier > 1.0f ? Color.GREEN : Color.RED);
+        game.getUiSystem().getToastBar().addToast(effect, colour);
 
         game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
 

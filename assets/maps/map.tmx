@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="545">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="549">
  <properties>
   <property name="background" type="bool" value="true"/>
  </properties>
@@ -402,8 +402,8 @@
 0,0,0,0,0,0,0,0,0,0,118,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,122,0,0,0,0,0,0,0,0,0,0,0,0,385,0,0,
 0,0,0,0,0,0,0,0,0,0,129,205,205,205,205,205,205,205,205,205,133,129,205,205,205,205,205,205,205,205,205,133,129,205,205,205,205,205,205,205,205,205,133,129,205,205,205,205,205,205,205,205,205,133,129,205,205,205,205,205,205,205,205,205,133,3758096426,0,0,217,0,0,0,0,0,0,347,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,140,205,205,205,205,205,205,205,59,60,144,140,205,205,205,205,205,205,205,59,60,144,140,205,205,205,205,205,205,205,59,60,144,140,205,205,205,205,205,205,205,59,60,144,140,205,205,205,205,205,205,205,59,60,144,196,197,198,0,0,0,0,0,0,0,0,0,348,0,0,
-0,0,348,0,0,0,0,0,0,0,129,205,210,205,205,205,205,205,75,76,133,129,205,210,205,205,205,205,205,75,76,133,129,205,210,205,205,205,205,205,75,76,133,129,205,210,205,205,205,14,15,75,76,133,129,205,210,205,205,205,205,205,75,76,133,218,219,220,0,0,0,0,0,0,0,316,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,140,216,221,0,0,0,0,0,91,92,144,140,216,221,0,185,186,187,0,91,92,144,140,216,221,0,0,0,0,0,91,92,144,140,216,221,0,0,0,30,31,91,92,144,140,216,221,0,0,0,0,0,91,92,144,0,0,0,0,0,0,0,0,0,0,335,0,0,0,0,
+0,0,348,0,0,0,0,0,0,0,129,205,210,205,205,205,205,205,75,76,133,129,205,210,205,205,205,205,205,75,76,133,129,205,210,205,205,205,205,205,75,76,133,129,205,210,205,205,205,0,0,75,76,133,129,205,210,205,205,205,205,205,75,76,133,218,219,220,0,0,0,0,0,0,0,316,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,140,216,221,0,0,0,0,0,91,92,144,140,216,221,0,185,186,187,0,91,92,144,140,216,221,0,0,0,0,0,91,92,144,140,216,221,0,0,0,0,0,91,92,144,140,216,221,0,0,0,0,0,91,92,144,0,0,0,0,0,0,0,0,0,0,335,0,0,0,0,
 0,0,387,0,1610613052,1610613071,0,0,0,0,129,0,0,0,0,0,0,0,0,0,133,129,0,0,0,0,0,0,0,0,0,133,129,0,0,0,0,0,0,0,0,0,133,129,0,0,0,0,0,0,0,0,0,133,129,0,0,0,0,0,0,0,0,0,133,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,347,0,0,0,0,140,0,0,0,0,0,0,0,0,0,144,140,0,0,0,0,0,0,0,0,0,144,140,0,0,0,0,0,0,0,0,0,144,140,0,0,0,0,0,0,0,0,0,144,140,0,0,0,0,0,0,0,0,0,144,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -431,8 +431,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,74,0,57,0,0,57,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,61,62,63,90,0,73,0,0,73,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,15,0,0,89,0,0,89,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,31,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,89,0,0,89,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1610612781,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -651,15 +651,15 @@
  <objectgroup color="#00ff11" id="11" name="Player">
   <object id="344" name="player" x="544" y="816" width="32" height="32">
    <properties>
-    <property name="boostItem" value="keycard/1.5"/>
+    <property name="boostItem" value="scroll/2"/>
     <property name="collidable" type="bool" value="true"/>
     <property name="footstepFrequency" type="float" value="3"/>
-    <property name="items" value="keycard,keycard"/>
+    <property name="items" value="scroll,blue_potion"/>
     <property name="speed" type="float" value="100"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#00f1f9" id="8" name="UI" visible="0">
+ <objectgroup color="#00f1f9" id="8" name="UI">
   <object id="332" name="dialogue" x="13.7728" y="864.317" width="1252.12" height="407.675">
    <properties>
     <property name="letterTime" type="float" value="0.05"/>
@@ -672,7 +672,7 @@
    </properties>
   </object>
   <object id="334" name="pause_menu" x="449.996" y="476.716" width="402.799" height="259.979"/>
-  <object id="336" name="toast_bar" x="512" y="0" width="249.949" height="123.765">
+  <object id="336" name="toast_bar" x="480" y="0" width="319.495" height="107.463">
    <properties>
     <property name="duration" type="float" value="5"/>
    </properties>
@@ -830,39 +830,32 @@
   <object id="524" x="640" y="800" width="46.6667" height="11.6667"/>
  </objectgroup>
  <objectgroup color="#0005ff" id="12" name="Interactable">
-  <object id="544" name="lever1" x="960" y="1232" width="6.63636" height="10.4545">
+  <object id="544" name="lever1" x="969.37" y="1236.46" width="14.2837" height="22.5016">
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="sprites" value="up/1,down/1"/>
     <property name="trigger" value="LeverPull,0,down,true,100,interact,spikes1,down"/>
    </properties>
   </object>
-  <object id="357" name="door1" x="128" y="919.75" width="32" height="40.25">
+  <object id="357" name="door1" x="128" y="920" width="32" height="40.25">
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="sprites" value="closed/1,open/1"/>
     <property name="trigger" value="GiveTakeItem,key,false,-1,-1,0,open,false,true,true,100,interact"/>
    </properties>
   </object>
-  <object id="524" name="professor2" x="415.508" y="599.026" width="46.2139" height="39.9072">
+  <object id="525" name="star" x="406.836" y="811.482" width="8" height="14">
    <properties>
     <property name="collidable" type="bool" value="true"/>
-    <property name="sprites" value="back/1,right/1"/>
-    <property name="trigger" value="Dialogue,-1,-1,right,false,true,true,10,interact"/>
+    <property name="sprites" value="star/2"/>
+    <property name="trigger" value="PlayerSpeed,2.0,5.0,null,true,false,true,100,TOUCH"/>
    </properties>
   </object>
-  <object id="525" name="professor5" x="253.589" y="603.125" width="46.2139" height="39.9072">
+  <object id="529" name="longboi" x="16" y="352" width="32" height="32">
    <properties>
     <property name="collidable" type="bool" value="true"/>
-    <property name="sprites" value="left/1,front/1"/>
-    <property name="trigger" value="PlayerSpeed,2.0,5.0,front,true,false,true,100,TOUCH"/>
-   </properties>
-  </object>
-  <object id="529" name="professor6" x="16" y="352" width="32" height="32">
-   <properties>
-    <property name="collidable" type="bool" value="true"/>
-    <property name="sprites" value="left/1,front/1"/>
-    <property name="trigger" value="GameWin,keycard,0,0,front,false,false,true,1000,interact"/>
+    <property name="sprites" value="stand/3"/>
+    <property name="trigger" value="GameWin,sausage_roll,0,0,null,false,false,true,1000,interact"/>
    </properties>
   </object>
   <object id="534" name="spikes1" x="720" y="992" width="32" height="32">
@@ -872,11 +865,11 @@
     <property name="trigger" value="Dialogue,-1,-1,null,false,false,true,10,interact"/>
    </properties>
   </object>
-  <object id="535" name="chest1" x="1062" y="1164.67" width="19.6667" height="17.6667">
+  <object id="535" name="chest1" x="1062" y="1164.67" width="22" height="18">
    <properties>
     <property name="collidable" type="bool" value="true"/>
-    <property name="sprites" value="invisible/1"/>
-    <property name="trigger" value="GiveTakeItem,master_key,true,0,0,0,invisible,false,false,false,0,interact"/>
+    <property name="sprites" value="shut/1"/>
+    <property name="trigger" value="GiveTakeItem,master_key,true,0,0,0,null,false,false,false,0,interact"/>
    </properties>
   </object>
   <object id="536" name="door2" x="1136" y="487.75" width="32" height="40.25">
@@ -886,11 +879,39 @@
     <property name="trigger" value="GiveTakeItem,master_key,false,-1,-1,-1,open,false,true,true,0,interact"/>
    </properties>
   </object>
-  <object id="541" name="chest2" x="790.333" y="700.337" width="19.6667" height="17.6667">
+  <object id="541" name="chest2" x="790.333" y="700.337" width="22" height="18">
    <properties>
     <property name="collidable" type="bool" value="true"/>
-    <property name="sprites" value="invisible/1"/>
-    <property name="trigger" value="GiveTakeItem,key,true,0,0,0,invisible,false,false,false,0,interact"/>
+    <property name="sprites" value="shut/1"/>
+    <property name="trigger" value="GiveTakeItem,key,true,0,0,0,null,false,false,false,0,interact"/>
+   </properties>
+  </object>
+  <object id="545" name="potion" x="456.241" y="808.654" width="8" height="14">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="sprites" value="red/2"/>
+    <property name="trigger" value="PlayerSpeed,2.0,5.0,null,true,false,true,100,TOUCH"/>
+   </properties>
+  </object>
+  <object id="546" name="skull" x="374.875" y="814.145" width="8" height="14">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="sprites" value="skull/2"/>
+    <property name="trigger" value="PlayerSpeed,2.0,5.0,null,true,false,true,100,TOUCH"/>
+   </properties>
+  </object>
+  <object id="547" name="book1" x="324.957" y="822.631" width="8" height="14">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="sprites" value="old/2"/>
+    <property name="trigger" value="PlayerSpeed,0.2,5.0,null,true,false,true,100,TOUCH"/>
+   </properties>
+  </object>
+  <object id="548" name="book" x="338.934" y="821.134" width="8" height="14">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="sprites" value="new/2"/>
+    <property name="trigger" value="PlayerSpeed,2.0,5.0,null,true,false,true,100,TOUCH"/>
    </properties>
   </object>
  </objectgroup>
