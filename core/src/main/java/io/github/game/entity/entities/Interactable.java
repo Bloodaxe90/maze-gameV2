@@ -22,6 +22,8 @@ public class Interactable extends Entity {
      */
     public Interactable(RectangleMapObject properties, TextureAtlas spriteAtlas) {
         super(properties, spriteAtlas);
+
+        hitbox.setHeight(hitbox.height * 1.5f);
     }
 
     @Override

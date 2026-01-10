@@ -34,6 +34,7 @@ public class StatusBar extends Element {
 
         // The label that will display our text
         status = new Label("", skin);
+        status.setFontScale(1.2f);
         updateStatusText(); // Set the initial text
         status.setAlignment(Align.topRight);
 
@@ -114,4 +115,6 @@ public class StatusBar extends Element {
     public boolean isTimeUp() {
         return timeRemaining <= 0;
     }
+
+
 }

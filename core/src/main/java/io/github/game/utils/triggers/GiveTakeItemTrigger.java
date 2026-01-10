@@ -1,6 +1,5 @@
 package io.github.game.utils.triggers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import io.github.game.Game;
 import io.github.game.entity.entities.Player;
@@ -17,7 +16,7 @@ public class GiveTakeItemTrigger implements Trigger {
     private final String item; // The item to be given or taken
     private final boolean give; // True if this trigger gives the item, false if it takes it
     private final String dialogueDefault; // Text to show if conditions aren't met
-    private final String toastText; // Toast message to show on first interaction
+    private  String toastText; // Toast message to show on first interaction
     private final String itemMoveDialogue; // Text to show when the item is moved
     private final String interactionSprite; // Sprite to change to on first interaction
     private final boolean destroy; // Should the object disappear after being triggered
@@ -47,6 +46,12 @@ public class GiveTakeItemTrigger implements Trigger {
         this.event = Boolean.parseBoolean(args[9].toLowerCase());
         this.score = Integer.parseInt(args[10]);
         this.type = TriggerType.valueOf(args[11].toUpperCase());
+        if (!toastText.isEmpty() && score != 0) {
+            toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
+        }
+        if (event) {
+            toastText += " +1ev";
+        }
     }
 
     @Override
@@ -79,20 +84,20 @@ public class GiveTakeItemTrigger implements Trigger {
             // Add score and show toast message on the first interaction
             if (firstInteraction) {
                 if (event) game.getUiSystem().getStatusBar().incrementEventCounter();
-                game.getUiSystem().getToastBar().addToast(toastText, Color.BLUE);
+                game.getUiSystem().getToastBar().addToast(toastText, Color.ORANGE);
                 game.getUiSystem().getStatusBar().addScore(score);
                 firstInteraction = false;
                 if (uncollidable) {
                     game.getEntitySystem().getEntities().get(id).setCollidable(false);
                 }
             }
+
+            if (destroy) {
+                game.getEntitySystem().getEntities().get(id).setAlive(false);
+            }
         } else {
             // If the conditions aren't met, show a default message
             dialogueBox.showDialogue(dialogueDefault);
-        }
-
-        if (destroy) {
-            game.getEntitySystem().getEntities().get(id).setActive(false);
         }
 
         // Reset the player's interact flag

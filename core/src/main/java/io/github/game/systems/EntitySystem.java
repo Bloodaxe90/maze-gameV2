@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 
+import com.badlogic.gdx.math.Rectangle;
 import io.github.game.Game;
 import io.github.game.entity.Entity;
 import io.github.game.entity.entities.Player;
@@ -61,8 +62,17 @@ public class EntitySystem {
      */
     public void render(SpriteBatch batch) {
         if (!entities.isEmpty()) {
+            // Render all entities that are NOT the player
             for (Entity entity : entities.values()) {
-                entity.render(batch);
+                if (!(entity instanceof Player)) {
+                    entity.render(batch);
+                }
+            }
+
+            // Render the player last
+            Player player = getPlayer();
+            if (player != null) {
+                player.render(batch);
             }
         }
     }
@@ -80,21 +90,29 @@ public class EntitySystem {
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
 
-            entity.update(delta_t, game);
+            // Update all entities that are NOT the player
+            if (!(entity instanceof Player)) {
+                entity.update(delta_t, game);
+            }
 
             // If an entity has been set to inactive, remove it from the game
-            if (!entity.isActive()) {
+            if (!entity.isAlive() && !game.getUiSystem().getDialogueBox().isVisible()) {
                 iterator.remove();
             }
+        }
+        // Update the player last
+        Player player = getPlayer();
+        if (player != null) {
+            player.update(delta_t, game);
         }
     }
 
     /**
      * Checks if a given entity is colliding with any other collidable entity
      * @param entity1 The entity to check
-     * @return True if a collision occurred
+     * @return Collided Entity if a collision occurred, otherwise null
      */
-    public boolean checkCollision(Entity entity1) {
+    public Entity checkCollision(Entity entity1) {
         if (entity1.isCollidable()) {
             if (!entities.isEmpty()) {
                 // Loop through every other entity to check for collision
@@ -102,18 +120,48 @@ public class EntitySystem {
                     // Make sure the entities are collidable and not checking against themselves
                     if (entity2.isCollidable() && !entity1.equals(entity2)) {
                         if (entity2.getHitbox().overlaps(entity1.getHitbox())) {
-                            // If a collision happens, tell the other entity it's been triggered
                             entity2.setTriggered(true);
-                            return true;
+                            return entity2;
                         }
                     }
                 }
             }
         }
-        return false;
+        return null;
     }
 
-    /** @return The Player entity instance */
+    /**
+     * Checks if a given entity is within interaction distance from the player
+     * @return Entity to interact with, otherwise null
+     */
+    public Entity checkInteraction() {
+        Player player = getPlayer();
+        if (player != null) {
+            if (player.isCollidable()) {
+                if (!entities.isEmpty()) {
+                    Rectangle dilated_hitbox = new Rectangle(player.getHitbox());
+                    int dilation = 4;
+                    dilated_hitbox.x -= dilation;
+                    dilated_hitbox.y -= dilation;
+                    dilated_hitbox.width += dilation * 2;
+                    dilated_hitbox.height += dilation * 2;
+
+                    for (Entity entity2 : entities.values()) {
+                        // Make sure the entities are collidable and not checking against themselves
+                        if (entity2.isCollidable() && !player.equals(entity2)) {
+                            if (entity2.getHitbox().overlaps(dilated_hitbox)) {
+                                entity2.setTriggered(true);
+                                return entity2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+        /** @return The Player entity instance */
     public Player getPlayer() {
         // We assume the player object in Tiled is always named "player"
         return (Player) entities.get("player");

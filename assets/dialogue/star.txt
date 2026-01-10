@@ -1,0 +1,5 @@
+Achievement: You shouldn't be here
+---
+Star found!
+---
+{star}

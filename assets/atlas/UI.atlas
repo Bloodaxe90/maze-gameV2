@@ -1,5 +1,5 @@
 UI.png
-size:1024,256
+size:2048,256
 repeat:none
 keycard
 bounds:0,0,256,256
@@ -9,9 +9,13 @@ hotbar
 bounds:512,137,203,39
 sausage_roll
 bounds:256,0,256,256
-key
-bounds:1216,208,16,16
+slimy_key
+bounds:1024,112,16,16
+rusty_key
+bounds:1024,128,16,16
 master_key
+bounds:1280,240,16,16
+key
 bounds:1216,208,16,16
 old_book
 bounds:1184,176,16,16
@@ -21,4 +25,6 @@ scroll
 bounds:1200,176,16,16
 blue_potion
 bounds:1248,208,16,16
+coin
+bounds:1216,224,16,16
 

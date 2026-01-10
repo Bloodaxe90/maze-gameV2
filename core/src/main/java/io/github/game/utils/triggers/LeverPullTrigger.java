@@ -13,7 +13,8 @@ import io.github.game.utils.io.DialogueLoader;
 public class LeverPullTrigger implements Trigger {
 
     private final String id;
-    private final String toastText; // Toast message to show on first interaction
+    private final String dialogueText; // dialogue message to show on first interaction
+    private String toastText; // Toast message to show on first interaction
     private final String interactionSprite; // Sprite to change to on first interaction
     private final boolean event; // Should this increment the event counter
     private final int score; // The amount to increment the score by
@@ -29,14 +30,21 @@ public class LeverPullTrigger implements Trigger {
     public LeverPullTrigger(String[] args) {
         this.id = args[0];
         // The dialogue text is loaded from a file using an index from the args (-1 for no text)
-        this.toastText = DialogueLoader.getBlock(id, Integer.parseInt(args[1]));
+        this.dialogueText = DialogueLoader.getBlock(id, Integer.parseInt(args[1]));
+        this.toastText = DialogueLoader.getBlock(id, Integer.parseInt(args[2]));
         // If the sprite name is "null" the sprite wont change
-        this.interactionSprite = args[2].equalsIgnoreCase("null") ? "" : args[2];
-        this.event = Boolean.parseBoolean(args[3].toLowerCase());
-        this.score = Integer.parseInt(args[4]);
-        this.type = TriggerType.valueOf(args[5].toUpperCase());
-        this.triggerableID = args[6].toLowerCase();
-        this.triggerableSprite = args[7].equalsIgnoreCase("null") ? "" : args[7];
+        this.interactionSprite = args[3].equalsIgnoreCase("null") ? "" : args[3];
+        this.event = Boolean.parseBoolean(args[4].toLowerCase());
+        this.score = Integer.parseInt(args[5]);
+        this.type = TriggerType.valueOf(args[6].toUpperCase());
+        this.triggerableID = args[7].toLowerCase();
+        this.triggerableSprite = args[8].equalsIgnoreCase("null") ? "" : args[8];
+        if (!toastText.isEmpty() && score != 0) {
+            toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
+        }
+        if (event) {
+            toastText += " +1ev";
+        }
     }
 
     @Override
@@ -69,8 +77,9 @@ public class LeverPullTrigger implements Trigger {
         }
 
             if (firstInteraction) {
+                dialogueBox.showDialogue(dialogueText);
                 if (event) game.getUiSystem().getStatusBar().incrementEventCounter();
-                game.getUiSystem().getToastBar().addToast(toastText, Color.BLUE);
+                game.getUiSystem().getToastBar().addToast(toastText, Color.ORANGE);
                 game.getUiSystem().getStatusBar().addScore(score);
 
                 // Set the flag so this block doesn't run again

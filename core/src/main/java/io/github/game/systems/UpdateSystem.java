@@ -2,6 +2,7 @@ package io.github.game.systems;
 
 import com.badlogic.gdx.Gdx;
 import io.github.game.Game;
+import io.github.game.utils.io.AudioPlayer;
 
 /**
  * Updates the state of all game objects each frame
@@ -34,6 +35,8 @@ public class UpdateSystem {
                 game.getEntitySystem().update(delta_t, game);
             }
         }
+
+        AudioPlayer.setMusicEnabled(Game.PLAYING);
 
         // The camera and UI should update regardless of the pause state
         // This allows the camera to keep following the player even when paused,

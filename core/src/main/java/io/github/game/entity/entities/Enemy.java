@@ -55,7 +55,7 @@ public class Enemy extends MovableEntity {
     public void update(float delta_t, Game game) {
         super.update(delta_t, game);
 
-        if (!active) return;
+        if (!alive) return;
 
         Vector2 velocity = new Vector2(0f, 0f);
 
@@ -119,7 +119,7 @@ public class Enemy extends MovableEntity {
 
         try {
             String direction = moveInfo.substring(0, 1).toLowerCase();
-            int numTiles = Integer.parseInt(moveInfo.substring(1));
+            float numTiles = Float.parseFloat(moveInfo.substring(1));
             float distance = numTiles * Game.TILE_SIZE;
 
             // Update the target position based on the command

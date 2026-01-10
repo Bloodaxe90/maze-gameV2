@@ -34,7 +34,8 @@ public class Hotbar extends Element {
         // Some variables to help calculate the positions of the slots
         float padding = 5f;
         float slotWidth = getWidth() / padding;
-        int iconSize = (int) ((getWidth() - 46) / padding);
+        int iconWidth = (int) ((getWidth() - 46) / padding);
+        int iconHeight = (int) (getHeight() - (padding * 2));
         float firstIconX = padding;
 
         // Create an Image actor for each slot in the hotbar
@@ -44,8 +45,8 @@ public class Hotbar extends Element {
 
             // Calculate the position of this slot
             float iconX = firstIconX + (i * slotWidth);
-            itemIcon.setPosition(iconX, -padding);
-            itemIcon.setSize(iconSize, iconSize);
+            itemIcon.setPosition(iconX, padding);
+            itemIcon.setSize(iconWidth, iconHeight);
 
             itemIcons.add(itemIcon);
             this.addActor(itemIcon); // Add the icon to this group

@@ -27,6 +27,7 @@ public class PauseMenu extends Element {
         // Create the label with some default text loaded from our dialogue file
         pauseText = new Label("PAUSED\n\n" + DialogueLoader.getDialogue("tutorial"), skin);
         pauseText.setAlignment(Align.center);
+        pauseText.setFontScale(1.2f);
 
         // Add the label to this table
         this.add(pauseText).center();

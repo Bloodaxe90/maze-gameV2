@@ -45,7 +45,7 @@ public class DialogueBox extends Element {
         textLabel = new Label("", getSkin());
         textLabel.setWrap(true);
         textLabel.setAlignment(Align.topLeft);
-
+        textLabel.setFontScale(1.2f);
         // A ScrollPane is used to handle text that is too long for the box
         scrollPane = new ScrollPane(textLabel, getSkin());
         // We create a new style so we can remove the scrollpanes own background
@@ -63,8 +63,9 @@ public class DialogueBox extends Element {
     /**
      * Resets the dialogue box with new text
      * @param text The full dialogue message to display
+     * @return True if the text without SFX included is non-empty, false otherwise
      */
-    public void startDialogue(String text) {
+    public boolean startDialogue(String text) {
         // Parse the text for any sound effects and store them
         this.fullText = addSFX(text);
 
@@ -74,6 +75,8 @@ public class DialogueBox extends Element {
         this.isFinished = false;
         this.textLabel.setText("");
         scrollPane.setScrollY(0);
+
+        return !fullText.replace('\u200B', ' ').isBlank();
     }
 
 
@@ -145,16 +148,20 @@ public class DialogueBox extends Element {
                     textTimer -= letterTime;
                     textTimer -= 0.2f; // Short pause
                     break;
-                case '\u200B': // This is our invisible SFX trigger character
-                    AudioPlayer.playSound(sounds.get(0), 1f);
-                    sounds.remove(0);
                 default:
                     break;
             }
 
             textTimer -= letterTime;
-            // Play a generic "typing" sound for each letter, with a random pitch
-            AudioPlayer.playSound("speak1", 1f, MathUtils.random(2f, 3f));
+            // This is our invisible SFX trigger character
+            if (thisChar == '\u200B') {
+                // Play the first sound effect found in the .txt file
+                AudioPlayer.playSound(sounds.get(0), 1f);
+                sounds.remove(0);
+            } else {
+                // Play a generic "typing" sound for each letter, with a random pitch
+                AudioPlayer.playSound("speak1", 1f, MathUtils.random(2f, 3f));
+            }
         }
 
         // Update the label text only if it has changed
@@ -180,14 +187,13 @@ public class DialogueBox extends Element {
      * @param message The text to display
      */
     public void showDialogue(String message) {
-        if (!message.isEmpty()) {
-            startDialogue(message);
-            setVisible(true);
+        boolean isBlank = startDialogue(message);
+        setVisible(isBlank);
 
-            // Give the scrollpane "focus" so it can be controlled by the mouse wheel
-            Stage stage = this.getStage();
-            if (stage != null) stage.setScrollFocus(scrollPane);
-        }
+        // Give the scrollpane "focus" so it can be controlled by the mouse wheel
+        Stage stage = this.getStage();
+        if (stage != null) stage.setScrollFocus(scrollPane);
+
     }
 
 

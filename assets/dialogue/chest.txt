@@ -1,0 +1,35 @@
+Chest: {door_knock}
+It seems to be locked
+---
+Chest: {chest_open}
+The chest is mostly empty, but you see in the corner a single doubloon that someone must have missed
+---
+Achievement: Someone got there before you
+---
+Chest: {chest_open}
+You find a sinister sticky looking key inside and begrudgingly decide to take it
+---
+Achievement: Where could this go
+---
+Chest: {chest_open}
+You find a big important looking key, this must be your ticket out!
+---
+Achievement: Escape!
+---
+Chest: {chest_open}
+Another rusty key is inside, you take it.
+---
+Achievement: mystery key
+---
+Chest: {chest_open}
+You look extra close at the contents of the chest, it seems there's what remain of a sausage roll inside, you take it
+---
+Achievement: ew
+---
+Chest: {chest_open}
+It's open and so you look briefly but nothing seems to be inside.
+---
+Chest: {chest_open}
+You put the coin in the slot in the keyhole and discover the chest is full of routers and human body parts, you look away quickly and wonder who could have put this here
+---
+Achievement: SYS lore

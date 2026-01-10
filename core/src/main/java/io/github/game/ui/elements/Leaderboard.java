@@ -31,6 +31,8 @@ public class Leaderboard extends Element {
 
         // This label will display the scores
         this.leaderboardLabel = new Label("", skin);
+        leaderboardLabel.setFontScale(1.2f);
+
         leaderboardLabel.setAlignment(Align.center);
         this.add(leaderboardLabel); // Add the label to the table
 
@@ -61,7 +63,6 @@ public class Leaderboard extends Element {
         }
 
         try {
-            // Gdx.files.local gets the safe, writable directory for save games
             FileHandle file = Gdx.files.local(leaderboardPath);
             file.writeString(builder.toString(), false); // false means overwrite the file
         } catch (Exception e) {
@@ -98,7 +99,7 @@ public class Leaderboard extends Element {
      * Updates the text of the leaderboard label to display the current scores
      */
     private void update() {
-        StringBuilder text = new StringBuilder("--- HIGH SCORES ---\n");
+        StringBuilder text = new StringBuilder("--- Leaderboard ---\n");
         for (int i = 0; i < highScores.size(); i++) {
             text.append(i + 1)
                 .append(". ")
