@@ -14,8 +14,16 @@ import io.github.game.systems.UiSystem;
 import io.github.game.systems.UpdateSystem;
 import io.github.game.utils.io.AudioPlayer;
 
-
 /**
+ * CHANGES:
+ * This was the Main class in the forked project, and it has changed a lot since then that class
+ * was acting as a GOD CLASS attempting to handle rendering, logic and entity behaviour
+ * hard coded within itself. Many changes have been made to the class; the hardcoded
+ * parts were removed and re implemented in other classes (Most in EntitySystem and its managed Entity classes)
+ * as more general version of the original and the rendering, logic and input handling
+ * was passed onto other System classes leaving the Game class with the sole responsibility
+ * of organising the order which the systems should be run and initialising the systems
+ *
  * The main class for the game
  * sets up all the systems and runs the main game loop
  */
@@ -63,7 +71,7 @@ public class Game extends ApplicationAdapter {
         cameraSystem = new CameraSystem(
             240, 180, 1.5f
         );
-        AudioPlayer.playTrack("soundtrack", 0.5f);
+        AudioPlayer.playTrack("soundtrack", 0.2f);
     }
 
     @Override

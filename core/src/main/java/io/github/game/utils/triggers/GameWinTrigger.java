@@ -7,6 +7,8 @@ import io.github.game.ui.elements.DialogueBox;
 import io.github.game.utils.io.DialogueLoader;
 
 /**
+ * NEW CLASS: (explanation for why in Trigger class)
+ *
  * A special trigger that ends the game in a "win" state if the player has a specific item
  */
 public class GameWinTrigger implements Trigger {

@@ -9,6 +9,12 @@ import io.github.game.Game;
 import io.github.game.entity.MovableEntity;
 
 /**
+ * CHANGES:
+ * This class is the renamed Dean class from the original code
+ * it works much in the same way, however it is less hardcoded and allows for
+ * more general Enemy instance with some additional functionality not seen in
+ * the original game
+ *
  * The class for enemy entities
  * It extends MovableEntity to get movement capabilities and can either
  * follow the player or walk along a predefined path

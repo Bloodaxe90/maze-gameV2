@@ -9,6 +9,8 @@ import io.github.game.utils.io.DialogueLoader;
 
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * A UI element that shows text when the game is paused
  */
 public class PauseMenu extends Element {

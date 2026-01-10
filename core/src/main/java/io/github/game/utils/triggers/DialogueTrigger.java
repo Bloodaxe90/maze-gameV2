@@ -7,6 +7,8 @@ import io.github.game.ui.elements.DialogueBox;
 import io.github.game.utils.io.DialogueLoader;
 
 /**
+ * NEW CLASS: (explanation for why in Trigger class)
+ *
  * A trigger that starts a dialogue conversation when activated
  */
 public class DialogueTrigger implements Trigger {

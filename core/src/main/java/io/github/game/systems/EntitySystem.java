@@ -18,6 +18,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * NEW CLASS: (explanation for why in Game)
+ * This class also takes on check for collision between entity objects found
+ * in the CollisionSystem class in the forked code
+ *
  * Manages all the entities in the game
  * This includes creating, updating, rendering, and disposing of them
  */

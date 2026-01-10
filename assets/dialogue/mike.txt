@@ -1,14 +1,14 @@
-Mike: {beep_boop}
+{beep_boop}Mike:
 He seems to be in a trance of some sorts, I wonder what could wake him up, he does seem hungry.
 ---
-Mike: {beep_boop}
+{beep_boop}Mike:
 IS THAT A SAUSAGE ROLL, GIVE ME THAT
-{crunch}{crunch}{crunch}
+{crunch}.{crunch}.{crunch}.
 Oh, sorry you woke me up from my trance I was just thinking about routers and network switches and being a free man
 
 Wait was that your only last sausage roll, you'll have to forgive me I haven't seen a Gregg's sausage roll in years.
 
-However, I do remember seeing one in a chest on an island, was a bit moldy, probably not much left of it now, you'll have to look really closely to see it in there, black mold and all.
+However, I do remember seeing one in a chest on an island to the left, was a bit moldy, probably not much left of it now, you'll have to look really closely to see it in there, black mold and all.
 
 Anyway I better get going, thanks for the sausage roll
 ---

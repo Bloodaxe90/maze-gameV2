@@ -7,6 +7,13 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.game.Game;
 
 /**
+ * CHANGES:
+ * The Rendering system in the forked code was not only responsible for rendering
+ * but was also used for updating the logic of the entities, managing the camera
+ * and managing the map. In this new code we seperated out the logic from the rendering
+ * class so it only handles Rendering. UpdateSystem now handles logic updates,
+ * CameraSystem Manages the camera and EnvironmentSystem Manages the environment.
+ *
  * Handles all the drawing for the game
  */
 public class RenderSystem {

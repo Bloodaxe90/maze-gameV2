@@ -6,6 +6,8 @@ import io.github.game.entity.entities.Player;
 import io.github.game.utils.io.AudioPlayer;
 
 /**
+ * NEW CLASS: (explanation for why in Trigger class)
+ *
  * A trigger that temporarily modifies the player's speed
  */
 public class PlayerSpeedTrigger implements Trigger {
@@ -63,13 +65,13 @@ public class PlayerSpeedTrigger implements Trigger {
         if (speedMultiplier > 1.0f) {
             effect = "Speed Boost!";
             colour = Color.GREEN;
-            AudioPlayer.playSound("powerup", 1f);
+            AudioPlayer.playSound("powerup", 2f);
         } else if (speedMultiplier == 0) {
             effect = "Frozen!";
             colour = Color.CYAN;
-            AudioPlayer.playSound("freeze", 1f);
+            AudioPlayer.playSound("freeze", 2f);
         } else {
-            AudioPlayer.playSound("debuff", 1f);
+            AudioPlayer.playSound("debuff", 2f);
         }
         game.getUiSystem().getToastBar().addToast(effect + " " + duration + "s " + (score != 0 ? (score >= 0 ? "+" : "") + score + "pts" : "") + (event ? " +1ev" : ""), colour);
         game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);

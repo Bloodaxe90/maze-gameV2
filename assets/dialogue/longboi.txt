@@ -1,4 +1,4 @@
-Thinboi: {quack}
+{quack}Thinboi:
 Did you forget?
 
 This is what I remember telling you:
@@ -12,7 +12,7 @@ This is what I remember telling you:
 
 Good luck in your escape!
 ---
-Thinboi: {quack}
+{quack}Thinboi:
 YOU FOUND ME!
 
 I've been stuck down here for 5... no, no 6, no surely not. It can't have been that long.
@@ -34,11 +34,11 @@ See yo.
 .
 Oh wait, one last thing.
 
-I remember seeing a small door somewhere down here, who knows what's behind, but I'm opening might have to do with the levers I've been seeing down here.
+I remember seeing a small door somewhere down here, who knows what's behind, but I think it might have something to do with the levers I've been seeing down here.
 ---
 Achievement: Avoiding the rugby boys?
 ---
-Longboi: {quack}
+{quack}Longboi:
 Oh hi, are you ok? You look of breath.
 
 Wait a second did you just escape from the university!
@@ -53,7 +53,7 @@ Also, if you see my friend, he's rather thin and likes to hang around the univer
 
 Now come to think about it, I haven't seen him in a long time, hope he didn't get lost in the dungeons...
 ---
-Longboi: {quack}
+{quack}Longboi:
 IS THAT A SAUSAGE ROLL!
 
 I will do anything for that sausage roll.

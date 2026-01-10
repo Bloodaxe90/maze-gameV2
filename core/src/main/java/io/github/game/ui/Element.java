@@ -13,6 +13,8 @@ import io.github.game.Game;
 import io.github.game.utils.io.MapLoader;
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * The base class for all UI elements in the game
  * It automatically handles positioning and sizing based on data from a Tiled map
  */

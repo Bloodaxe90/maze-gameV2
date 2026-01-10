@@ -13,6 +13,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * A UI element for displaying and managing the games high scores
  */
 public class Leaderboard extends Element {

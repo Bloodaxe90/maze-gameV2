@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.Array;
 import io.github.game.Game;
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * A utility class with static methods to help get data from the Tiled map
  */
 public final class MapLoader {

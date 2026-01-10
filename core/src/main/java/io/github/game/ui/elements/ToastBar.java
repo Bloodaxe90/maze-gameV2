@@ -12,6 +12,14 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.game.ui.Element;
 
 /**
+ * CHANGES:
+ * This is the replacement for the Toast system in the forked code
+ * a lot of it is the same as what was found in the forked code however as
+ * the ToastSystem in the original game was one of 2 UI elements we thought it didn't make sense
+ * to have a different similar "System" for each individual UI element, and so we
+ * made the ToastSystem a ToastBar element managed by the UI system along with all the
+ * other UI elements
+ *
  * A UI element that displays temporary, pop up messages at the top of the screen
  */
 public class ToastBar extends Element {

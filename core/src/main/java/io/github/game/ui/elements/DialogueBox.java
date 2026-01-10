@@ -19,6 +19,8 @@ import io.github.game.ui.Element;
 import io.github.game.utils.io.AudioPlayer;
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * A UI element for displaying dialogue with a typewriter effect
  */
 public class DialogueBox extends Element {
@@ -156,7 +158,7 @@ public class DialogueBox extends Element {
             // This is our invisible SFX trigger character
             if (thisChar == '\u200B') {
                 // Play the first sound effect found in the .txt file
-                AudioPlayer.playSound(sounds.get(0), 1f);
+                AudioPlayer.playSound(sounds.get(0), 4f);
                 sounds.remove(0);
             } else {
                 // Play a generic "typing" sound for each letter, with a random pitch

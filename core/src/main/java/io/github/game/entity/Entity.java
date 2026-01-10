@@ -19,6 +19,13 @@ import io.github.game.utils.io.AnimationLoader;
 import io.github.game.utils.io.MapLoader;
 
 /**
+ * CHANGES:
+ * This class combines the functionality of the Entity and AnimatedEntity Classes
+ * found in the original forked code. This was because after changing the image loading system to
+ * work with TexturePacker (LibGDX addon) we found that for non-animated sprites we could just have
+ * the animation be one frame and so all Entities would have animations. This justified combining
+ * the functionality of the two classes.
+ *
  * The base class for all objects in the game world, like the player and enemies
  */
 public abstract class Entity {

@@ -1,26 +1,26 @@
-Log: {book_open}
+{book_open}Log:
 I was trapped in this damned detention room for 3 months by the professor, for those who find themselves in the same situation as me, I've hidden a key inside this very book that you can use to escape.
 
 Also look out for other grey notebooks that I wrote while hiding from the professors
 ---
 Achievement: A secret inside
 ---
-Log: {book_open}
-On my way out of this place I did find many a doubloon, for anyone that wants one I stash some in a chest behind the bookcase with the orange tulip on it
+{book_open}Log:
+On my way out of this place I did find many a doubloon, for anyone that wants one I stashed some in a chest behind the bookcase with the RED TULIP on it
 ---
 Achievement: Gold?
 ---
-Log: {book_open}
+{book_open}Log:
 I was only ever able to find two levers to open the spike, who knows what's behind the third
 ---
 Achievement: What a mystery
 ---
-Log: {book_open}
-For those who made it this far, I have escaped and so this is my last log, I came back and put the master university key back in the chest, now just make it outside and find someone to help you get home
+{book_open}Log:
+For those who made it this far, I have escaped and so this is my last log book, I came back after escaping and put the master university key back in the chest, now just make it outside and find someone to help you get home. Maybe a duck? They'll do anything fo food
 ---
 Achievement: Logs Completed
 ---
-Log: {book_open}
+{book_open}Log:
 I just found a slimy old key, and it looks like it goes in the door toward the bottom of this room. I keep hearing footsteps coming from the other side, I wonder what could be in there, wish my luck.
 ---
 Achievement: Basement dweller

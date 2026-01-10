@@ -6,6 +6,13 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 
 /**
+ * CHANGES:
+ * Instead of a hardcoded UP DOWN LEFT RIGHT system where a given direction
+ * always moves the player the same number of pixels we changed the original code to be a  more general version
+ * that assumes Moveable Entity should not be directly instantiated (and so is abstract)
+ * and leaves it to the inheritor to define the movement rules. MoveableEntity now just provides
+ * a baseline functionality for movement.
+ *
  * An abstract class for any entity that can move around the world
  * It extends the base Entity class and adds movement related properties
  */

@@ -5,6 +5,8 @@ import io.github.game.Game;
 import io.github.game.utils.io.AudioPlayer;
 
 /**
+ * NEW CLASS: (explanation for why in RenderSystem)
+ *
  * Updates the state of all game objects each frame
  */
 public class UpdateSystem {

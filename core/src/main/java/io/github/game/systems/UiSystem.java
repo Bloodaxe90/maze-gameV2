@@ -12,6 +12,8 @@ import io.github.game.ui.elements.*;
 import io.github.game.utils.io.AudioPlayer;
 
 /**
+ * NEW CLASS: (explanation for why in ToastBar and StatusBar)
+ *
  * Manages all the UI elements, the stage they live on, and their logic
  */
 public class UiSystem {

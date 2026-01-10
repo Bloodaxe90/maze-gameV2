@@ -9,7 +9,12 @@ import io.github.game.entity.entities.Player;
 import static io.github.game.Game.PLAYING;
 
 /**
- * Handles all player input from the keyboard and mouse
+ * CHANGES:
+ * This hasn't changed much from the original forked code,
+ * it has just changed appearance slightly due to added functionality
+ * not seen in the original game
+ *
+ * Handles all player inputs from the keyboard and mouse
  */
 public class InputSystem {
 

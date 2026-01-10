@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * A utility class with a static method to load animations
  */
 public final class AnimationLoader {
