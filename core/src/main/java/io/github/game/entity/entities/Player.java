@@ -1,14 +1,16 @@
 package io.github.game.entity.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 import io.github.game.Game;
+import io.github.game.entity.Entity;
 import io.github.game.entity.MovableEntity;
+import io.github.game.systems.EntitySystem;
 import io.github.game.ui.elements.Hotbar;
 import io.github.game.ui.elements.Item;
 import io.github.game.utils.io.AudioPlayer;
@@ -62,8 +64,11 @@ public class Player extends MovableEntity {
         }
 
         // Load any starting items from the Tiled map properties
-        for (String item : getStartingProperty("items", String.class).split(",")) {
-            addItem(item);
+        String itemInfo = getStartingProperty("items", String.class);
+        if (!itemInfo.isEmpty()) {
+            for (String item : itemInfo.split(",")) {
+                addItem(item);
+            }
         }
     }
 
@@ -71,7 +76,9 @@ public class Player extends MovableEntity {
     public void update(float delta_t, Game game) {
         super.update(delta_t, game);
 
-        if (!active) return;
+        if (interact) {
+            game.getEntitySystem().checkInteraction();
+        }
 
         // Handle any temporary speed effects
         if (speedModifierDuration > 0) {
@@ -117,7 +124,7 @@ public class Player extends MovableEntity {
             setXPos(MathUtils.clamp(position.x, 0, Game.WORLD_SIZE.x - size.x));
         }
         // Check for collision with map objects or other entities
-        else if (game.getEnvironmentSystem().checkCollision(this) || game.getEntitySystem().checkCollision(this)) {
+        else if (game.getEnvironmentSystem().checkCollision(this) || game.getEntitySystem().checkCollision(this) != null) {
             velocity.x = 0;
             setXPos(oldX); // Move back if a collision occurred
         }
@@ -127,7 +134,7 @@ public class Player extends MovableEntity {
         if (position.y < 0 || position.y + size.y > Game.WORLD_SIZE.y) {
             velocity.y = 0;
             setYPos(MathUtils.clamp(position.y, 0, Game.WORLD_SIZE.y - size.y));
-        } else if (game.getEnvironmentSystem().checkCollision(this) || game.getEntitySystem().checkCollision(this)) {
+        } else if (game.getEnvironmentSystem().checkCollision(this) || game.getEntitySystem().checkCollision(this) != null) {
             velocity.y = 0;
             setYPos(oldY);
         }

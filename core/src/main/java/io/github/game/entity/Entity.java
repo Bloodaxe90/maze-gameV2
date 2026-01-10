@@ -39,7 +39,7 @@ public abstract class Entity {
     protected Trigger trigger;
     protected boolean triggered;
 
-    protected boolean active = true;
+    protected boolean alive = true;
     protected TextureAtlas spriteAtlas;
 
     /**
@@ -131,8 +131,8 @@ public abstract class Entity {
      * @param batch The SpriteBatch for rendering
      */
     public void render(SpriteBatch batch) {
-        // Only draw if the entity is active and has a sprite
-        if (active && this.sprite != null) {
+        // Only draw if the entity has a sprite
+        if (this.sprite != null) {
             batch.draw(sprite, position.x, position.y, size.x, size.y);
         }
     };
@@ -143,10 +143,8 @@ public abstract class Entity {
      * @param game A reference to the main game class
      */
     public void update(float delta_t, Game game) {
-        if (active) {
-            stateTime += delta_t;
-            tryTrigger(game);
-        }
+        stateTime += delta_t;
+        tryTrigger(game);
     };
 
     /**
@@ -247,17 +245,17 @@ public abstract class Entity {
 
 
     /** @return True if the entity is currently active */
-    public boolean isActive() {
-        return active;
+    public boolean isAlive() {
+        return alive;
     }
 
 
     /**
      * Sets whether the entity should be active (visible and updating)
-     * @param active The new active state
+     * @param alive The new active state
      */
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 
 
@@ -291,6 +289,10 @@ public abstract class Entity {
      */
     public void setTriggered(boolean triggered) {
         this.triggered = triggered;
+    }
+
+    public Trigger getTrigger() {
+        return trigger;
     }
 
     /**

@@ -3,6 +3,7 @@ package io.github.game.utils.triggers;
 import com.badlogic.gdx.graphics.Color;
 import io.github.game.Game;
 import io.github.game.entity.entities.Player;
+import io.github.game.utils.io.AudioPlayer;
 
 /**
  * A trigger that temporarily modifies the player's speed
@@ -57,12 +58,21 @@ public class PlayerSpeedTrigger implements Trigger {
         player.applySpeedModifier(speedMultiplier, duration);
 
         // We can add a toast message to let the player know what happened
-        String effect = (speedMultiplier > 1.0f ? "Speed Boost!" : "Slowed Down!") + " " + duration + "s";
-        Color colour = (speedMultiplier > 1.0f ? Color.GREEN : Color.RED);
-        game.getUiSystem().getToastBar().addToast(effect, colour);
-
+        String effect = "Slowed Down!";
+        Color colour = Color.RED;
+        if (speedMultiplier > 1.0f) {
+            effect = "Speed Boost!";
+            colour = Color.GREEN;
+            AudioPlayer.playSound("powerup", 1f);
+        } else if (speedMultiplier == 0) {
+            effect = "Frozen!";
+            colour = Color.CYAN;
+            AudioPlayer.playSound("freeze", 1f);
+        } else {
+            AudioPlayer.playSound("debuff", 1f);
+        }
+        game.getUiSystem().getToastBar().addToast(effect + " " + duration + "s " + (score != 0 ? (score >= 0 ? "+" : "") + score + "pts" : "") + (event ? " +1ev" : ""), colour);
         game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
-
         // If this is a story event and it's the first time interacting
         if (firstInteraction) {
             if (event) game.getUiSystem().getStatusBar().incrementEventCounter();
@@ -79,7 +89,7 @@ public class PlayerSpeedTrigger implements Trigger {
 
         // If the trigger is a one-time use item, destroy it
         if (destroy) {
-            game.getEntitySystem().getEntities().get(id).setActive(false);
+            game.getEntitySystem().getEntities().get(id).setAlive(false);
         }
 
         // Reset the player's interact flag if needed

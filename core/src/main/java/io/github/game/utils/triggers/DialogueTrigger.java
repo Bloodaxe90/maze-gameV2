@@ -1,6 +1,5 @@
 package io.github.game.utils.triggers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import io.github.game.Game;
 import io.github.game.entity.entities.Player;
@@ -14,7 +13,7 @@ public class DialogueTrigger implements Trigger {
 
     private final String id;
     private final String dialogue; // Dialogue to be displayed on interaction
-    private final String toastText; // Toast message to show on first interaction
+    private String toastText; // Toast message to show on first interaction
     private final String interactionSprite; // Sprite to change to on first interaction
     private final boolean destroy; // Should the object disappear after being triggered
     private final boolean uncollidable; // Should the object become non-collidable after interaction
@@ -42,6 +41,12 @@ public class DialogueTrigger implements Trigger {
         this.event = Boolean.parseBoolean(args[6].toLowerCase());
         this.score = Integer.parseInt(args[7]);
         this.type = TriggerType.valueOf(args[8].toUpperCase());
+        if (!toastText.isEmpty() && score != 0) {
+            toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
+        }
+        if (event) {
+            toastText += " +1ev";
+        }
     }
 
     @Override
@@ -71,7 +76,7 @@ public class DialogueTrigger implements Trigger {
             // If this is a story event and it's the first time interacting
             if (firstInteraction) {
                 if (event) game.getUiSystem().getStatusBar().incrementEventCounter();
-                game.getUiSystem().getToastBar().addToast(toastText, Color.BLUE);
+                game.getUiSystem().getToastBar().addToast(toastText, Color.ORANGE);
                 game.getUiSystem().getStatusBar().addScore(score);
 
                 // Set the flag so this block doesn't run again
@@ -86,7 +91,7 @@ public class DialogueTrigger implements Trigger {
 
         // If the object is meant to be destroyed, set it to inactive
         if (destroy) {
-            game.getEntitySystem().getEntities().get(id).setActive(false);
+            game.getEntitySystem().getEntities().get(id).setAlive(false);
         }
 
         // Reset the player's interact flag so it doesn't trigger again instantly

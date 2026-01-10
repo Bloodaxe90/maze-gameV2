@@ -14,7 +14,8 @@ public class GameWinTrigger implements Trigger {
     private final String id;
     private final String item; // The required item to win
     private final String dialogueDefault; // Text to show if the player doesn't have the item
-    private final String toastText; // Toast message to show on first interaction
+    private final String winDialogue; // Text to show if conditions are met
+    private String toastText; // Toast message to show on first interaction
     private final String interactionSprite; // Sprite to change to on first interaction
     private final boolean destroy; // Should the object disappear after being triggered
     private final boolean uncollidable; // Should the object become non-collidable after interaction
@@ -33,14 +34,21 @@ public class GameWinTrigger implements Trigger {
         this.item = args[1].toLowerCase();
         // The dialogue text is loaded from a file using an index from the args (-1 for no text)
         this.dialogueDefault = DialogueLoader.getBlock(id, Integer.parseInt(args[2]));
-        this.toastText = DialogueLoader.getBlock(id, Integer.parseInt(args[3]));
+        this.winDialogue = DialogueLoader.getBlock(id, Integer.parseInt(args[3]));
+        this.toastText = DialogueLoader.getBlock(id, Integer.parseInt(args[4]));
         // If the sprite name is "null" the sprite wont change
-        this.interactionSprite = args[4].equalsIgnoreCase("null") ? "" : args[4];
-        this.destroy = Boolean.parseBoolean(args[5].toLowerCase());
-        this.uncollidable = Boolean.parseBoolean(args[6].toLowerCase());
-        this.event = Boolean.parseBoolean(args[7].toLowerCase());
-        this.score = Integer.parseInt(args[8]);
-        this.type = TriggerType.valueOf(args[9].toUpperCase());
+        this.interactionSprite = args[5].equalsIgnoreCase("null") ? "" : args[5];
+        this.destroy = Boolean.parseBoolean(args[6].toLowerCase());
+        this.uncollidable = Boolean.parseBoolean(args[7].toLowerCase());
+        this.event = Boolean.parseBoolean(args[8].toLowerCase());
+        this.score = Integer.parseInt(args[9]);
+        this.type = TriggerType.valueOf(args[10].toUpperCase());
+        if (!toastText.isEmpty() && score != 0) {
+            toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
+        }
+        if (event) {
+            toastText += " +1ev";
+        }
     }
 
     @Override
@@ -60,26 +68,30 @@ public class GameWinTrigger implements Trigger {
         if (player.hasItem(item)) {
             // If the player has the item, they win!
             game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
+            dialogueBox.showDialogue(winDialogue);
 
             // Add score and show toast message on the first interaction
             if (firstInteraction) {
                 if (event) game.getUiSystem().getStatusBar().incrementEventCounter();
-                game.getUiSystem().getToastBar().addToast(toastText, Color.BLUE);
+                game.getUiSystem().getToastBar().addToast(toastText, Color.ORANGE);
                 game.getUiSystem().getStatusBar().addScore(score);
                 firstInteraction = false;
                 if (uncollidable) {
                     game.getEntitySystem().getEntities().get(id).setCollidable(false);
                 }
             }
+            // Add 10x the time remaining to the score
+            game.getUiSystem().getStatusBar().addScore((int) game.getUiSystem().getStatusBar().getTimeRemaining() * 10);
+
             // Call the method to set up the "Game Over" screen with a win message
-            game.getUiSystem().setupGameOverScreen("Win\nYou made it home in time");
+            game.getUiSystem().setupGameOverScreen("Win\nYou made it home in time\nThe time remaining has been added to your score");
         } else {
             // If the player does NOT have the item, just show a dialogue message
             dialogueBox.showDialogue(dialogueDefault);
         }
 
         if (destroy) {
-            game.getEntitySystem().getEntities().get(id).setActive(false);
+            game.getEntitySystem().getEntities().get(id).setAlive(false);
         }
 
         // Reset the player's interact flag

@@ -1,1 +1,9 @@
 Achievement: activate a strange mechanism
+---
+Achievement: clunk thunk
+---
+{mechanical}
+---
+{lever}
+---
+Achievement: Reference?

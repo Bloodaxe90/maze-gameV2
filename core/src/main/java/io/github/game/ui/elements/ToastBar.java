@@ -66,6 +66,7 @@ public class ToastBar extends Element {
         if (!text.isEmpty()) {
             // Create the Scene2D label for the message
             Label label = new Label(text, getSkin());
+            label.setFontScale(1.2f);
             label.setColor(color);
             label.setAlignment(Align.center);
             label.setWrap(true);

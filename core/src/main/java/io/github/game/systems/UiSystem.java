@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.game.Game;
 import io.github.game.entity.entities.Player;
 import io.github.game.ui.elements.*;
+import io.github.game.utils.io.AudioPlayer;
 
 /**
  * Manages all the UI elements, the stage they live on, and their logic

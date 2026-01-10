@@ -1,0 +1,12 @@
+Broken Pot:
+It's just pottery shards
+---
+Pot: {shatter}
+You break the pot with you hand and find a rusty key inside
+---
+Achievement: Bloody hands
+---
+Pot broken
+---
+{shatter}
+

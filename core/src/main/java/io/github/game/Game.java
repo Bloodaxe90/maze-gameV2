@@ -12,6 +12,7 @@ import io.github.game.systems.InputSystem;
 import io.github.game.systems.RenderSystem;
 import io.github.game.systems.UiSystem;
 import io.github.game.systems.UpdateSystem;
+import io.github.game.utils.io.AudioPlayer;
 
 
 /**
@@ -62,6 +63,7 @@ public class Game extends ApplicationAdapter {
         cameraSystem = new CameraSystem(
             240, 180, 1.5f
         );
+        AudioPlayer.playTrack("soundtrack", 0.5f);
     }
 
     @Override
@@ -78,7 +80,15 @@ public class Game extends ApplicationAdapter {
      */
     public boolean isGameOver() {
         // This is a simple way to check game state by reading from the UI
-        if (uiSystem.getPauseMenu().getText().toLowerCase().replaceAll("[^a-z]", "").contains("gameover")) {
+        String status = uiSystem.getPauseMenu().getText().toLowerCase().replaceAll("[^a-z]", "");
+        if (status.contains("gameover") && !getUiSystem().getDialogueBox().isVisible()) {
+            if (PLAYING) {
+                if (status.contains("win")) {
+                    AudioPlayer.playSound("win", 3f);
+                } else {
+                    AudioPlayer.playSound("lose", 3f);
+                }
+            }
             PLAYING = false;
             return true;
         }

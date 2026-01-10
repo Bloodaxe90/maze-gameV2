@@ -1,1 +1,22 @@
-Achievement: enter the dungeon
+Achievement: escape?
+---
+Achievement: What a load of crap
+---
+Achievement: ENTER THE DUNGEON
+---
+Door: {rattle}
+The doors keyhole is large and an exceptionally shiny gold
+---
+Door: {rattle}
+The doors keyhole is green and slimy
+---
+Door: {rattle}
+The doors keyhole is very rusted
+---
+Door: {rattle}
+The doors looks like it would fit any normal key
+---
+Small Door: {rattle}
+The door doesn't seam to have a keyhole
+---
+{door_unlock}
