@@ -14,7 +14,7 @@ bounds:240,240,16,16
 spikes_up1
 bounds:256,240,16,16
 chest_shut1
-bounds:341,156,22,18
+bounds:341,156,22,19
 potion_blue1
 bounds:356,208,8,15
 potion_blue2
