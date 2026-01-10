@@ -848,7 +848,7 @@
   </object>
  </objectgroup>
  <objectgroup color="#00ff11" id="11" name="Player">
-  <object id="344" name="player" x="1066.53" y="149.363" width="32" height="32">
+  <object id="344" name="player" x="267.253" y="692.375" width="32" height="32">
    <properties>
     <property name="boostItem" value="scroll/2"/>
     <property name="collidable" type="bool" value="true"/>
