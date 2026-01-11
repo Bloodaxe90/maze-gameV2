@@ -66,6 +66,7 @@ public class GameWinTrigger implements Trigger {
         }
 
         if (player.hasItem(item)) {
+            player.removeItem(item);
             // If the player has the item, they win!
             game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
             dialogueBox.showDialogue(winDialogue);
@@ -81,10 +82,11 @@ public class GameWinTrigger implements Trigger {
                 }
             }
             // Add 10x the time remaining to the score
-            game.getUiSystem().getStatusBar().addScore((int) game.getUiSystem().getStatusBar().getTimeRemaining() * 10);
+            int timeScore = (int) game.getUiSystem().getStatusBar().getTimeRemaining() * 10;
+            game.getUiSystem().getStatusBar().addScore(timeScore);
 
             // Call the method to set up the "Game Over" screen with a win message
-            game.getUiSystem().setupGameOverScreen("Win\nYou made it home in time\nThe time remaining has been added to your score" + "\n+" + game.getUiSystem().getStatusBar().getScore() + "pts");
+            game.getUiSystem().setupGameOverScreen("Win\nYou made it home in time\nThe time remaining has been added to your score\n+" + timeScore + "pts");
         } else {
             // If the player does NOT have the item, just show a dialogue message
             dialogueBox.showDialogue(dialogueDefault);
