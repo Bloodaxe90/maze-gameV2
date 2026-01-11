@@ -24,9 +24,12 @@ public class LeaderboardTest extends AbstractHeadlessGdxTest {
     private FitViewport mockViewport;
     private Skin testSkin;
 
+    /**
+     * Does setup and mocking needed for testing leaderboard.
+     */
     @BeforeEach
     public void setup() {
-        // 1. Initialize Gdx.files MOCK FIRST to prevent NullPointerException
+        // Initialize Gdx.files
         Gdx.files = mock(Files.class);
         FileHandle mockFile = mock(FileHandle.class);
         when(Gdx.files.local(anyString())).thenReturn(mockFile);
@@ -34,8 +37,7 @@ public class LeaderboardTest extends AbstractHeadlessGdxTest {
 
         Game.WORLD_SIZE = new Vector2(100, 100);
 
-        // 2. Setup Skin with a MOCKED BitmapFont
-        // This avoids the "classpath" call that crashed your previous run
+        // Setup Skin with a MOCKED BitmapFont
         testSkin = new Skin();
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = mock(BitmapFont.class);
@@ -46,6 +48,9 @@ public class LeaderboardTest extends AbstractHeadlessGdxTest {
         when(mockViewport.getWorldHeight()).thenReturn(600f);
     }
 
+    /**
+     * Tests initialising leaderboard, and if it has correct dimensions.
+     */
     @Test
     public void testLeaderboardDimensions() {
         try (MockedStatic<MapLoader> mapLoaderMock = mockStatic(MapLoader.class)) {
@@ -58,14 +63,13 @@ public class LeaderboardTest extends AbstractHeadlessGdxTest {
             mapLoaderMock.when(() -> MapLoader.getLayerRectangle(anyString(), anyString()))
                 .thenReturn(mockMapObj);
 
-            // Correct 4-argument constructor: (id, hostLayer, viewport, skin)
             Leaderboard leaderboard = new Leaderboard("leaderboardID", "uiLayer", mockViewport, testSkin);
 
-            /* Projection Math Check:
-               X: (20/100) * 800 = 160
-               Y: (20/100) * 600 = 120
-               W: (60/100) * 800 = 480
-               H: (60/100) * 600 = 360
+            /* Projection maths:
+               x: (20/100) * 800 = 160
+               y: (20/100) * 600 = 120
+               w: (60/100) * 800 = 480
+               h: (60/100) * 600 = 360
             */
             assertAll("Coordinate Math",
                 () -> assertEquals(160f, leaderboard.getX(), 0.01f),

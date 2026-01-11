@@ -26,25 +26,30 @@ public class HotbarTest extends AbstractHeadlessGdxTest {
     private Skin testSkin;
     private TextureAtlas mockAtlas;
 
+    /**
+     * Does setup and mocking needed for testing hotbar.
+     */
     @BeforeEach
     public void setup() {
-        // 1. Initialize Gdx.files first to avoid NullPointerExceptions
+        // Initialize Gdx.files.
         Gdx.files = mock(Files.class);
 
         Game.WORLD_SIZE = new Vector2(100, 100);
         testSkin = new Skin();
 
-        // 2. Setup Viewport
+        // Setup Viewport.
         mockViewport = mock(FitViewport.class);
         when(mockViewport.getWorldWidth()).thenReturn(800f);
         when(mockViewport.getWorldHeight()).thenReturn(600f);
 
-        // 3. Setup Atlas
-        // We return null for regions to bypass the "setBackground" recursion loop
+        // Setup Atlas
         mockAtlas = mock(TextureAtlas.class);
         when(mockAtlas.findRegion(anyString())).thenReturn(null);
     }
 
+    /**
+     * Tests initialising hotbar.
+     */
     @Test
     public void hotbarInitializationTest() {
         try (MockedStatic<MapLoader> mapMock = mockStatic(MapLoader.class)) {
@@ -60,9 +65,13 @@ public class HotbarTest extends AbstractHeadlessGdxTest {
         }
     }
 
+    /**
+     * Tests adding mock item to a hotbar.
+     */
     @Test
     public void addItemTest() {
         try (MockedStatic<MapLoader> mapMock = mockStatic(MapLoader.class)) {
+            // Do necessary mocks.
             TestUtils.mockMapLoader(mapMock);
             TestUtils.mockTextureAtlas(mockAtlas);
 
@@ -79,9 +88,13 @@ public class HotbarTest extends AbstractHeadlessGdxTest {
         }
     }
 
+    /**
+     * Tests removing item from hotbar by first adding and checking that works, thn remove.
+     */
     @Test
     void removeItemTest() {
         try (MockedStatic<MapLoader> mapMock = mockStatic(MapLoader.class)) {
+            // Do necessary mocks.
             TestUtils.mockMapLoader(mapMock);
             TestUtils.mockTextureAtlas(mockAtlas);
 
@@ -105,9 +118,13 @@ public class HotbarTest extends AbstractHeadlessGdxTest {
         }
     }
 
+    /**
+     * Tests the edge case of adding more items than the hotbar can store.
+     */
     @Test
     void edgeCaseTest() {
         try (MockedStatic<MapLoader> mapMock = mockStatic(MapLoader.class)) {
+            // Do necessary mocks.
             TestUtils.mockMapLoader(mapMock);
             TestUtils.mockTextureAtlas(mockAtlas);
 
@@ -115,8 +132,7 @@ public class HotbarTest extends AbstractHeadlessGdxTest {
 
             Array<Item> inventory = new Array<>();
 
-            // BEHAVIOR: Boundary protection (Limit to NUM_SLOTS)
-            // Hotbar has 5 slots, we give it 10 items
+            // Hotbar should have 5 slots, we try to give it 10 items
             for (int i = 0; i < 10; i++) {
                 Item mockItem = mock(Item.class);
                 when(mockItem.getName()).thenReturn("item" + i);
@@ -126,8 +142,7 @@ public class HotbarTest extends AbstractHeadlessGdxTest {
             assertDoesNotThrow(() -> hotbar.updateInventory(inventory),
                 "The system should only attempt to update slots that exist in the UI.");
 
-            // Assert: Verify we only have 5 icons in the Hotbar group
-            // (Assuming NUM_SLOTS = 5)
+            // Assuming NUM_SLOTS = 5
             assertEquals(5, hotbar.getChildren().size,
                 "The UI should not create extra icons if the inventory is larger than the hotbar.");
         }
