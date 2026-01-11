@@ -7,6 +7,8 @@ import io.github.game.ui.elements.DialogueBox;
 import io.github.game.utils.io.DialogueLoader;
 
 /**
+ * NEW CLASS: (explanation for why in Trigger class)
+ *
  * A more advanced trigger that can either give an item to the player,
  * or take an item from them
  */
@@ -39,11 +41,9 @@ public class LeverPullTrigger implements Trigger {
         this.type = TriggerType.valueOf(args[6].toUpperCase());
         this.triggerableID = args[7].toLowerCase();
         this.triggerableSprite = args[8].equalsIgnoreCase("null") ? "" : args[8];
-        if (!toastText.isEmpty() && score != 0) {
-            toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
-        }
-        if (event) {
-            toastText += " +1ev";
+        if (!toastText.isEmpty()) {
+            if (score != 0) toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
+            if (event) toastText += " +1ev";
         }
     }
 

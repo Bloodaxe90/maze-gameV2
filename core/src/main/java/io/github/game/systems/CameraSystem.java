@@ -8,6 +8,8 @@ import io.github.game.Game;
 import io.github.game.entity.entities.Player;
 
 /**
+ * NEW CLASS: (explanation for why in RenderSystem)
+ *
  * Manages the game camera and its movement
  *
  * This system handles:

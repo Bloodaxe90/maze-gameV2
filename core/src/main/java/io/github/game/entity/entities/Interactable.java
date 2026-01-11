@@ -7,6 +7,10 @@ import io.github.game.Game;
 import io.github.game.entity.Entity;
 
 /**
+ * NEW CLASS:
+ * Since the Entity class is now abstract this class operates for game elements that
+ * don't move
+ *
  * A simple entity class for objects in the world that can change their sprite,
  * like a switch that can be turned on or off
  */

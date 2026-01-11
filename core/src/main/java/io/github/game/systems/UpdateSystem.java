@@ -5,6 +5,8 @@ import io.github.game.Game;
 import io.github.game.utils.io.AudioPlayer;
 
 /**
+ * NEW CLASS: (explanation for why in RenderSystem)
+ *
  * Updates the state of all game objects each frame
  */
 public class UpdateSystem {
@@ -42,6 +44,6 @@ public class UpdateSystem {
         // This allows the camera to keep following the player even when paused,
         // and lets the UI update its animations or timers
         game.getCameraSystem().update(game.getEntitySystem().getPlayer());
-        game.getUiSystem().update(delta_t, Game.PLAYING, game.getEntitySystem().getPlayer());
+        game.getUiSystem().update(delta_t, game.getEntitySystem().getPlayer());
     }
 }

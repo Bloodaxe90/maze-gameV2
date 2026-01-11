@@ -9,17 +9,22 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.game.ui.Element;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * A UI element for displaying and managing the games high scores
  */
 public class Leaderboard extends Element {
     private final String leaderboardPath = "assets/leaderboard/leaderboard.txt";
 
-    private List<Integer> highScores;
-    private final int MAX_ENTRIES = 5;
+    private List<String> highScores;
+
+    private final String separator = "\u200B";
+
+
+    private final int maxEntries;
     private final Label leaderboardLabel;
 
     /**
@@ -28,6 +33,7 @@ public class Leaderboard extends Element {
     public Leaderboard(String id, String hostLayer, FitViewport uiViewport, Skin skin) {
         super(id, hostLayer, uiViewport, skin);
         this.highScores = new ArrayList<>();
+        this.maxEntries = getStartingProperty("entries", Integer.class);
 
         // This label will display the scores
         this.leaderboardLabel = new Label("", skin);
@@ -42,23 +48,52 @@ public class Leaderboard extends Element {
     }
 
     /**
+     * Gets the score from the leaderboard entry string
+     * @param entry The string e.g. "Eric1000"
+     * @return The integer score or 0 if format is invalid
+     */
+    private int getScoreFromEntry(String entry) {
+        try {
+            String[] entryInfo = entry.split(separator, 2);
+            if (entryInfo.length == 2) {
+                return Integer.parseInt(entryInfo[1]);
+            }
+        } catch (Exception e) {
+            Gdx.app.log("ERROR", "Entry in leaderboard wrong format: " + e);
+        }
+        return 0;
+    }
+
+    /**
      * Saves the current sessions score to the leaderboard, sorts the list,
      * and writes it to a file
      */
-    public void save(int score) {
-        highScores.add(score);
+    public void save(String name, int score) {
+        String newEntry = name + separator + score;
+
+        // Prevent identical entries
+        if (highScores.contains(newEntry)) {
+            return;
+        }
+
+        highScores.add(newEntry);
 
         // Sort the scores from highest to lowest
-        highScores.sort(Collections.reverseOrder());
-
+        highScores.sort((e1, e2) -> {
+            int score1 = getScoreFromEntry(e1);
+            int score2 = getScoreFromEntry(e2);
+            // Integer.compare returns -1, 0, 1
+            // We reverse the order (score2 vs score1) to get a descending sort
+            return Integer.compare(score2, score1);
+        });
         // Trim the list if its longer than our max entries
-        if (highScores.size() > MAX_ENTRIES) {
-            highScores = highScores.subList(0, MAX_ENTRIES);
+        if (highScores.size() > maxEntries) {
+            highScores = highScores.subList(0, maxEntries);
         }
 
         // Build the string to be saved to the file
         StringBuilder builder = new StringBuilder();
-        for (Integer s : highScores) {
+        for (String s : highScores) {
             builder.append(s).append("\n");
         }
 
@@ -84,11 +119,11 @@ public class Leaderboard extends Element {
             for (String line : lines) {
                 // Ignore any empty lines in the file
                 if (!line.trim().isEmpty()) {
-                    highScores.add(Integer.parseInt(line.trim()));
+                    highScores.add(line);
                 }
             }
             // Sort the list just in case the file wasn't saved correctly
-            highScores.sort(Collections.reverseOrder());
+            highScores.sort((e1, e2) -> Integer.compare(getScoreFromEntry(e2), getScoreFromEntry(e1)));
         } catch (Exception e) {
             // This might happen if the file doesn't exist yet, which is fine
             Gdx.app.error("Leaderboard", "Failed to load leaderboard", e);
@@ -98,15 +133,22 @@ public class Leaderboard extends Element {
     /**
      * Updates the text of the leaderboard label to display the current scores
      */
-    private void update() {
+    public void update() {
         StringBuilder text = new StringBuilder("--- Leaderboard ---\n");
         for (int i = 0; i < highScores.size(); i++) {
-            text.append(i + 1)
-                .append(". ")
-                .append(highScores.get(i))
-                .append("\n");
+            String[] entryInfo = highScores.get(i).split(separator, 2);
+            if (entryInfo.length == 2) {
+                String name = entryInfo[0];
+                String score = entryInfo[1];
+
+                text.append(i + 1)
+                    .append(". ")
+                    .append(name)
+                    .append("  ")
+                    .append(score)
+                    .append("\n");
+            }
         }
-        // Show a message if there are no scores yet
         if (highScores.isEmpty()) {
             text.append("No scores yet");
         }

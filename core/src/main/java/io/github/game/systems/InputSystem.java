@@ -9,7 +9,12 @@ import io.github.game.entity.entities.Player;
 import static io.github.game.Game.PLAYING;
 
 /**
- * Handles all player input from the keyboard and mouse
+ * CHANGES:
+ * This hasn't changed much from the original forked code,
+ * it has just changed appearance slightly due to added functionality
+ * not seen in the original game
+ *
+ * Handles all player inputs from the keyboard and mouse
  */
 public class InputSystem {
 
@@ -29,9 +34,8 @@ public class InputSystem {
     public void handleInputs() {
         if (game.isGameOver()) return;
 
-        // P or ESC or Left click toggles the pause/play state of the game
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P) ||
-            Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) ||
+        // ESC or Left click toggles the pause/play state of the game
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) ||
             Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)
         ) {
             PLAYING = !PLAYING;
@@ -53,7 +57,6 @@ public class InputSystem {
                 // Don't process any other game inputs while in dialogue
                 return;
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.T)) game.getUiSystem().getToastBar().addToast("Sigma on the wall whos the fiarest of them all its me sigma rizzler", Color.BLUE);
 
             // Get the player to update its movement states
             Player player = game.getEntitySystem().getPlayer();

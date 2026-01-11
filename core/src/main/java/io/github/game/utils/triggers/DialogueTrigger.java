@@ -7,6 +7,8 @@ import io.github.game.ui.elements.DialogueBox;
 import io.github.game.utils.io.DialogueLoader;
 
 /**
+ * NEW CLASS: (explanation for why in Trigger class)
+ *
  * A trigger that starts a dialogue conversation when activated
  */
 public class DialogueTrigger implements Trigger {
@@ -41,11 +43,9 @@ public class DialogueTrigger implements Trigger {
         this.event = Boolean.parseBoolean(args[6].toLowerCase());
         this.score = Integer.parseInt(args[7]);
         this.type = TriggerType.valueOf(args[8].toUpperCase());
-        if (!toastText.isEmpty() && score != 0) {
-            toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
-        }
-        if (event) {
-            toastText += " +1ev";
+        if (!toastText.isEmpty()) {
+            if (score != 0) toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
+            if (event) toastText += " +1ev";
         }
     }
 

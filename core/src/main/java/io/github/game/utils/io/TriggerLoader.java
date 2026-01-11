@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * A utility class that uses reflection to load and create Trigger objects
  * This allows us to define triggers in the Tiled map editor as simple strings
  */

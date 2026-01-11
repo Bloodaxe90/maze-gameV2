@@ -8,6 +8,13 @@ import io.github.game.ui.Element;
 
 
 /**
+ * CHANGES:
+ * This is the replacement for the Timer system in the forked code, as
+ * the TimerSystem in the original game was one of 2 UI elements we thought it didn't make sense
+ * to have a different similar "System" for each individual UI element, and so we
+ * made the TimerSystem part of the StatusBar element managed by the UI system
+ * along with all the other UI elements
+ *
  * A UI element to display game state like score, time, and objectives
  */
 public class StatusBar extends Element {

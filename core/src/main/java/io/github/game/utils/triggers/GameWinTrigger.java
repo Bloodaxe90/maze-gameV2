@@ -7,6 +7,8 @@ import io.github.game.ui.elements.DialogueBox;
 import io.github.game.utils.io.DialogueLoader;
 
 /**
+ * NEW CLASS: (explanation for why in Trigger class)
+ *
  * A special trigger that ends the game in a "win" state if the player has a specific item
  */
 public class GameWinTrigger implements Trigger {
@@ -43,11 +45,9 @@ public class GameWinTrigger implements Trigger {
         this.event = Boolean.parseBoolean(args[8].toLowerCase());
         this.score = Integer.parseInt(args[9]);
         this.type = TriggerType.valueOf(args[10].toUpperCase());
-        if (!toastText.isEmpty() && score != 0) {
-            toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
-        }
-        if (event) {
-            toastText += " +1ev";
+        if (!toastText.isEmpty()) {
+            if (score != 0) toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
+            if (event) toastText += " +1ev";
         }
     }
 
@@ -66,6 +66,7 @@ public class GameWinTrigger implements Trigger {
         }
 
         if (player.hasItem(item)) {
+            player.removeItem(item);
             // If the player has the item, they win!
             game.getEntitySystem().getEntities().get(id).setSprite(interactionSprite);
             dialogueBox.showDialogue(winDialogue);
@@ -81,10 +82,11 @@ public class GameWinTrigger implements Trigger {
                 }
             }
             // Add 10x the time remaining to the score
-            game.getUiSystem().getStatusBar().addScore((int) game.getUiSystem().getStatusBar().getTimeRemaining() * 10);
+            int timeScore = (int) game.getUiSystem().getStatusBar().getTimeRemaining() * 10;
+            game.getUiSystem().getStatusBar().addScore(timeScore);
 
             // Call the method to set up the "Game Over" screen with a win message
-            game.getUiSystem().setupGameOverScreen("Win\nYou made it home in time\nThe time remaining has been added to your score");
+            game.getUiSystem().setupGameOverScreen("Win\nYou made it home in time\nThe time remaining has been added to your score\n+" + timeScore + "pts");
         } else {
             // If the player does NOT have the item, just show a dialogue message
             dialogueBox.showDialogue(dialogueDefault);

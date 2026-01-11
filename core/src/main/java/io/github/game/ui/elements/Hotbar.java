@@ -13,6 +13,8 @@ import io.github.game.ui.Element;
 
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * A UI element that displays the players inventory items
  */
 public class Hotbar extends Element {

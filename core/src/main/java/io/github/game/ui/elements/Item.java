@@ -1,6 +1,8 @@
 package io.github.game.ui.elements;
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * A simple data class to represent an item in the games inventory
  */
 public class Item {

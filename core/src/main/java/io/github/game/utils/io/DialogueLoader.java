@@ -2,6 +2,8 @@ package io.github.game.utils.io;
 import com.badlogic.gdx.Gdx;
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * A utility class to load dialogue text from files
  */
 public final class DialogueLoader {

@@ -15,6 +15,10 @@ import io.github.game.entity.Entity;
 import io.github.game.utils.io.MapLoader;
 
 /**
+ * NEW CLASS: (explanation for why in RenderSystem)
+ * This class also takes on check for collision between entities and the environment found
+ * in the CollisionSystem class in the forked code
+ *
  * Manages the game's environment, including rendering the map and handling collisions with it
  */
 public class EnvironmentSystem {

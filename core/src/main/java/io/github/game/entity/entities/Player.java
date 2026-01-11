@@ -16,6 +16,11 @@ import io.github.game.ui.elements.Item;
 import io.github.game.utils.io.AudioPlayer;
 
 /**
+ * CHANGES:
+ * This class functions for the same reason as in the original forked code
+ * however now it is less hardcoded and has some additional functionality
+ * not seen before in the original game
+ *
  * The main player class, controlled by the user
  * It handles movement and inventory
  */

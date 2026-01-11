@@ -6,6 +6,8 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
 /**
+ * NEW CLASS: (Adds additional functionality not seen in original game)
+ *
  * A utility class to handle loading and playing all sounds and music
  */
 public final class AudioPlayer {

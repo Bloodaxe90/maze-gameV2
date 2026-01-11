@@ -4,19 +4,19 @@ Achievement: What a load of crap
 ---
 Achievement: ENTER THE DUNGEON
 ---
-Door: {rattle}
+{rattle}Door:
 The doors keyhole is large and an exceptionally shiny gold
 ---
-Door: {rattle}
+{rattle}Door:
 The doors keyhole is green and slimy
 ---
-Door: {rattle}
+{rattle}Door:
 The doors keyhole is very rusted
 ---
-Door: {rattle}
+{rattle}Door:
 The doors looks like it would fit any normal key
 ---
-Small Door: {rattle}
+{rattle}Door:
 The door doesn't seam to have a keyhole
 ---
 {door_unlock}
