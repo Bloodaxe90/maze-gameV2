@@ -23,7 +23,7 @@ public class Leaderboard extends Element {
 
     private final String separator = "\u200B";
 
-    private static final int maxEntries = 5;
+    private final int maxEntries = 5;
     private final Label leaderboardLabel;
 
     /**
