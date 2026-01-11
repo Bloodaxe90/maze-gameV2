@@ -23,8 +23,7 @@ public class Leaderboard extends Element {
 
     private final String separator = "\u200B";
 
-
-    private final int maxEntries;
+    private final int maxEntries = 5;
     private final Label leaderboardLabel;
 
     /**
@@ -33,7 +32,6 @@ public class Leaderboard extends Element {
     public Leaderboard(String id, String hostLayer, FitViewport uiViewport, Skin skin) {
         super(id, hostLayer, uiViewport, skin);
         this.highScores = new ArrayList<>();
-        this.maxEntries = getStartingProperty("entries", Integer.class);
 
         // This label will display the scores
         this.leaderboardLabel = new Label("", skin);
