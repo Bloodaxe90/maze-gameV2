@@ -93,30 +93,15 @@ public class UiSystem {
             if (statusBar.isTimeUp()) {
                 setupGameOverScreen("Loss\nYou timed out\nThe game is not designed to be beaten first go,\n but it can be beaten in under 5 mins.\nTry again and pay attention to ALL the dialogue");
             }
-            nameInput.setVisible(!PLAYING);
-
             stage.setKeyboardFocus(null);
         } else {
-            nameInput.setVisible(false);
-        }
-
-        // Check for game over condition
-        if (statusBar.isTimeUp()) {
-            if (pauseMenu.getText().toLowerCase().contains("paused")) {
-                setupGameOverScreen("Loss\nYou timed out\nThe game is not designed to be beaten first go,\n but it can be beaten in under 5 mins.\nTry again and pay attention to ALL the dialogue");
-            }
-            nameInput.setVisible(false);
-        } else {
-            nameInput.setVisible(!PLAYING);
+            stage.setKeyboardFocus(nameInput.getNameTextBox());
         }
 
         // The pause menu and leaderboard should only be visible when the game is NOT playing
         pauseMenu.setVisible(!PLAYING);
         leaderboard.setVisible(!PLAYING);
-
-        if (nameInput.isVisible()) {
-            stage.setKeyboardFocus(nameInput.getNameTextBox());
-        }
+        nameInput.setVisible(!PLAYING);
 
     }
 
@@ -126,6 +111,7 @@ public class UiSystem {
      * @param text The reason for the game over
      */
     public void setupGameOverScreen(String text) {
+        nameInput.getNameTextBox().setDisabled(true);
         leaderboard.save(nameInput.getName(), statusBar.getScore());
         leaderboard.update();
         statusBar.update(0); // Update status bar one last time

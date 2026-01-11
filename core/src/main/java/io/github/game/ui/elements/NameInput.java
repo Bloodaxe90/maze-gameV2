@@ -54,6 +54,10 @@ public class NameInput extends Element {
         return name;
     }
 
+    public Label getTextLabel() {
+        return textLabel;
+    }
+
     public TextField getNameTextBox() {
         return nameTextBox;
     }
