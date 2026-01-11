@@ -48,11 +48,9 @@ public class GiveTakeItemTrigger implements Trigger {
         this.event = Boolean.parseBoolean(args[9].toLowerCase());
         this.score = Integer.parseInt(args[10]);
         this.type = TriggerType.valueOf(args[11].toUpperCase());
-        if (!toastText.isEmpty() && score != 0) {
-            toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
-        }
-        if (event) {
-            toastText += " +1ev";
+        if (!toastText.isEmpty()) {
+            if (score != 0) toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
+            if (event) toastText += " +1ev";
         }
     }
 

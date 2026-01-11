@@ -41,11 +41,9 @@ public class LeverPullTrigger implements Trigger {
         this.type = TriggerType.valueOf(args[6].toUpperCase());
         this.triggerableID = args[7].toLowerCase();
         this.triggerableSprite = args[8].equalsIgnoreCase("null") ? "" : args[8];
-        if (!toastText.isEmpty() && score != 0) {
-            toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
-        }
-        if (event) {
-            toastText += " +1ev";
+        if (!toastText.isEmpty()) {
+            if (score != 0) toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
+            if (event) toastText += " +1ev";
         }
     }
 

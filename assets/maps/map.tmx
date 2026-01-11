@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="120" tilewidth="16" tileheight="16" infinite="0" nextlayerid="24" nextobjectid="1243">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="120" tilewidth="16" tileheight="16" infinite="0" nextlayerid="24" nextobjectid="1244">
  <properties>
   <property name="background" type="bool" value="true"/>
  </properties>
@@ -848,7 +848,7 @@
   </object>
  </objectgroup>
  <objectgroup color="#00ff11" id="11" name="Player">
-  <object id="344" name="player" x="267.253" y="692.375" width="32" height="32">
+  <object id="344" name="player" x="267.253" y="685.2" width="32" height="32">
    <properties>
     <property name="boostItem" value="scroll/2"/>
     <property name="collidable" type="bool" value="true"/>
@@ -858,7 +858,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#00f1f9" id="8" name="UI" visible="0">
+ <objectgroup color="#00f1f9" id="8" name="UI">
   <object id="332" name="dialogue" x="32" y="1280.06" width="1215.88" height="607.938">
    <properties>
     <property name="letterTime" type="float" value="0.05"/>
@@ -877,7 +877,16 @@
    </properties>
   </object>
   <object id="337" name="hotbar" x="16" y="48" width="449.218" height="172.606"/>
-  <object id="350" name="leaderboard" x="96" y="736" width="208.921" height="300.181"/>
+  <object id="350" name="leaderboard" x="96" y="736" width="208.921" height="300.181">
+   <properties>
+    <property name="entries" type="int" value="5"/>
+   </properties>
+  </object>
+  <object id="1243" name="name_input" x="949.223" y="758.519" width="299.599" height="277.967">
+   <properties>
+    <property name="length" type="int" value="10"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup color="#fff701" id="6" name="Collision">
   <object id="558" x="307.618" y="81.0364" width="121.021" height="75.7051"/>
@@ -1407,7 +1416,7 @@
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="sprites" value="stand/3"/>
-    <property name="trigger" value="GameWin,sausage_roll,3,4,-1,null,false,false,true,1000,interact"/>
+    <property name="trigger" value="GameWin,sausage_roll,3,4,5,null,false,false,true,1000,interact"/>
    </properties>
   </object>
   <object id="534" name="spikes2" x="139.952" y="1790.29" width="40" height="40">

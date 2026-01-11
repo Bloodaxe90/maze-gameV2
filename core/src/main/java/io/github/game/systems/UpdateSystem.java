@@ -44,6 +44,6 @@ public class UpdateSystem {
         // This allows the camera to keep following the player even when paused,
         // and lets the UI update its animations or timers
         game.getCameraSystem().update(game.getEntitySystem().getPlayer());
-        game.getUiSystem().update(delta_t, Game.PLAYING, game.getEntitySystem().getPlayer());
+        game.getUiSystem().update(delta_t, game.getEntitySystem().getPlayer());
     }
 }

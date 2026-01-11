@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import io.github.game.Game;
 import io.github.game.entity.entities.Player;
 import io.github.game.ui.elements.*;
-import io.github.game.utils.io.AudioPlayer;
+
+import static io.github.game.Game.PLAYING;
 
 /**
  * NEW CLASS: (explanation for why in ToastBar and StatusBar)
@@ -27,6 +27,7 @@ public class UiSystem {
     private final StatusBar statusBar;
     private final Leaderboard leaderboard;
     private final ToastBar toastBar;
+    private final NameInput nameInput;
     private final TextureAtlas uiAtlas;
 
     /**
@@ -65,6 +66,9 @@ public class UiSystem {
         this.toastBar = new ToastBar("toast_bar", layerName, uiViewport, skin);
         this.stage.addActor(toastBar);
 
+        this.nameInput = new NameInput("name_input", layerName, uiViewport, skin);
+        this.stage.addActor(nameInput);
+
         // An InputMultiplexer allows both the UI stage and other things (like the player)
         // to receive input events
         InputMultiplexer multiplexer = new InputMultiplexer();
@@ -76,27 +80,44 @@ public class UiSystem {
     /**
      * Updates all the UI elements each frame
      * @param delta Time since last frame
-     * @param playing Is the game currently paused?
      * @param player The player object, to get data like inventory and health
      */
-    public void update(float delta, boolean playing, Player player) {
+    public void update(float delta, Player player) {
         // Only update certain elements if the game is not paused
-        if (playing) {
+        if (PLAYING) {
             stage.act(delta); // This calls the 'act' method on all actors in the stage
             hotbar.updateInventory(player.getInventory());
 
             statusBar.update(delta);
+
+            if (statusBar.isTimeUp()) {
+                setupGameOverScreen("Loss\nYou timed out\nThe game is not designed to be beaten first go,\n but it can be beaten in under 5 mins.\nTry again and pay attention to ALL the dialogue");
+            }
+            nameInput.setVisible(!PLAYING);
+
+            stage.setKeyboardFocus(null);
+        } else {
+            nameInput.setVisible(false);
         }
 
         // Check for game over condition
         if (statusBar.isTimeUp()) {
-            playing = false;
-            setupGameOverScreen("Loss\nYou timed out");
+            if (pauseMenu.getText().toLowerCase().contains("paused")) {
+                setupGameOverScreen("Loss\nYou timed out\nThe game is not designed to be beaten first go,\n but it can be beaten in under 5 mins.\nTry again and pay attention to ALL the dialogue");
+            }
+            nameInput.setVisible(false);
+        } else {
+            nameInput.setVisible(!PLAYING);
         }
 
         // The pause menu and leaderboard should only be visible when the game is NOT playing
-        pauseMenu.setVisible(!playing);
-        leaderboard.setVisible(!playing);
+        pauseMenu.setVisible(!PLAYING);
+        leaderboard.setVisible(!PLAYING);
+
+        if (nameInput.isVisible()) {
+            stage.setKeyboardFocus(nameInput.getNameTextBox());
+        }
+
     }
 
 
@@ -105,6 +126,8 @@ public class UiSystem {
      * @param text The reason for the game over
      */
     public void setupGameOverScreen(String text) {
+        leaderboard.save(nameInput.getName(), statusBar.getScore());
+        leaderboard.update();
         statusBar.update(0); // Update status bar one last time
         pauseMenu.setText("Game Over: " + text + "\n\n" + statusBar.getStatusText());
         statusBar.setVisible(false); // Hide the normal status bar
@@ -134,7 +157,7 @@ public class UiSystem {
     public void dispose() {
         stage.dispose();
         skin.dispose();
-        leaderboard.save(statusBar.getScore()); // Save the leaderboard before the game closes
+        leaderboard.save(nameInput.getName(), statusBar.getScore()); // Save the leaderboard before the game closes
         uiAtlas.dispose();
     }
 
@@ -176,5 +199,10 @@ public class UiSystem {
     /** @return The UI viewport */
     public FitViewport getViewport() {
         return uiViewport;
+    }
+
+    /** @return The name input element */
+    public NameInput getNameInput() {
+        return nameInput;
     }
 }

@@ -45,11 +45,9 @@ public class GameWinTrigger implements Trigger {
         this.event = Boolean.parseBoolean(args[8].toLowerCase());
         this.score = Integer.parseInt(args[9]);
         this.type = TriggerType.valueOf(args[10].toUpperCase());
-        if (!toastText.isEmpty() && score != 0) {
-            toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
-        }
-        if (event) {
-            toastText += " +1ev";
+        if (!toastText.isEmpty()) {
+            if (score != 0) toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
+            if (event) toastText += " +1ev";
         }
     }
 
@@ -86,7 +84,7 @@ public class GameWinTrigger implements Trigger {
             game.getUiSystem().getStatusBar().addScore((int) game.getUiSystem().getStatusBar().getTimeRemaining() * 10);
 
             // Call the method to set up the "Game Over" screen with a win message
-            game.getUiSystem().setupGameOverScreen("Win\nYou made it home in time\nThe time remaining has been added to your score");
+            game.getUiSystem().setupGameOverScreen("Win\nYou made it home in time\nThe time remaining has been added to your score" + "\n+" + game.getUiSystem().getStatusBar().getScore() + "pts");
         } else {
             // If the player does NOT have the item, just show a dialogue message
             dialogueBox.showDialogue(dialogueDefault);

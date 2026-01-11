@@ -43,11 +43,9 @@ public class DialogueTrigger implements Trigger {
         this.event = Boolean.parseBoolean(args[6].toLowerCase());
         this.score = Integer.parseInt(args[7]);
         this.type = TriggerType.valueOf(args[8].toUpperCase());
-        if (!toastText.isEmpty() && score != 0) {
-            toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
-        }
-        if (event) {
-            toastText += " +1ev";
+        if (!toastText.isEmpty()) {
+            if (score != 0) toastText += " " + (score >= 0 ? "+" : "") + score + "pts";
+            if (event) toastText += " +1ev";
         }
     }
 
